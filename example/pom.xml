@@ -12,37 +12,108 @@
 	<artifactId>example</artifactId>
 	<packaging>war</packaging>
 
+	<properties>
+		<!-- Save the exploded directory with .war at the end so IntelliJ can deploy it -->
+		<webapp.dir>${project.build.directory}/${project.build.finalName}-exploded.war</webapp.dir>
+	</properties>
+
 	<dependencies>
+
+		<dependency>
+			<groupId>com.wirelust.bitbucket.client</groupId>
+			<artifactId>wirelust-bitbucket-api-client</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
+			<artifactId>resteasy-client</artifactId>
 			<version>${version.resteasy}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-oauth</artifactId>
+			<version>${version.resteasy}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!--
+			JBoss/Weld Refrence Implementation for
+			CDI on a Servlet Container
+		-->
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>2.2.16.Final</version>
+			<scope>runtime</scope>
+		</dependency>
+
+
+		<!-- Provided -->
+
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
+			<version>1.0.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-cdi</artifactId>
-			<version>${version.resteasy}</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jackson2-provider</artifactId>
-			<version>${version.resteasy}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-multipart-provider</artifactId>
-			<version>${version.resteasy}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-validator-provider-11</artifactId>
-			<version>${version.resteasy}</version>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
 			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+
+					<archive>
+						<!-- Note, manifest not written to exploded directory.
+						http://jira.codehaus.org/browse/MWAR-167
+						-->
+						<manifestEntries>
+							<Specification-Title>${project.name}</Specification-Title>
+							<Specification-Version>${project.version}</Specification-Version>
+							<Implementation-Version>${build.number}</Implementation-Version>
+							<Implementation-Build>${buildNumber}</Implementation-Build>
+						</manifestEntries>
+					</archive>
+					<webappDirectory>${webapp.dir}</webappDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+
+
+	</build>
 </project>
