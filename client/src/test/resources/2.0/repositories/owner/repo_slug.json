@@ -1,0 +1,61 @@
+{
+    "scm": "hg",
+    "has_wiki": true,
+    "description": "Site for tutorial101 files",
+    "links": {
+        "watchers": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials/tutorials.bitbucket.org/watchers"
+        },
+        "commits": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials/tutorials.bitbucket.org/commits"
+        },
+        "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials/tutorials.bitbucket.org"
+        },
+        "html": {
+            "href": "https://bitbucket.org/tutorials/tutorials.bitbucket.org"
+        },
+        "avatar": {
+            "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2012/Nov/28/tutorials.bitbucket.org-logo-1456883302-9_avatar.png"
+        },
+        "forks": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials/tutorials.bitbucket.org/forks"
+        },
+        "clone": [{
+            "href": "https://bitbucket.org/tutorials/tutorials.bitbucket.org",
+            "name": "https"
+        }, {
+            "href": "ssh://hg@bitbucket.org/tutorials/tutorials.bitbucket.org",
+            "name": "ssh"
+        }],
+        "pullrequests": {
+            "href": "https://api.bitbucket.org/2.0/repositories/tutorials/tutorials.bitbucket.org/pullrequests"
+        }
+    },
+    "fork_policy": "allow_forks",
+    "name": "tutorials.bitbucket.org",
+    "language": "html/css",
+    "created_on": "2011-12-20T16:35:06.480042+00:00",
+    "full_name": "tutorials/tutorials.bitbucket.org",
+    "has_issues": true,
+    "owner": {
+        "username": "tutorials",
+        "display_name": "tutorials account",
+        "uuid": "{c788b2da-b7a2-404c-9e26-d3f077557007}",
+        "links": {
+            "self": {
+                "href": "https://api.bitbucket.org/2.0/users/tutorials"
+            },
+            "html": {
+                "href": "https://bitbucket.org/tutorials"
+            },
+            "avatar": {
+                "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
+            }
+        }
+    },
+    "updated_on": "2014-11-03T02:24:08.409995+00:00",
+    "size": 76182262,
+    "is_private": false,
+    "uuid": "{9970a9b6-2d86-413f-8555-da8e1ac0e542}"
+}

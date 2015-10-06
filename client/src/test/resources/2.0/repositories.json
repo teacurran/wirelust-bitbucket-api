@@ -1,0 +1,70 @@
+{
+	"pagelen": 10,
+	"values": [
+		{
+			"scm": "hg",
+			"has_wiki": true,
+			"description": "Mercurial (hg) extension to allow commenting on commit messages.  Mainly written for practice reading & working with mercurial internals.\r\n",
+			"links": {
+				"watchers": {
+					"href": "https://api.bitbucket.org/2.0/repositories/phlogistonjohn/tweakmsg/watchers"
+				},
+				"commits": {
+					"href": "https://api.bitbucket.org/2.0/repositories/phlogistonjohn/tweakmsg/commits"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/repositories/phlogistonjohn/tweakmsg"
+				},
+				"html": {
+					"href": "https://bitbucket.org/phlogistonjohn/tweakmsg"
+				},
+				"avatar": {
+					"href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/83c512cdf761/img/language-avatars/default_16.png"
+				},
+				"forks": {
+					"href": "https://api.bitbucket.org/2.0/repositories/phlogistonjohn/tweakmsg/forks"
+				},
+				"clone": [
+					{
+						"href": "https://bitbucket.org/phlogistonjohn/tweakmsg",
+						"name": "https"
+					},
+					{
+						"href": "ssh://hg@bitbucket.org/phlogistonjohn/tweakmsg",
+						"name": "ssh"
+					}
+				],
+				"pullrequests": {
+					"href": "https://api.bitbucket.org/2.0/repositories/phlogistonjohn/tweakmsg/pullrequests"
+				}
+			},
+			"fork_policy": "allow_forks",
+			"name": "tweakmsg",
+			"language": "",
+			"created_on": "2008-06-25T00:53:00.273366+00:00",
+			"full_name": "phlogistonjohn/tweakmsg",
+			"has_issues": true,
+			"owner": {
+				"username": "phlogistonjohn",
+				"display_name": "John Mulligan",
+				"uuid": "{c8614bfa-831a-49eb-866b-4bdd87c8c2c2}",
+				"links": {
+					"self": {
+						"href": "https://api.bitbucket.org/2.0/users/phlogistonjohn"
+					},
+					"html": {
+						"href": "https://bitbucket.org/phlogistonjohn"
+					},
+					"avatar": {
+						"href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2009/Nov/07/Screenshot1_avatar.png"
+					}
+				}
+			},
+			"updated_on": "2012-06-24T17:32:27.458855+00:00",
+			"size": 7085,
+			"is_private": false,
+			"uuid": "{59299fb9-3695-4e0c-b8ca-836888b83315}"
+		}
+	]
+}
+

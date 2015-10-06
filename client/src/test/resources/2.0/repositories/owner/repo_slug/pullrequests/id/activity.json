@@ -1,0 +1,134 @@
+{
+	"pagelen": 2,
+	"next": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/3767/activity?pagelen=2&page=2",
+	"values": [
+		{
+			"comment": {
+				"parent": {
+					"id": 25334,
+					"links": {
+						"self": {
+							"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/3767/comments/25334"
+						}
+					}
+				},
+				"links": {
+					"self": {
+						"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/3767/comments/25337"
+					}
+				},
+				"content": {
+					"raw": "If we are leaving the email attached to the team account, Gravatar should still work fine. The problem would be they can't change the Gravatar associated account then.",
+					"markup": "markdown",
+					"html": "<p>If we are leaving the email attached to the team account, Gravatar should still work fine. The problem would be they can't change the Gravatar associated account then.</p>"
+				},
+				"created_on": "2013-11-07T17:11:20.986517+00:00",
+				"user": {
+					"username": "mfrauenholtz",
+					"display_name": "Michael Frauenholtz",
+					"links": {
+						"self": {
+							"href": "https://bitbucket.org/api/2.0/users/mfrauenholtz"
+						},
+						"avatar": {
+							"href": "https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Aug/24/mfrauenholtz-avatar-1858533797-5_avatar.png"
+						}
+					}
+				},
+				"updated_on": "2013-11-07T17:11:20.989028+00:00",
+				"id": 25337
+			},
+			"pull_request": {
+				"id": 3767,
+				"links": {
+					"self": {
+						"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/3767"
+					}
+				},
+				"title": "BB-9500: Remove certain admin links for Team accounts"
+			}
+		},
+		{
+			"update": {
+				"status": "open",
+				"description": "![img](https://cloudup.com/ccaeaiiEz1S+) ## Removing: * Notifications * Email * Change password * Sessions ## Renaming: * Change username * Delete account (rename to delete team) ",
+				"title": "BB-9500: Remove certain admin links for Team accounts",
+				"destination": {
+					"commit": {
+						"hash": "e04099ba977c",
+						"links": {
+							"self": {
+								"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/commit/e04099ba977c"
+							}
+						}
+					},
+					"repository": {
+						"links": {
+							"self": {
+								"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket"
+							},
+							"avatar": {
+								"href": "https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Sep/27/bitbucket-logo-1832464563-7_avatar.png"
+							}
+						},
+						"full_name": "bitbucket/bitbucket",
+						"name": "bitbucket"
+					},
+					"branch": {
+						"name": "staging"
+					}
+				},
+				"source": {
+					"commit": {
+						"hash": "cfda27cb506e",
+						"links": {
+							"self": {
+								"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/commit/cfda27cb506e"
+							}
+						}
+					},
+					"repository": {
+						"links": {
+							"self": {
+								"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket"
+							},
+							"avatar": {
+								"href": "https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Sep/27/bitbucket-logo-1832464563-7_avatar.png"
+							}
+						},
+						"full_name": "bitbucket/bitbucket",
+						"name": "bitbucket"
+					},
+					"branch": {
+						"name": "mfrauenholtz/team-removal/admin-links"
+					}
+				},
+				"reason": "",
+				"user": {
+					"username": "mfrauenholtz",
+					"display_name": "Michael Frauenholtz",
+					"links": {
+						"self": {
+							"href": "https://bitbucket.org/api/2.0/users/mfrauenholtz"
+						},
+						"avatar": {
+							"href": "https://bitbucket-staging-assetroot.s3.amazonaws.com/c/photos/2013/Aug/24/mfrauenholtz-avatar-1858533797-5_avatar.png"
+						}
+					}
+				},
+				"date": "2013-11-07T16:56:48.699418+00:00"
+			},
+			"pull_request": {
+				"id": 3767,
+				"links": {
+					"self": {
+						"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/3767"
+					}
+				},
+				"title": "BB-9500: Remove certain admin links for Team accounts"
+			}
+		}
+	],
+	"page": 1,
+	"size": 10
+}
