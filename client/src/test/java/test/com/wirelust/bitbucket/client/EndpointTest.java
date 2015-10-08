@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
+import com.wirelust.bitbucket.client.representations.CommitSource;
 import com.wirelust.bitbucket.client.representations.Link;
+import com.wirelust.bitbucket.client.representations.PullRequest;
+import com.wirelust.bitbucket.client.representations.PullRequestList;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
 import com.wirelust.bitbucket.client.representations.User;
@@ -97,7 +100,6 @@ public class EndpointTest {
 	public void shouldBeAbleToDeseralizeGetAllRepositories() throws Exception {
 
 		Response response = bitbucketV2Client.getAllRepositories();
-
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		RepositoryList repositoryList = response.readEntity(RepositoryList.class);
@@ -125,7 +127,6 @@ public class EndpointTest {
 	public void shouldBeAbleToDeseralizeGetRepositoriesByOwner() throws Exception {
 
 		Response response = bitbucketV2Client.getRepositoriesByOwner("owner");
-
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		RepositoryList repositoryList = response.readEntity(RepositoryList.class);
@@ -162,7 +163,6 @@ public class EndpointTest {
 	public void shouldBeAbleToDeseralizeRepositoryByOwnerSlug() throws Exception {
 
 		Response response = bitbucketV2Client.getRepositoryByOwnerRepoSlug("owner", "repo_slug");
-
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		Repository repository = response.readEntity(Repository.class);
@@ -190,6 +190,37 @@ public class EndpointTest {
 
 		Map<String, List<Link>> ownerLinks = owner.getLinks();
 		Assert.assertEquals(3, ownerLinks.size());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizePullRequestList() throws Exception {
+		Response response = bitbucketV2Client.getPullRequests("owner", "repo_slug", "OPEN");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		PullRequestList pullRequestList = response.readEntity(PullRequestList.class);
+
+		Assert.assertEquals(1, (long)pullRequestList.getPage());
+		Assert.assertEquals(12, (long)pullRequestList.getSize());
+		Assert.assertEquals(1, (long)pullRequestList.getPagelen());
+
+		List<PullRequest> pullRequests = pullRequestList.getValues();
+		Assert.assertEquals(1, pullRequests.size());
+
+		PullRequest firstPullRequest = pullRequests.get(0);
+		Assert.assertEquals(true, firstPullRequest.getCloseSourceBranch());
+
+		Map<String, List<Link>> links = firstPullRequest.getLinks();
+		Assert.assertEquals(10, links.size());
+
+		CommitSource commitSource = firstPullRequest.getSource();
+		Assert.assertEquals("mfrauenholtz/team-removal/admin-links", commitSource.getBranch().getName());
+		Assert.assertEquals("2a81a1edc0c2", commitSource.getCommit().getHash());
+		Assert.assertEquals(1, commitSource.getCommit().getLinks().size());
+
+		CommitSource commitDestination = firstPullRequest.getDestination();
+		Assert.assertEquals("staging", commitDestination.getBranch().getName());
+		Assert.assertEquals("e04099ba977c", commitDestination.getCommit().getHash());
+		Assert.assertEquals(1, commitDestination.getCommit().getLinks().size());
 	}
 
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
