@@ -158,6 +158,39 @@ public class EndpointTest {
 		Assert.assertEquals(3, ownerLinks.size());
 	}
 
+	@Test
+	public void shouldBeAbleToDeseralizeRepositoryByOwnerSlug() throws Exception {
+
+		Response response = bitbucketV2Client.getRepositoryByOwnerRepoSlug("owner", "repo_slug");
+
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		Repository repository = response.readEntity(Repository.class);
+
+		Assert.assertEquals("hg", repository.getScm());
+
+		Date createdDate = simpleDateTimeFormat.parse("2011-12-20T16:35:06.480042+00:00");
+		Assert.assertEquals(createdDate, repository.getCreatedOn());
+
+		Date modifiedDate = simpleDateTimeFormat.parse("2014-11-03T02:24:08.409995+00:00");
+		Assert.assertEquals(modifiedDate, repository.getUpdatedOn());
+
+		Map<String, List<Link>> links = repository.getLinks();
+		Assert.assertEquals(8, links.size());
+
+		List<Link> cloneLinks = links.get("clone");
+		Assert.assertEquals(2, cloneLinks.size());
+
+		Link firstCloneLink = cloneLinks.get(1);
+		Assert.assertEquals("ssh://hg@bitbucket.org/tutorials/tutorials.bitbucket.org", firstCloneLink.getHref());
+		Assert.assertEquals("ssh", firstCloneLink.getName());
+
+		User owner = repository.getOwner();
+		Assert.assertEquals("tutorials account", owner.getDisplayName());
+
+		Map<String, List<Link>> ownerLinks = owner.getLinks();
+		Assert.assertEquals(3, ownerLinks.size());
+	}
 
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
 		if (dir == null || !dir.isDirectory()) {

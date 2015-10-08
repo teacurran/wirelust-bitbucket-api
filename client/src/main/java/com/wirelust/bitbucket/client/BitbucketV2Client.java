@@ -35,6 +35,12 @@ public interface BitbucketV2Client {
 	/**
 	 * 	https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}
 	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getRepositoryByOwnerRepoSlug(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug);
 
 	/**
 	 * POST https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}
