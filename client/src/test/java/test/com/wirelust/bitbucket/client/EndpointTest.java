@@ -14,6 +14,7 @@ import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.representations.Link;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
+import com.wirelust.bitbucket.client.representations.User;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -93,7 +94,7 @@ public class EndpointTest {
 	}
 
 	@Test
-	public void deserializeUserActivitiesGoalsDaily() throws Exception {
+	public void shouldBeAbleToDeseralizeGetAllRepositories() throws Exception {
 
 		Response response = bitbucketV2Client.getAllRepositories();
 
@@ -119,6 +120,44 @@ public class EndpointTest {
 		Assert.assertEquals("https://bitbucket.org/phlogistonjohn/tweakmsg", firstCloneLink.getHref());
 		Assert.assertEquals("https", firstCloneLink.getName());
 	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeGetRepositoriesByOwner() throws Exception {
+
+		Response response = bitbucketV2Client.getRepositoriesByOwner("owner");
+
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		RepositoryList repositoryList = response.readEntity(RepositoryList.class);
+
+		Assert.assertEquals(10, (long) repositoryList.getPagelen());
+
+		Repository repository = repositoryList.getValues().get(0);
+		Assert.assertEquals("git", repository.getScm());
+
+		Date createdDate = simpleDateTimeFormat.parse("2014-08-13T19:05:22.148829+00:00");
+		Assert.assertEquals(createdDate, repository.getCreatedOn());
+
+		Date modifiedDate = simpleDateTimeFormat.parse("2014-08-13T19:05:22.168083+00:00");
+		Assert.assertEquals(modifiedDate, repository.getUpdatedOn());
+
+		Map<String, List<Link>> links = repository.getLinks();
+		Assert.assertEquals(8, links.size());
+
+		List<Link> cloneLinks = links.get("clone");
+		Assert.assertEquals(2, cloneLinks.size());
+
+		Link firstCloneLink = cloneLinks.get(1);
+		Assert.assertEquals("ssh://git@bitbucket.org/dans9190/new-repository.git", firstCloneLink.getHref());
+		Assert.assertEquals("ssh", firstCloneLink.getName());
+
+		User owner = repository.getOwner();
+		Assert.assertEquals("Daniel  Stevens", owner.getDisplayName());
+
+		Map<String, List<Link>> ownerLinks = owner.getLinks();
+		Assert.assertEquals(3, ownerLinks.size());
+	}
+
 
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
 		if (dir == null || !dir.isDirectory()) {
