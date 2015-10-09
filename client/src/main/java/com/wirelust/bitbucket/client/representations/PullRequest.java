@@ -30,6 +30,8 @@ public class PullRequest {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date updatedOn;
 	Commit mergeCommit;
+	List<User> reviewers;
+	List<Participant> participants;
 
 	public Long getId() {
 		return id;
@@ -141,5 +143,21 @@ public class PullRequest {
 
 	public void setMergeCommit(Commit mergeCommit) {
 		this.mergeCommit = mergeCommit;
+	}
+
+	public List<User> getReviewers() {
+		return reviewers;
+	}
+
+	public void setReviewers(List<User> reviewers) {
+		this.reviewers = reviewers;
+	}
+
+	public List<Participant> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(List<Participant> participants) {
+		this.participants = participants;
 	}
 }

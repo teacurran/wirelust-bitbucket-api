@@ -43,20 +43,6 @@ public interface BitbucketV2Client {
 		@PathParam("repo_slug") String repoSlug);
 
 	/**
-	 * POST https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}
-
-1
-$ curl -X POST -v -u username:password -H "Content-Type: application/json" \
-2
-  https://api.bitbucket.org/2.0/repositories/teamsinspace/new-repository4 \
-3
-  -d '{"scm": "git", "is_private": "true", "fork_policy": "no_public_forks" }'
-	 *
-	 *
-	 */
-
-
-	/**
 	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
 	 */
 	@GET
@@ -67,5 +53,15 @@ $ curl -X POST -v -u username:password -H "Content-Type: application/json" \
 			@PathParam("repo_slug") String repoSlug,
 			@QueryParam("state") String state);
 
+	/**
+	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPullRequestById(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") String id);
 
 }

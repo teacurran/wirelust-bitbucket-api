@@ -223,6 +223,39 @@ public class EndpointTest {
 		Assert.assertEquals(1, commitDestination.getCommit().getLinks().size());
 	}
 
+	@Test
+	public void shouldBeAbleToDeseralizePullRequest() throws Exception {
+		Response response = bitbucketV2Client.getPullRequestById("owner", "repo_slug", "id");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		PullRequest pullRequest = response.readEntity(PullRequest.class);
+
+		Assert.assertEquals(true, pullRequest.getCloseSourceBranch());
+
+		Map<String, List<Link>> links = pullRequest.getLinks();
+		Assert.assertEquals(10, links.size());
+
+		CommitSource commitSource = pullRequest.getSource();
+		Assert.assertEquals("mfrauenholtz/team-removal/admin-links", commitSource.getBranch().getName());
+		Assert.assertEquals("2a81a1edc0c2", commitSource.getCommit().getHash());
+		Assert.assertEquals(1, commitSource.getCommit().getLinks().size());
+
+		CommitSource commitDestination = pullRequest.getDestination();
+		Assert.assertEquals("staging", commitDestination.getBranch().getName());
+		Assert.assertEquals("e04099ba977c", commitDestination.getCommit().getHash());
+		Assert.assertEquals(1, commitDestination.getCommit().getLinks().size());
+
+		Assert.assertEquals(1, pullRequest.getReviewers().size());
+		Assert.assertEquals("bnguyen", pullRequest.getReviewers().get(0).getUsername());
+
+		Assert.assertEquals(3, pullRequest.getParticipants().size());
+		Assert.assertEquals("PARTICIPANT", pullRequest.getParticipants().get(0).getRole());
+		Assert.assertEquals("mfrauenholtz", pullRequest.getParticipants().get(0).getUser().getUsername());
+		Assert.assertEquals("PARTICIPANT", pullRequest.getParticipants().get(1).getRole());
+		Assert.assertEquals("dbennett", pullRequest.getParticipants().get(1).getUser().getUsername());
+
+	}
+
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
 		if (dir == null || !dir.isDirectory()) {
 			throw new IllegalArgumentException("not a directory");
