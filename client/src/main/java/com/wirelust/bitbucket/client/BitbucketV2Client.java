@@ -54,7 +54,7 @@ public interface BitbucketV2Client {
 			@QueryParam("state") String state);
 
 	/**
-	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
+	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}")
@@ -64,4 +64,14 @@ public interface BitbucketV2Client {
 			@PathParam("repo_slug") String repoSlug,
 			@PathParam("id") String id);
 
+	/**
+	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPullRequestCommits(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") String id);
 }

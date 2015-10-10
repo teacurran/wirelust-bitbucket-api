@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
+import com.wirelust.bitbucket.client.Constants;
+import com.wirelust.bitbucket.client.representations.Commit;
+import com.wirelust.bitbucket.client.representations.CommitList;
 import com.wirelust.bitbucket.client.representations.CommitSource;
 import com.wirelust.bitbucket.client.representations.Link;
 import com.wirelust.bitbucket.client.representations.PullRequest;
@@ -56,6 +59,7 @@ public class EndpointTest {
 	BitbucketV2Client bitbucketV2Client;
 	SimpleDateFormat simpleDateFormat;
 	SimpleDateFormat simpleDateTimeFormat;
+	SimpleDateFormat simpleDateTimeFormat2;
 
 	@Deployment
 	public static WebArchive create() {
@@ -90,6 +94,9 @@ public class EndpointTest {
 
 		simpleDateTimeFormat = new SimpleDateFormat(DATE_TIME_FORMAT);
 		simpleDateTimeFormat.setTimeZone(gmtZone);
+
+		simpleDateTimeFormat2 = new SimpleDateFormat(Constants.DATE_TIME_FORMAT_2);
+		simpleDateTimeFormat2.setTimeZone(gmtZone);
 	}
 
 	@After
@@ -254,6 +261,37 @@ public class EndpointTest {
 		Assert.assertEquals("PARTICIPANT", pullRequest.getParticipants().get(1).getRole());
 		Assert.assertEquals("dbennett", pullRequest.getParticipants().get(1).getUser().getUsername());
 
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizePullRequestCommitList() throws Exception {
+		Response response = bitbucketV2Client.getPullRequestCommits("owner", "repo_slug", "id");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		CommitList commitList = response.readEntity(CommitList.class);
+
+		Assert.assertEquals(1, (long) commitList.getPage());
+		Assert.assertEquals(11, (long) commitList.getSize());
+		Assert.assertEquals(1, (long) commitList.getPagelen());
+
+		List<Commit> commits = commitList.getValues();
+		Assert.assertEquals(1, commits.size());
+
+		Commit firstCommit = commits.get(0);
+		Assert.assertEquals("ad758aeba36fa4b9d258ac1667f55cfb811e6df3", firstCommit.getHash());
+
+		Map<String, List<Link>> links = firstCommit.getLinks();
+		Assert.assertEquals(6, links.size());
+
+		Assert.assertEquals("16929c2f94828ca9d8adb5b91e7db7b274aae318", firstCommit.getParents().get(0).getHash());
+
+		Date date = simpleDateTimeFormat2.parse("2013-11-07T00:17:05+00:00");
+		Assert.assertEquals(date, firstCommit.getDate());
+
+		Assert.assertEquals("Reorder imports. ", firstCommit.getMessage());
+
+		Assert.assertEquals("Erik van Zijst <erik.van.zijst@gmail.com>", firstCommit.getAuthor().getRaw());
+		Assert.assertEquals("erik", firstCommit.getAuthor().getUser().getUsername());
 	}
 
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {

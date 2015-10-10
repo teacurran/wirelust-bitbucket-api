@@ -1,7 +1,11 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wirelust.bitbucket.client.Constants;
 
 /**
  * Date: 08-Oct-2015
@@ -12,6 +16,12 @@ public class Commit {
 
 	String hash;
 	Map<String, List<Link>> links;
+	List<Commit> parents;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT_2)
+	Date date;
+	String message;
+	CommitAuthor author;
+	Repository repository;
 
 	public String getHash() {
 		return hash;
@@ -27,5 +37,45 @@ public class Commit {
 
 	public void setLinks(Map<String, List<Link>> links) {
 		this.links = links;
+	}
+
+	public List<Commit> getParents() {
+		return parents;
+	}
+
+	public void setParents(List<Commit> parents) {
+		this.parents = parents;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public CommitAuthor getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(CommitAuthor author) {
+		this.author = author;
+	}
+
+	public Repository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(Repository repository) {
+		this.repository = repository;
 	}
 }
