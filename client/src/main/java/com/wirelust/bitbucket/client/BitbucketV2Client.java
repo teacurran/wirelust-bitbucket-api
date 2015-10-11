@@ -74,4 +74,16 @@ public interface BitbucketV2Client {
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
 			@PathParam("id") String id);
+
+	/**
+	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/diff
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/diff")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getPullRequestDiff(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") String id);
+
 }

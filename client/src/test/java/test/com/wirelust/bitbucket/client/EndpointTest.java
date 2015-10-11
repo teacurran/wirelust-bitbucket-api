@@ -294,6 +294,17 @@ public class EndpointTest {
 		Assert.assertEquals("erik", firstCommit.getAuthor().getUser().getUsername());
 	}
 
+	@Test
+	public void shouldBeAbleToGetPullRequestDiff() throws Exception {
+		Response response = bitbucketV2Client.getPullRequestDiff("owner", "repo_slug", "id");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		String diff = response.readEntity(String.class);
+
+		Assert.assertTrue(diff.contains("UsernameChangeForm"));
+	}
+
+
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
 		if (dir == null || !dir.isDirectory()) {
 			throw new IllegalArgumentException("not a directory");
