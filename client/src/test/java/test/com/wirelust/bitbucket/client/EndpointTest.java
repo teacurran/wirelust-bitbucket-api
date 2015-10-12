@@ -17,6 +17,7 @@ import com.wirelust.bitbucket.client.representations.CommitList;
 import com.wirelust.bitbucket.client.representations.CommitSource;
 import com.wirelust.bitbucket.client.representations.Link;
 import com.wirelust.bitbucket.client.representations.PullRequest;
+import com.wirelust.bitbucket.client.representations.PullRequestActivityList;
 import com.wirelust.bitbucket.client.representations.PullRequestList;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
@@ -292,6 +293,16 @@ public class EndpointTest {
 
 		Assert.assertEquals("Erik van Zijst <erik.van.zijst@gmail.com>", firstCommit.getAuthor().getRaw());
 		Assert.assertEquals("erik", firstCommit.getAuthor().getUser().getUsername());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizePullRequestActivity() throws Exception {
+		Response response = bitbucketV2Client.getPullRequestActivity("owner", "repo_slug");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		PullRequestActivityList activityList = response.readEntity(PullRequestActivityList.class);
+
+		Assert.assertEquals(10965, (long)activityList.getSize());
 	}
 
 	@Test

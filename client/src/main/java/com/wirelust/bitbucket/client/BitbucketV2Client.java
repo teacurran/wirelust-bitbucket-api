@@ -54,6 +54,16 @@ public interface BitbucketV2Client {
 			@QueryParam("state") String state);
 
 	/**
+	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/pullrequests/activity
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/activity")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getPullRequestActivity(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug);
+
+	/**
 	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}
 	 */
 	@GET
@@ -85,5 +95,6 @@ public interface BitbucketV2Client {
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
 			@PathParam("id") String id);
+
 
 }
