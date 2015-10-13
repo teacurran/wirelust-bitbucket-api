@@ -306,6 +306,16 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizePullRequestActivityById() throws Exception {
+		Response response = bitbucketV2Client.getPullRequestActivityById("owner", "repo_slug", "id");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		PullRequestActivityList activityList = response.readEntity(PullRequestActivityList.class);
+
+		Assert.assertEquals(10, (long)activityList.getSize());
+	}
+
+	@Test
 	public void shouldBeAbleToGetPullRequestDiff() throws Exception {
 		Response response = bitbucketV2Client.getPullRequestDiff("owner", "repo_slug", "id");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());

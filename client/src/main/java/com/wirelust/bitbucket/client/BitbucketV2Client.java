@@ -75,6 +75,17 @@ public interface BitbucketV2Client {
 			@PathParam("id") String id);
 
 	/**
+	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPullRequestActivityById(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") String id);
+
+	/**
 	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
 	 */
 	@GET
