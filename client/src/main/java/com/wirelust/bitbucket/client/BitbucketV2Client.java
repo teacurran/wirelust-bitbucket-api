@@ -97,6 +97,17 @@ public interface BitbucketV2Client {
 			@PathParam("id") String id);
 
 	/**
+	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/comments")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPullRequestComments(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") String id);
+
+	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/diff
 	 */
 	@GET

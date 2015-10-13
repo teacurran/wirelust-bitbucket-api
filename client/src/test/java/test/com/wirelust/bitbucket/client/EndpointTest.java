@@ -12,6 +12,8 @@ import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.Constants;
+import com.wirelust.bitbucket.client.representations.Comment;
+import com.wirelust.bitbucket.client.representations.CommentList;
 import com.wirelust.bitbucket.client.representations.Commit;
 import com.wirelust.bitbucket.client.representations.CommitList;
 import com.wirelust.bitbucket.client.representations.CommitSource;
@@ -293,6 +295,28 @@ public class EndpointTest {
 
 		Assert.assertEquals("Erik van Zijst <erik.van.zijst@gmail.com>", firstCommit.getAuthor().getRaw());
 		Assert.assertEquals("erik", firstCommit.getAuthor().getUser().getUsername());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizePullRequestCommentList() throws Exception {
+		Response response = bitbucketV2Client.getPullRequestComments("owner", "repo_slug", "id");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		CommentList commentList = response.readEntity(CommentList.class);
+
+		Assert.assertEquals(1, (long) commentList.getPage());
+		Assert.assertEquals(4, (long) commentList.getSize());
+		Assert.assertEquals(1, (long) commentList.getPagelen());
+
+		List<Comment> comments = commentList.getValues();
+		Assert.assertEquals(1, comments.size());
+
+		Comment firstComment = comments.get(0);
+		Assert.assertEquals(25337, (long)firstComment.getId());
+
+		Assert.assertEquals(25334, (long)firstComment.getParent().getId());
+
+		Assert.assertEquals("markdown", firstComment.getContent().getMarkup());
 	}
 
 	@Test
