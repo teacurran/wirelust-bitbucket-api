@@ -38,9 +38,20 @@ public interface BitbucketV2Client {
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getRepositoryByOwnerRepoSlug(
+	public Response getRepositoryByOwnerRepo(
 		@PathParam("owner") String owner,
 		@PathParam("repo_slug") String repoSlug);
+
+	/**
+	 * https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commits
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/commits")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getRepositoryCommitsByOwnerRepo(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug);
+
 
 	/**
 	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
