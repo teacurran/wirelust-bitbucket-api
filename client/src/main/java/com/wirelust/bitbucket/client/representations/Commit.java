@@ -22,6 +22,7 @@ public class Commit {
 	String message;
 	CommitAuthor author;
 	Repository repository;
+	List<Participant> participants;
 
 	public String getHash() {
 		return hash;
@@ -77,5 +78,13 @@ public class Commit {
 
 	public void setRepository(Repository repository) {
 		this.repository = repository;
+	}
+
+	public List<Participant> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(List<Participant> participants) {
+		this.participants = participants;
 	}
 }

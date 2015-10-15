@@ -268,7 +268,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizeRepoCommitList() throws Exception {
-		Response response = bitbucketV2Client.getRepositoryCommitsByOwnerRepo("owner", "repo_slug");
+		Response response = bitbucketV2Client.getCommitsByOwnerRepo("owner", "repo_slug");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		CommitList commitList = response.readEntity(CommitList.class);
@@ -294,6 +294,29 @@ public class EndpointTest {
 
 		Assert.assertEquals("Joseph Walton", firstCommit.getAuthor().getUser().getDisplayName());
 		Assert.assertEquals("jwalton", firstCommit.getAuthor().getUser().getUsername());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeRepoCommit() throws Exception {
+		Response response = bitbucketV2Client.getCommitByOwnerRepoRevision("owner", "repo_slug", "revision");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		Commit commit = response.readEntity(Commit.class);
+
+		Assert.assertEquals("61d9e64348f9da407e62f64726337fd3bb24b466", commit.getHash());
+
+		Map<String, List<Link>> links = commit.getLinks();
+		Assert.assertEquals(6, links.size());
+
+		Assert.assertEquals("59721f593b020123a75424285845325126f56e2e", commit.getParents().get(0).getHash());
+
+		Date date = simpleDateTimeFormat2.parse("2013-10-21T07:21:51+00:00");
+		Assert.assertEquals(date, commit.getDate());
+
+		Assert.assertEquals("Merge remote-tracking branch 'origin/rest-2.8.x' ", commit.getMessage());
+
+		Assert.assertEquals("Joseph Walton", commit.getAuthor().getUser().getDisplayName());
+		Assert.assertEquals("jwalton", commit.getAuthor().getUser().getUsername());
 	}
 
 	@Test
