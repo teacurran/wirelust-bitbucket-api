@@ -32,6 +32,8 @@ public class ApplicationConfig implements Serializable {
 
 	public static final String BITBUCKET_TOKEN_URL = "https://bitbucket.org/site/oauth2/access_token";
 
+	public static final String BITBUCKET_ENDPOINT_URL = "https://bitbucket.org/api";
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
 	private static final long serialVersionUID = 2378080314904271776L;

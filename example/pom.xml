@@ -35,6 +35,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>${version.resteasy}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.2.12</version>
@@ -48,19 +55,24 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!--
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-oauth</artifactId>
 			<version>${version.resteasy}</version>
 			<scope>compile</scope>
 		</dependency>
-		-->
 
 		<dependency>
 			<groupId>org.apache.oltu.oauth2</groupId>
 			<artifactId>org.apache.oltu.oauth2.client</artifactId>
 			<version>1.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.2</version>
 			<scope>compile</scope>
 		</dependency>
 

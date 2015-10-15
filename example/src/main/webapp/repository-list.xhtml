@@ -1,25 +1,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:p="http://primefaces.org/ui">
 
-<ui:define name="metadata">
-	<f:metadata>
-		<f:viewParam name="code" value="#{authService.authCode}"/>
-		<f:viewAction action="#{authService.checkOauthCode}" />
-	</f:metadata>
-</ui:define>
-
-
 <ui:composition template="/WEB-INF/view/templates/main.xhtml">
 	<ui:define name="content">
 
 		<h:form>
-			<h1>Login</h1>
-			<h:commandButton action="#{authService.login}" value="Login"/>
+			<h1>Repository List</h1>
+
+			<p:dataTable value="#{repositoryService.list}" var="_repo">
+
+				<p:column headerText="UUID">
+					<h:outputText value="#{_repo.uuid}"/>
+				</p:column>
+
+				<p:column headerText="Full Name">
+					<h:outputText value="#{_repo.fullName}"/>
+				</p:column>
+
+			</p:dataTable>
 
 		</h:form>
 	</ui:define>

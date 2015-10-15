@@ -11,15 +11,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
+import com.wirelust.bitbucket.client.BitbucketV2Client;
+import com.wirelust.bitbucket.client.representations.User;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
-import org.apache.oltu.oauth2.client.response.GitHubTokenResponse;
 import org.apache.oltu.oauth2.client.response.OAuthAccessTokenResponse;
 import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.OAuth;
-import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
@@ -39,9 +39,13 @@ public class AuthService implements Serializable {
 	@Inject
 	ApplicationConfig applicationConfig;
 
-	String oAuthCode;
+	@Inject
+	BitbucketV2Client bitbucketV2Client;
+
+	String authCode;
 	String accessToken;
 	Long expiresIn;
+	User user;
 
 	public void login() throws OAuthSystemException, IOException {
 		OAuthClientRequest oAuthClientRequest = OAuthClientRequest
@@ -59,7 +63,7 @@ public class AuthService implements Serializable {
 	}
 
 	public void checkOauthCode() throws OAuthSystemException, OAuthProblemException, IOException {
-		if (isLoggedIn() || oAuthCode == null) {
+		if (isLoggedIn() || authCode == null) {
 			return;
 		}
 
@@ -67,7 +71,7 @@ public class AuthService implements Serializable {
 			.tokenLocation(ApplicationConfig.BITBUCKET_TOKEN_URL)
 			.setGrantType(GrantType.AUTHORIZATION_CODE)
 			.setRedirectURI(applicationConfig.getBitbucketOauthRedirectUrl())
-			.setCode(oAuthCode)
+			.setCode(authCode)
 			.buildBodyMessage();
 
 		// Bitbucket requires the client_id and secret to be sent with Basic Auth
@@ -97,15 +101,35 @@ public class AuthService implements Serializable {
 		expiresIn = oAuthResponse.getExpiresIn();
 	}
 
+	public User getUser() {
+		return null;
+	}
+
 	public boolean isLoggedIn() {
 		return accessToken != null;
 	}
 
-	public String getoAuthCode() {
-		return oAuthCode;
+	public String getAuthCode() {
+		return authCode;
 	}
 
-	public void setoAuthCode(String oAuthCode) {
-		this.oAuthCode = oAuthCode;
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public Long getExpiresIn() {
+		return expiresIn;
+	}
+
+	public void setExpiresIn(Long expiresIn) {
+		this.expiresIn = expiresIn;
 	}
 }
