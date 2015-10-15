@@ -22,6 +22,7 @@ public class Comment {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date updatedOn;
 	User user;
+	CommentLine inline;
 
 	public Long getId() {
 		return id;
@@ -77,5 +78,13 @@ public class Comment {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public CommentLine getInline() {
+		return inline;
+	}
+
+	public void setInline(CommentLine inline) {
+		this.inline = inline;
 	}
 }

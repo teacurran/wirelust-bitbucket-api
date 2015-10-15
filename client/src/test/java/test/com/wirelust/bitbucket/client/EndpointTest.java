@@ -351,6 +351,45 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizeCommitCommentList() throws Exception {
+		Response response = bitbucketV2Client.getCommentsByOwnerRepoRevision("owner", "repo_slug", "revision");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		CommentList commentList = response.readEntity(CommentList.class);
+
+		List<Comment> comments = commentList.getValues();
+		Assert.assertEquals(1, comments.size());
+
+		Comment firstComment = comments.get(0);
+		Assert.assertEquals(530189, (long)firstComment.getId());
+
+
+		Date dateCreated = simpleDateTimeFormat.parse("2013-11-07T23:55:24.486865+00:00");
+		Assert.assertEquals(dateCreated, firstComment.getCreatedOn());
+
+		Date dateModified = simpleDateTimeFormat.parse("2013-11-07T23:55:24.502477+00:00");
+		Assert.assertEquals(dateModified, firstComment.getUpdatedOn());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeCommitComment() throws Exception {
+		Response response = bitbucketV2Client.getCommentByOwnerRepoRevisionId("owner",
+			"repo_slug", "revision", "comment_id");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		Comment comment = response.readEntity(Comment.class);
+
+		Assert.assertEquals(530189, (long)comment.getId());
+
+		Date dateCreated = simpleDateTimeFormat.parse("2013-11-07T23:55:24.486865+00:00");
+		Assert.assertEquals(dateCreated, comment.getCreatedOn());
+
+		Date dateModified = simpleDateTimeFormat.parse("2013-11-07T23:55:24.502477+00:00");
+		Assert.assertEquals(dateModified, comment.getUpdatedOn());
+
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizePullRequestCommentList() throws Exception {
 		Response response = bitbucketV2Client.getPullRequestComments("owner", "repo_slug", "id");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());

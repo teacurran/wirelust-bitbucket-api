@@ -64,6 +64,29 @@ public interface BitbucketV2Client {
 		@PathParam("revision") String revision);
 
 	/**
+	 * https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommentsByOwnerRepoRevision(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug,
+		@PathParam("revision") String revision);
+
+	/**
+	 * https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments/{comment_id}
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments/{comment_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getCommentByOwnerRepoRevisionId(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug,
+		@PathParam("revision") String revision,
+		@PathParam("comment_id") String commentId);
+
+	/**
 	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
 	 */
 	@GET

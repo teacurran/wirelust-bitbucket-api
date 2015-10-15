@@ -41,7 +41,9 @@ public class MockApiEndpointServlet extends HttpServlet {
 			resp.setContentType(outputMime);
 		}
 
-		if (is != null) {
+		if (is == null) {
+			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+		} else {
 			IOUtils.copy(is, out);
 			is.close();
 		}
