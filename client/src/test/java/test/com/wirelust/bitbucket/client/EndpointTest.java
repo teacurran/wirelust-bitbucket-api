@@ -373,8 +373,8 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizeCommitComment() throws Exception {
-		Response response = bitbucketV2Client.getCommentByOwnerRepoRevisionId("owner",
-			"repo_slug", "revision", "comment_id");
+		Response response = bitbucketV2Client.getCommentByOwnerRepoRevisionId("owner", "repo_slug", "revision",
+			"comment_id");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		Comment comment = response.readEntity(Comment.class);
@@ -386,7 +386,6 @@ public class EndpointTest {
 
 		Date dateModified = simpleDateTimeFormat.parse("2013-11-07T23:55:24.502477+00:00");
 		Assert.assertEquals(dateModified, comment.getUpdatedOn());
-
 	}
 
 	@Test
@@ -439,6 +438,27 @@ public class EndpointTest {
 		String diff = response.readEntity(String.class);
 
 		Assert.assertTrue(diff.contains("UsernameChangeForm"));
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeUser() throws Exception {
+		Response response = bitbucketV2Client.getUser("username");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		User user = response.readEntity(User.class);
+
+		Assert.assertEquals("tutorials", user.getUsername());
+		Assert.assertEquals("https://tutorials.bitbucket.org/", user.getWebsite());
+		Assert.assertEquals("tutorials account", user.getDisplayName());
+		Assert.assertEquals("Santa Monica, CA", user.getLocation());
+		Assert.assertEquals("user", user.getType());
+
+		Map<String, List<Link>> links = user.getLinks();
+		Assert.assertEquals(6, links.size());
+
+		Date dateModified = simpleDateTimeFormat.parse("2011-12-20T16:34:07.132459+00:00");
+		Assert.assertEquals(dateModified, user.getCreatedOn());
+
 	}
 
 

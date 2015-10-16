@@ -1,7 +1,11 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wirelust.bitbucket.client.Constants;
 
 /**
  * Date: 07-Oct-2015
@@ -10,9 +14,14 @@ import java.util.Map;
  */
 public class User {
 
-	private String uuid;
-	private String username;
-	private String displayName;
+	String uuid;
+	String username;
+	String displayName;
+	String website;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
+	Date createdOn;
+	String location;
+	String type;
 	Map<String, List<Link>> links;
 
 	public String getUuid() {
@@ -45,5 +54,37 @@ public class User {
 
 	public void setLinks(Map<String, List<Link>> links) {
 		this.links = links;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

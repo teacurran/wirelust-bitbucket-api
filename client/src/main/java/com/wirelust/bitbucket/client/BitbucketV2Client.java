@@ -1,6 +1,14 @@
 package com.wirelust.bitbucket.client;
 
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 /**
  * Date: 26-Sep-2015
  *
@@ -8,25 +16,34 @@ package com.wirelust.bitbucket.client;
  */
 public interface BitbucketV2Client {
 
+	/**
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}
+	 */
 	@GET
 	@Path("/2.0/repositories/{owner}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRepositoriesByOwner(
 			@PathParam("owner") String owner);
 
+	/**
+	 * GET https://api.bitbucket.org/2.0/repositories/{teamname}
+	 */
 	@GET
 	@Path("/2.0/repositories/{teamname}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRepositoriesByTeam(
 			@PathParam("teamname") String teamName);
 
+	/**
+	 * GET https://api.bitbucket.org/2.0/repositories
+	 */
 	@GET
 	@Path("/2.0/repositories")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllRepositories();
 
 	/**
-	 * 	https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}")
@@ -36,7 +53,7 @@ public interface BitbucketV2Client {
 		@PathParam("repo_slug") String repoSlug);
 
 	/**
-	 * https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commits
+	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commits
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commits")
@@ -46,7 +63,7 @@ public interface BitbucketV2Client {
 		@PathParam("repo_slug") String repoSlug);
 
 	/**
-	 * https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}
+	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}")
@@ -57,7 +74,7 @@ public interface BitbucketV2Client {
 		@PathParam("revision") String revision);
 
 	/**
-	 * https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments
+	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments")
@@ -68,7 +85,7 @@ public interface BitbucketV2Client {
 		@PathParam("revision") String revision);
 
 	/**
-	 * https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments/{comment_id}
+	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments/{comment_id}
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments/{comment_id}")
@@ -80,7 +97,7 @@ public interface BitbucketV2Client {
 		@PathParam("comment_id") String commentId);
 
 	/**
-	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests")
@@ -101,7 +118,7 @@ public interface BitbucketV2Client {
 			@PathParam("repo_slug") String repoSlug);
 
 	/**
-	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}")
@@ -112,7 +129,7 @@ public interface BitbucketV2Client {
 			@PathParam("id") String id);
 
 	/**
-	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity")
@@ -123,7 +140,7 @@ public interface BitbucketV2Client {
 			@PathParam("id") String id);
 
 	/**
-	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits")
@@ -134,7 +151,7 @@ public interface BitbucketV2Client {
 			@PathParam("id") String id);
 
 	/**
-	 * https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/comments")
@@ -155,5 +172,13 @@ public interface BitbucketV2Client {
 			@PathParam("repo_slug") String repoSlug,
 			@PathParam("id") String id);
 
+	/**
+	 * GET https://bitbucket.org/api/2.0/users/{username}
+	 */
+	@GET
+	@Path("/2.0/users/{username}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getUser(
+			@PathParam("username") String username);
 
 }
