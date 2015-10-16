@@ -24,6 +24,7 @@ import com.wirelust.bitbucket.client.representations.PullRequestList;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
 import com.wirelust.bitbucket.client.representations.User;
+import com.wirelust.bitbucket.client.representations.UserFollowerList;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -74,8 +75,8 @@ public class EndpointTest {
 		File dir = new File("src/test/resources");
 		addResourceFilesToArchive(testWar, dir);
 
-		testWar.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").importDependencies(ScopeType.TEST)
-			.resolve().withTransitivity().asFile());
+		testWar.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").importDependencies(ScopeType.TEST).resolve
+			().withTransitivity().asFile());
 
 		System.out.println("test.war:" + testWar.toString(true));
 		LOGGER.debug("test deployment: {}", testWar.toString(true));
@@ -427,7 +428,7 @@ public class EndpointTest {
 
 		PullRequestActivityList activityList = response.readEntity(PullRequestActivityList.class);
 
-		Assert.assertEquals(10, (long)activityList.getSize());
+		Assert.assertEquals(10, (long) activityList.getSize());
 	}
 
 	@Test
@@ -458,9 +459,25 @@ public class EndpointTest {
 
 		Date dateModified = simpleDateTimeFormat.parse("2011-12-20T16:34:07.132459+00:00");
 		Assert.assertEquals(dateModified, user.getCreatedOn());
-
 	}
 
+	@Test
+	public void shouldBeAbleToDeseralizeUserFollowers() throws Exception {
+		Response response = bitbucketV2Client.getUserFollowers("username");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		UserFollowerList followerList = response.readEntity(UserFollowerList.class);
+
+		Assert.assertEquals(10, (long)followerList.getPagelen());
+		Assert.assertEquals(1, (long) followerList.getPage());
+		Assert.assertEquals(1, (long)followerList.getSize());
+
+		List<User> followers = followerList.getValues();
+		Assert.assertEquals(1, followers.size());
+
+		User firstFollower = followers.get(0);
+		Assert.assertEquals("tutorials", firstFollower.getUsername());
+	}
 
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
 		if (dir == null || !dir.isDirectory()) {

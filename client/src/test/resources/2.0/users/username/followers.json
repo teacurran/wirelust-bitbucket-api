@@ -1,0 +1,35 @@
+{
+	"pagelen": 10,
+	"values": [
+		{
+			"username": "tutorials",
+			"website": "https://tutorials.bitbucket.org/",
+			"display_name": "tutorials account",
+			"links": {
+				"self": {
+					"href": "https://bitbucket.org/!api/2.0/users/tutorials"
+				},
+				"repositories": {
+					"href": "https://bitbucket.org/!api/2.0/repositories/tutorials"
+				},
+				"html": {
+					"href": "https://bitbucket.org/tutorials"
+				},
+				"followers": {
+					"href": "https://bitbucket.org/!api/2.0/users/tutorials/followers"
+				},
+				"avatar": {
+					"href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2013/Nov/25/tutorials-avatar-1563784409-6_avatar.png"
+				},
+				"following": {
+					"href": "https://bitbucket.org/!api/2.0/users/tutorials/following"
+				}
+			},
+			"created_on": "2011-12-20T16:34:07.132459+00:00",
+			"location": "Santa Monica, CA",
+			"type": "user"
+		}
+	],
+	"page": 1,
+	"size": 1
+}

@@ -181,4 +181,12 @@ public interface BitbucketV2Client {
 	public Response getUser(
 			@PathParam("username") String username);
 
+	/**
+	 * GET https://bitbucket.org/api/2.0/users/{username}/followers
+	 */
+	@GET
+	@Path("/2.0/users/{username}/followers")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getUserFollowers(
+			@PathParam("username") String username);
 }
