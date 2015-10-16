@@ -173,6 +173,14 @@ public interface BitbucketV2Client {
 			@PathParam("id") String id);
 
 	/**
+	 * GET https://bitbucket.org/api/2.0/user
+	 */
+	@GET
+	@Path("/2.0/user")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getUser();
+
+	/**
 	 * GET https://bitbucket.org/api/2.0/users/{username}
 	 */
 	@GET
