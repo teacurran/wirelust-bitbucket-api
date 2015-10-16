@@ -1,0 +1,5 @@
+= Bitbucket API Client example web application
+
+This is a simple web application to show the functionality of the Bitbucket API client.
+
+This example has been tested on Tomcat 8.x

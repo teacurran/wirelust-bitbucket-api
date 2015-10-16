@@ -10,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.representations.User;
@@ -39,13 +41,9 @@ public class AuthService implements Serializable {
 	@Inject
 	ApplicationConfig applicationConfig;
 
-	@Inject
-	BitbucketV2Client bitbucketV2Client;
-
 	String authCode;
 	String accessToken;
 	Long expiresIn;
-	User user;
 
 	public void login() throws OAuthSystemException, IOException {
 		OAuthClientRequest oAuthClientRequest = OAuthClientRequest
@@ -99,10 +97,6 @@ public class AuthService implements Serializable {
 
 		accessToken = oAuthResponse.getAccessToken();
 		expiresIn = oAuthResponse.getExpiresIn();
-	}
-
-	public User getUser() {
-		return null;
 	}
 
 	public boolean isLoggedIn() {

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
@@ -26,12 +27,31 @@ public class RepositoryService implements Serializable {
 	BitbucketV2Client bitbucketV2Client;
 
 	RepositoryList repositoryList;
+	String user;
 
 	public List<Repository> getList() {
-		Response response = bitbucketV2Client.getAllRepositories();
-		repositoryList = response.readEntity(RepositoryList.class);
+		Response response;
+		if (user != null) {
+			response = bitbucketV2Client.getRepositoriesByOwner(user);
+		} else {
+			response = bitbucketV2Client.getAllRepositories();
+		}
 
-		return repositoryList.getValues();
+		if (response.getStatus() == HttpServletResponse.SC_OK) {
+			repositoryList = response.readEntity(RepositoryList.class);
+		}
+
+		if (repositoryList != null) {
+			return repositoryList.getValues();
+		}
+		return null;
 	}
 
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
 }

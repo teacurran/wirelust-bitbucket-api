@@ -18,9 +18,30 @@
 	<ui:define name="content">
 
 		<h:form>
-			<h1>Login</h1>
-			<h:commandButton action="#{authService.login}" value="Login"/>
 
+			<p:panel header="Log in" rendered="#{!authService.loggedIn}">
+				<h1>Log in to bitbucket</h1>
+				<p:commandButton action="#{authService.login}" value="Login"/>
+			</p:panel>
+
+			<p:panel header="Logged in" rendered="#{authService.loggedIn}">
+
+				<h:panelGrid columns="2" columnClasses="label, value" styleClass="detail-grid">
+
+					<h:outputLabel for="fieldDisplayName" value="Name"/>
+					<h:outputText id="fieldDisplayName" value="#{userService.user.displayName}"/>
+
+					<h:outputLabel for="fieldUsername" value="Username"/>
+					<h:outputText id="fieldUsername" value="#{userService.user.username}"/>
+
+					<h:outputLabel for="fieldRepositories" value="Repositories"/>
+					<p:link outcome="repository-list.xhtml" value="My Repositories">
+						<f:param name="user" value="#{userService.user.username}"/>
+					</p:link>
+
+				</h:panelGrid>
+
+			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>
