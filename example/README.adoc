@@ -3,3 +3,13 @@
 This is a simple web application to show the functionality of the Bitbucket API client.
 
 This example has been tested on Tomcat 8.x
+
+To set-up:
+
+1. create a document called example.properties
+2. add the following values
+    * bitbucketOauthKey=your_bitbucket_oauth_key
+    * bitbucketSecret=your_bitbucket_oauth_secret
+    * bitbucketOauthRedirectUrl=your_bitbucket_redirect_url
+3. Start tomcat with the environment variable: app.bitbucket.env=your_path_to/example.properties
+
