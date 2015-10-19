@@ -64,6 +64,19 @@ public interface BitbucketV2Client {
 		@PathParam("repo_slug") String repoSlug);
 
 	/**
+	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/diff/{revision}
+	 * NOTE: NOT in the official Bitbucket documentation
+	 * @return java.lang.String
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/diff/{revision}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getDiffByOwnerRepoRevision(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug,
+		@PathParam("revision") String revision);
+
+	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}
 	 * @return com.wirelust.bitbucket.client.representations.Commit
 	 */

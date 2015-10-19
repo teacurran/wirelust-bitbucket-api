@@ -12,4 +12,9 @@ body {
 	background-color: #DDDDDD;
 }
 
+.commit-diff {
+	width: 800px;
+	height: 300px;
+	overflow: scroll;
+}
 

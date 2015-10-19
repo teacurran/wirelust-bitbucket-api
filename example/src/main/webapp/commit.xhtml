@@ -20,12 +20,12 @@
 		<h:form>
 			<h1>Commit:
 				<p:link outcome="repository-list.xhtml"
-					value="#{repositoryService.repository.owner.username}">
-					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+					value="#{commitService.paramOwner}">
+					<f:param name="owner" value="#{commitService.paramOwner}"/>
 				</p:link>/<p:link outcome="repository-view.xhtml"
-					value="#{repositoryService.repository.name}">
-					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
-					<f:param name="name" value="#{repositoryService.repository.name}"/>
+					value="#{commitService.paramRepoSlug}">
+					<f:param name="owner" value="#{commitService.paramOwner}"/>
+					<f:param name="name" value="#{commitService.paramRepoSlug}"/>
 				</p:link>/#{commitService.commit.hash}
 			</h1>
 
@@ -41,7 +41,11 @@
 				<h:outputText id="fieldAuthor" value="#{commitService.commit.author.raw}"/>
 
 				<h:outputLabel for="fieldDiff" value="Diff"/>
-				<h:outputText id="fieldDiff" value="#{commitService.diff}" escape="true"/>
+				<p:panel>
+					<pre class="commit-diff">
+						<h:outputText id="fieldDiff" value="#{commitService.diff}" escape="true"/>
+					</pre>
+				</p:panel>
 			</h:panelGrid>
 
 		</h:form>

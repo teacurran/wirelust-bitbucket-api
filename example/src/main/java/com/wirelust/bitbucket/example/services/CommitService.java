@@ -45,7 +45,7 @@ public class CommitService implements Serializable {
 
 	public String getDiff() {
 		if (diff == null && paramOwner != null && paramRepoSlug != null && paramRevision != null) {
-			Response response = bitbucketV2Client.getPullRequestDiff(paramOwner, paramRepoSlug, paramRevision);
+			Response response = bitbucketV2Client.getDiffByOwnerRepoRevision(paramOwner, paramRepoSlug, paramRevision);
 
 			if (response.getStatus() == HttpServletResponse.SC_OK) {
 				diff = response.readEntity(String.class);

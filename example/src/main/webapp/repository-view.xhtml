@@ -41,7 +41,7 @@
 			<p:dataTable value="#{repositoryService.repositoryCommits.values}" var="_commit">
 
 				<p:column headerText="Author">
-					<h:outputText value="#{_commit.author.user.username}"/>
+					<h:outputText value="#{_commit.author.raw}"/>
 				</p:column>
 
 				<p:column headerText="Date">
