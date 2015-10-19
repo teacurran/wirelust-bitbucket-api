@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="metadata">
+	<f:metadata>
+		<f:viewParam name="owner" value="#{commitService.paramOwner}"/>
+		<f:viewParam name="repo_slug" value="#{commitService.paramRepoSlug}"/>
+		<f:viewParam name="revision" value="#{commitService.paramRevision}"/>
+	</f:metadata>
+</ui:define>
+
+<ui:composition template="/WEB-INF/view/templates/main.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+			<h1>Commit:
+				<p:link outcome="repository-list.xhtml"
+					value="#{repositoryService.repository.owner.username}">
+					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+				</p:link>/<p:link outcome="repository-view.xhtml"
+					value="#{repositoryService.repository.name}">
+					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+					<f:param name="name" value="#{repositoryService.repository.name}"/>
+				</p:link>/#{commitService.commit.hash}
+			</h1>
+
+			<h:panelGrid columns="2" columnClasses="label, value" styleClass="detail-grid">
+
+				<h:outputLabel for="fieldHash" value="Hash"/>
+				<h:outputText id="fieldHash" value="#{commitService.commit.hash}"/>
+
+				<h:outputLabel for="fieldDate" value="Date"/>
+				<h:outputText id="fieldDate" value="#{commitService.commit.date}"/>
+
+				<h:outputLabel for="fieldAuthor" value="Author"/>
+				<h:outputText id="fieldAuthor" value="#{commitService.commit.author.raw}"/>
+
+				<h:outputLabel for="fieldDiff" value="Diff"/>
+				<h:outputText id="fieldDiff" value="#{commitService.diff}" escape="true"/>
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

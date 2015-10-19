@@ -49,7 +49,11 @@
 				</p:column>
 
 				<p:column headerText="Hash">
-					<h:outputText value="#{_commit.hash}"/>
+					<p:link outcome="commit.xhtml" value="#{_commit.hash}">
+						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
+						<f:param name="revision" value="#{_commit.hash}"/>
+					</p:link>
 				</p:column>
 			</p:dataTable>
 

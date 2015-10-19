@@ -65,6 +65,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}
+	 * @return com.wirelust.bitbucket.client.representations.Commit
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}")
@@ -76,6 +77,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments
+	 * @return com.wirelust.bitbucket.client.representations.CommentList
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments")
@@ -87,6 +89,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments/{comment_id}
+	 * @return com.wirelust.bitbucket.client.representations.Comment
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/comments/{comment_id}")
@@ -120,6 +123,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}
+	 * @return com.wirelust.bitbucket.client.representations.PullRequest
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}")
@@ -131,6 +135,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity
+	 * @return com.wirelust.bitbucket.client.representations.PullRequestActivity
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity")
@@ -142,6 +147,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 * @return com.wirelust.bitbucket.client.representations.CommitList
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits")
@@ -153,6 +159,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 * @return com.wirelust.bitbucket.client.representations.CommentList
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/comments")
@@ -164,6 +171,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/diff
+	 * @return com.wirelust.bitbucket.client.representations.String
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/diff")
