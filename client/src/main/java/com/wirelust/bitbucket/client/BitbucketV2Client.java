@@ -54,6 +54,7 @@ public interface BitbucketV2Client {
 
 	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/commits
+	 * @return com.wirelust.bitbucket.client.representations.CommitList
 	 */
 	@GET
 	@Path("/2.0/repositories/{owner}/{repo_slug}/commits")

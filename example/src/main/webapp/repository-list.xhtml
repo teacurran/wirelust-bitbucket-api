@@ -8,7 +8,7 @@
 
 <ui:define name="metadata">
 	<f:metadata>
-		<f:viewParam name="user" value="#{repositoryService.user}"/>
+		<f:viewParam name="owner" value="#{repositoryService.user}"/>
 	</f:metadata>
 </ui:define>
 
@@ -25,7 +25,10 @@
 				</p:column>
 
 				<p:column headerText="Full Name">
-					<h:outputText value="#{_repo.fullName}"/>
+					<p:link outcome="repository-view.xhtml" value="#{_repo.fullName}">
+						<f:param name="owner" value="#{_repo.owner.username}"/>
+						<f:param name="name" value="#{_repo.name}"/>
+					</p:link>
 				</p:column>
 
 			</p:dataTable>

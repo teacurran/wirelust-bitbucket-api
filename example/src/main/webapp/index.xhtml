@@ -36,7 +36,7 @@
 
 					<h:outputLabel for="fieldRepositories" value="Repositories"/>
 					<p:link outcome="repository-list.xhtml" value="My Repositories">
-						<f:param name="user" value="#{userService.user.username}"/>
+						<f:param name="owner" value="#{userService.user.username}"/>
 					</p:link>
 
 				</h:panelGrid>

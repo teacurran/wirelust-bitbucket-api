@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
+import com.wirelust.bitbucket.client.representations.CommitList;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
 
@@ -28,6 +29,10 @@ public class RepositoryService implements Serializable {
 
 	RepositoryList repositoryList;
 	String user;
+	Repository repository;
+	String repositoryOwner;
+	String repositoryName;
+	CommitList commitList;
 
 	public List<Repository> getList() {
 		Response response;
@@ -53,5 +58,45 @@ public class RepositoryService implements Serializable {
 
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public Repository getRepository() {
+		if (repositoryName != null && repository == null) {
+			Response response = bitbucketV2Client.getRepositoryByOwnerRepo(repositoryOwner, repositoryName);
+			if (response.getStatus() == HttpServletResponse.SC_OK) {
+				repository = response.readEntity(Repository.class);
+			}
+		}
+		return repository;
+	}
+
+	public CommitList getRepositoryCommits() {
+		if (commitList == null && getRepository() != null) {
+			Response response = bitbucketV2Client.getCommitsByOwnerRepo(repositoryOwner, repositoryName);
+			if (response.getStatus() == HttpServletResponse.SC_OK) {
+				commitList = response.readEntity(CommitList.class);
+			}
+		}
+		return commitList;
+	}
+
+	public void setRepository(Repository repository) {
+		this.repository = repository;
+	}
+
+	public String getRepositoryOwner() {
+		return repositoryOwner;
+	}
+
+	public void setRepositoryOwner(String repositoryOwner) {
+		this.repositoryOwner = repositoryOwner;
+	}
+
+	public String getRepositoryName() {
+		return repositoryName;
+	}
+
+	public void setRepositoryName(String repositoryName) {
+		this.repositoryName = repositoryName;
 	}
 }

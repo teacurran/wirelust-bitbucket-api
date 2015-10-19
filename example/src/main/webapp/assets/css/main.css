@@ -1,0 +1,15 @@
+body {
+	font-family: helvetica, arial, sans-serif;
+}
+
+.detail-grid td {
+	padding: 5px 10px 5px 5px;
+	vertical-align: top;
+}
+
+.detail-grid .label {
+	font-weight: bold;
+	background-color: #DDDDDD;
+}
+
+
