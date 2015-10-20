@@ -39,6 +39,7 @@ public class CommitService implements Serializable {
 			if (response.getStatus() == HttpServletResponse.SC_OK) {
 				commit = response.readEntity(Commit.class);
 			}
+			response.close();
 		}
 		return commit;
 	}
@@ -50,6 +51,7 @@ public class CommitService implements Serializable {
 			if (response.getStatus() == HttpServletResponse.SC_OK) {
 				diff = response.readEntity(String.class);
 			}
+			response.close();
 		}
 		return diff;
 	}

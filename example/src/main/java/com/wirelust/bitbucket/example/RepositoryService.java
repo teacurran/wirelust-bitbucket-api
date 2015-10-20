@@ -46,6 +46,8 @@ public class RepositoryService implements Serializable {
 			repositoryList = response.readEntity(RepositoryList.class);
 		}
 
+		response.close();
+
 		if (repositoryList != null) {
 			return repositoryList.getValues();
 		}
@@ -66,6 +68,7 @@ public class RepositoryService implements Serializable {
 			if (response.getStatus() == HttpServletResponse.SC_OK) {
 				repository = response.readEntity(Repository.class);
 			}
+			response.close();
 		}
 		return repository;
 	}
@@ -76,6 +79,7 @@ public class RepositoryService implements Serializable {
 			if (response.getStatus() == HttpServletResponse.SC_OK) {
 				commitList = response.readEntity(CommitList.class);
 			}
+			response.close();
 		}
 		return commitList;
 	}
