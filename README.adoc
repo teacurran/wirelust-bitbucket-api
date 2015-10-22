@@ -1,0 +1,41 @@
+= Bitbucket API Java Client
+
+This project contains a Java client for the http://www.bitbucket.com[Bitbucket] API.
+
+Please refer to the
+https://confluence.atlassian.com/bitbucket/bitbucket-cloud-documentation-home-221448814.html[API Documentation] from
+Bitbucket for how to use these calls.
+
+To build:
+
+* ensure you have JDK 1.7+ installed
+* ensure you have maven 3.0+ installed
+* run the command: mvn package
+
+== Modules
+
+=== Client
+This module contains Value Objects and an Interface for the API.
+
+The goal for the project is to only contain as much information as needed in order to invoke a JAX-RS 2.0 client.
+
+There is no code related to networking or JSON serialization/de-serialization. It is assumed that these functions are
+handled by the client.
+
+All annotations are JAX-RS with the exception of some Jackson annotations for Date serialization.  If your client isn't
+using Jackson then you will have to use another approach for serializing dates.  I am looking into ways to make this
+module not rely on Jackson.
+
+Unit tests for this module use Arquillian running Wildfly 8.2.  It should be possible to run any embedded servlet
+container for unit tests but I happened to have Wildfly 8.2 config I could copy from another project.
+
+As of this writing, there are only client endpoints for GET methods.
+
+=== Example
+
+This is an example web-app for tesitng the API against the live BitBucket endpoint.
+
+The example app has been tested on Tomcat 8.x.
+
+Please refer to the README.adoc within the example module for how to run it.
+

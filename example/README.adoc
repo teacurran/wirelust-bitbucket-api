@@ -6,10 +6,20 @@ This example has been tested on Tomcat 8.x
 
 To set-up:
 
-1. create a document called example.properties
-2. add the following values
-    * bitbucketOauthKey=your_bitbucket_oauth_key
-    * bitbucketSecret=your_bitbucket_oauth_secret
-    * bitbucketOauthRedirectUrl=your_bitbucket_redirect_url
-3. Start tomcat with the environment variable: app.bitbucket.env=your_path_to/example.properties
+. Within bitbucket
+    .. click on "manage account"
+    .. click on "OAuth"
+    .. add a new OAuth consumer
+    .. set the Callback URL to: http://127.0.0.1:8080/
+    .. set whatever permissions for API resources you want to access
+    .. after it is created, record the Key and Secret
+. create a document called example.properties
+. add the following values
+    .. bitbucketOauthKey=your_bitbucket_oauth_key
+    .. bitbucketSecret=your_bitbucket_oauth_secret
+    .. bitbucketOauthRedirectUrl=http://127.0.0.1:8080/
+. Start tomcat with the environment variable: app.bitbucket.env=your_path_to/example.properties
+    .. this can be set by creating a file called ./bin/setenv.sh and adding the line
+    .. export JAVA_OPTS="-Dapp.bitbucket.env=your_path_to/example.properties"
+
 
