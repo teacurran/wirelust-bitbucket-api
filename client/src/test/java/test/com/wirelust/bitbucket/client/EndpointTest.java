@@ -25,6 +25,7 @@ import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
 import com.wirelust.bitbucket.client.representations.User;
 import com.wirelust.bitbucket.client.representations.UserFollowerList;
+import com.wirelust.bitbucket.client.representations.UserList;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -439,6 +440,23 @@ public class EndpointTest {
 		String diff = response.readEntity(String.class);
 
 		Assert.assertTrue(diff.contains("UsernameChangeForm"));
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeTeams() throws Exception {
+		Response response = bitbucketV2Client.getTeams("contributor");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		UserList teamList = response.readEntity(UserList.class);
+		Assert.assertEquals(10, (long)teamList.getPagelen());
+
+		List<User> users = teamList.getValues();
+		Assert.assertEquals(2, users.size());
+
+		User firstUser = users.get(0);
+		Assert.assertEquals("1team", firstUser.getUsername());
+		Assert.assertEquals("the team", firstUser.getDisplayName());
+
 	}
 
 	@Test

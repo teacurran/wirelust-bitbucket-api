@@ -195,6 +195,16 @@ public interface BitbucketV2Client {
 			@PathParam("id") String id);
 
 	/**
+	 * GET https://api.bitbucket.org/2.0/teams/?role={role}
+	 */
+	@GET
+	@Path("/2.0/teams")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getTeams(
+		@QueryParam("role") String role
+	);
+
+	/**
 	 * GET https://bitbucket.org/api/2.0/user
 	 */
 	@GET

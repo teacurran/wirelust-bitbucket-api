@@ -1,0 +1,69 @@
+{
+	"pagelen": 10,
+	"values": [
+		{
+			"username": "1team",
+			"website": "",
+			"display_name": "the team",
+			"uuid": "{aa559944-83c9-4963-a9a8-69ac8d9cf5d2}",
+			"links": {
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/teams/1team"
+				},
+				"repositories": {
+					"href": "https://api.bitbucket.org/2.0/repositories/1team"
+				},
+				"html": {
+					"href": "https://bitbucket.org/1team"
+				},
+				"followers": {
+					"href": "https://api.bitbucket.org/2.0/teams/1team/followers"
+				},
+				"avatar": {
+					"href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/572a80470390/img/default_team_avatar/32/team_blue.png"
+				},
+				"members": {
+					"href": "https://api.bitbucket.org/2.0/teams/1team/members"
+				},
+				"following": {
+					"href": "https://api.bitbucket.org/2.0/teams/1team/following"
+				}
+			},
+			"created_on": "2013-04-22T18:09:29.103337+00:00",
+			"location": "",
+			"type": "team"
+		},
+		{
+			"username": "atlassian_tech_writing",
+			"website": "",
+			"display_name": "Atlassian Technical Writing",
+			"uuid": "{bb95f287-ac12-4a77-986f-7a5208f81c5e}",
+			"links": {
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/teams/atlassian_tech_writing"
+				},
+				"repositories": {
+					"href": "https://api.bitbucket.org/2.0/repositories/atlassian_tech_writing"
+				},
+				"html": {
+					"href": "https://bitbucket.org/atlassian_tech_writing"
+				},
+				"followers": {
+					"href": "https://api.bitbucket.org/2.0/teams/atlassian_tech_writing/followers"
+				},
+				"avatar": {
+					"href": "https://secure.gravatar.com/avatar/bdf2aff14fd80963df7365749db4ae41?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2F572a80470390%2Fimg%2Fdefault_team_avatar%2F32%2Fteam_blue.png&s=32"
+				},
+				"members": {
+					"href": "https://api.bitbucket.org/2.0/teams/atlassian_tech_writing/members"
+				},
+				"following": {
+					"href": "https://api.bitbucket.org/2.0/teams/atlassian_tech_writing/following"
+				}
+			},
+			"created_on": "2013-06-18T03:15:47.115462+00:00",
+			"location": "",
+			"type": "team"
+		}
+	]
+}
