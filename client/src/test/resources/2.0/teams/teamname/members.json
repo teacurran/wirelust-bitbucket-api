@@ -1,0 +1,36 @@
+{
+	"pagelen": 50,
+	"values": [
+		{
+			"username": "Alana-dev",
+			"website": "",
+			"display_name": "Alana-dev",
+			"uuid": "{e51f7be4-7375-4df4-9b5b-ab6f8c66a6f3}",
+			"links": {
+				"self": {
+					"href": "https://bitbucket.org/api/2.0/users/Alana-dev"
+				},
+				"repositories": {
+					"href": "https://bitbucket.org/api/2.0/repositories/Alana-dev"
+				},
+				"html": {
+					"href": "https://bitbucket.org/Alana-dev"
+				},
+				"followers": {
+					"href": "https://bitbucket.org/api/2.0/users/Alana-dev/followers"
+				},
+				"avatar": {
+					"href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Dec/05/2547547175-0-dan-test-avatar_avatar.png"
+				},
+				"following": {
+					"href": "https://bitbucket.org/api/2.0/users/Alana-dev/following"
+				}
+			},
+			"created_on": "2014-10-23T19:39:45.854234+00:00",
+			"location": "",
+			"type": "user"
+		}
+	],
+	"page": 1,
+	"size": 1
+}

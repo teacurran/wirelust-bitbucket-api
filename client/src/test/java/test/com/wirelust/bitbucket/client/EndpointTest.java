@@ -12,20 +12,7 @@ import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.Constants;
-import com.wirelust.bitbucket.client.representations.Comment;
-import com.wirelust.bitbucket.client.representations.CommentList;
-import com.wirelust.bitbucket.client.representations.Commit;
-import com.wirelust.bitbucket.client.representations.CommitList;
-import com.wirelust.bitbucket.client.representations.CommitSource;
-import com.wirelust.bitbucket.client.representations.Link;
-import com.wirelust.bitbucket.client.representations.PullRequest;
-import com.wirelust.bitbucket.client.representations.PullRequestActivityList;
-import com.wirelust.bitbucket.client.representations.PullRequestList;
-import com.wirelust.bitbucket.client.representations.Repository;
-import com.wirelust.bitbucket.client.representations.RepositoryList;
-import com.wirelust.bitbucket.client.representations.User;
-import com.wirelust.bitbucket.client.representations.UserFollowerList;
-import com.wirelust.bitbucket.client.representations.UserList;
+import com.wirelust.bitbucket.client.representations.*;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -375,8 +362,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizeCommitComment() throws Exception {
-		Response response = bitbucketV2Client.getCommentByOwnerRepoRevisionId("owner", "repo_slug", "revision",
-			"comment_id");
+		Response response = bitbucketV2Client.getCommentByOwnerRepoRevisionId("owner", "repo_slug", "revision", "comment_id");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		Comment comment = response.readEntity(Comment.class);
@@ -443,6 +429,21 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizeTeam() throws Exception {
+		Response response = bitbucketV2Client.getTeamByName("teamname");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		Team team = response.readEntity(Team.class);
+		Assert.assertEquals("teamsinspace", team.getUsername());
+		Assert.assertEquals("Teams In Space", team.getDisplayName());
+		Assert.assertEquals("{61fc5cf6-d054-47d2-b4a9-061ccf858379}", team.getUuid());
+		Assert.assertEquals(7, team.getLinks().size());
+
+		Date dateCreated = simpleDateTimeFormat.parse("2014-04-08T00:00:14.070969+00:00");
+		Assert.assertEquals(dateCreated, team.getCreatedOn());
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizeTeams() throws Exception {
 		Response response = bitbucketV2Client.getTeams("contributor");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
@@ -456,7 +457,6 @@ public class EndpointTest {
 		User firstUser = users.get(0);
 		Assert.assertEquals("1team", firstUser.getUsername());
 		Assert.assertEquals("the team", firstUser.getDisplayName());
-
 	}
 
 	@Test
