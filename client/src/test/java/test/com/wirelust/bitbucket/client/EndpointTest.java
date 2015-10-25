@@ -460,6 +460,18 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizeTeamMembers() throws Exception {
+		Response response = bitbucketV2Client.getTeamMembers("teamname");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		UserList userList = response.readEntity(UserList.class);
+		Assert.assertEquals(1, userList.getValues().size());
+
+		User user = userList.getValues().get(0);
+		Assert.assertEquals("Alana-dev", user.getUsername());
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizeUser() throws Exception {
 		Response response = bitbucketV2Client.getUser("username");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
