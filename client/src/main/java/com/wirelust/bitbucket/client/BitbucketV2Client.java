@@ -225,6 +225,26 @@ public interface BitbucketV2Client {
 	);
 
 	/**
+	 * GET https://api.bitbucket.org/2.0/teams/{teamname}/followers
+	 */
+	@GET
+	@Path("/2.0/teams/{teamname}/followers")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getTeamFollowers(
+		@PathParam("teamname") String teamName
+	);
+
+	/**
+	 * GET https://api.bitbucket.org/2.0/teams/{teamname}/following
+	 */
+	@GET
+	@Path("/2.0/teams/{teamname}/following")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getTeamFollowing(
+		@PathParam("teamname") String teamName
+	);
+
+	/**
 	 * GET https://bitbucket.org/api/2.0/user
 	 */
 	@GET

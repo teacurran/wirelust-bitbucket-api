@@ -444,6 +444,30 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizeTeamFollowers() throws Exception {
+		Response response = bitbucketV2Client.getTeamFollowers("teamname");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		UserList userList = response.readEntity(UserList.class);
+		Assert.assertEquals(1, userList.getValues().size());
+
+		User user = userList.getValues().get(0);
+		Assert.assertEquals("tutorials", user.getUsername());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeTeamFollowing() throws Exception {
+		Response response = bitbucketV2Client.getTeamFollowing("teamname");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		UserList userList = response.readEntity(UserList.class);
+		Assert.assertEquals(1, userList.getValues().size());
+
+		User user = userList.getValues().get(0);
+		Assert.assertEquals("bitbucket", user.getUsername());
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizeTeams() throws Exception {
 		Response response = bitbucketV2Client.getTeams("contributor");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());

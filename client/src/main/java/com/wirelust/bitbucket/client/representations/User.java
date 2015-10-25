@@ -15,6 +15,7 @@ import com.wirelust.bitbucket.client.Constants;
 public class User {
 
 	String uuid;
+	String kind;
 	String username;
 	String displayName;
 	String website;
@@ -86,5 +87,13 @@ public class User {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 }
