@@ -362,7 +362,8 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizeCommitComment() throws Exception {
-		Response response = bitbucketV2Client.getCommentByOwnerRepoRevisionId("owner", "repo_slug", "revision", "comment_id");
+		Response response = bitbucketV2Client.getCommentByOwnerRepoRevisionId("owner", "repo_slug", "revision",
+			"comment_id");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		Comment comment = response.readEntity(Comment.class);
@@ -453,6 +454,18 @@ public class EndpointTest {
 
 		User user = userList.getValues().get(0);
 		Assert.assertEquals("tutorials", user.getUsername());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeTeamRepository() throws Exception {
+		Response response = bitbucketV2Client.getTeamRepositories("teamname");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		RepositoryList repositoryList = response.readEntity(RepositoryList.class);
+		Assert.assertEquals(2, repositoryList.getValues().size());
+
+		Repository repository = repositoryList.getValues().get(0);
+		Assert.assertEquals("hg", repository.getScm());
 	}
 
 	@Test

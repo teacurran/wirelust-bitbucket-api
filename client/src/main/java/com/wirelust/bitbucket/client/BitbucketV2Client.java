@@ -245,6 +245,16 @@ public interface BitbucketV2Client {
 	);
 
 	/**
+	 * GET https://api.bitbucket.org/2.0/teams/{teamname}/repositories
+	 */
+	@GET
+	@Path("/2.0/teams/{teamname}/repositories")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getTeamRepositories(
+		@PathParam("teamname") String teamName
+	);
+
+	/**
 	 * GET https://bitbucket.org/api/2.0/user
 	 */
 	@GET
