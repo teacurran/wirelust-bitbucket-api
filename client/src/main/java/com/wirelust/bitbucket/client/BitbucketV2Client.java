@@ -205,6 +205,39 @@ public interface BitbucketV2Client {
 	);
 
 	/**
+	 * GET https://api.bitbucket.org/2.0/snippets
+	 */
+	@GET
+	@Path("/2.0/snippets/{username}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getSnippits(
+		@QueryParam("role") String role
+	);
+
+	/**
+	 * GET https://api.bitbucket.org/2.0/snippets/{username or teamname}/{snippets id}/comments
+	 */
+	@GET
+	@Path("/2.0/snippets/{username}/{snippit_id}/comments")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getSnippitComments(
+		@PathParam("username") String username,
+		@PathParam("snippit_id") String snippitId
+	);
+
+	/**
+	 * GET https://api.bitbucket.org/2.0/snippets/{username or teamname}/{snippets id}/comments/{comment id}
+	 */
+	@GET
+	@Path("/2.0/snippets/{username}/{snippit_id}/comments/{comment_id}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getSnippitComment(
+		@PathParam("username") String username,
+		@PathParam("snippit_id") String snippitId,
+		@PathParam("comment_id") String commentId
+	);
+
+	/**
 	 * GET https://api.bitbucket.org/2.0/teams/?role={role}
 	 */
 	@GET
