@@ -1,0 +1,99 @@
+{
+	"page": 1,
+	"pagelen": 30,
+	"size": 3,
+	"values": [
+		{
+			"created_on": "2015-03-18T18:50:07.990433+00:00",
+			"id": "KzRo",
+			"is_private": false,
+			"links": {
+				"comments": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/KzRo/comments"
+				},
+				"commits": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/KzRo/commits"
+				},
+				"diff": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/KzRo/a697ae7cdbfa2ba3dbb4d3bacc7669493ebae5e3/diff"
+				},
+				"html": {
+					"href": "https://bitbucket.org/snippets/teamsinspace/KzRo"
+				},
+				"patch": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/KzRo/a697ae7cdbfa2ba3dbb4d3bacc7669493ebae5e3/patch"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/KzRo"
+				},
+				"watchers": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/KzRo/watchers"
+				}
+			},
+			"owner": {
+				"display_name": "Teams In Space",
+				"links": {
+					"avatar": {
+						"href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Sep/24/teamsinspace-avatar-3731530358-7_avatar.png"
+					},
+					"html": {
+						"href": "https://bitbucket.org/teamsinspace"
+					},
+					"self": {
+						"href": "https://api.bitbucket.org/2.0/teams/teamsinspace"
+					}
+				},
+				"username": "teamsinspace",
+				"uuid": "{61fc5cf6-d054-47d2-b4a9-061ccf858379}"
+			},
+			"title": "",
+			"updated_on": "2015-03-18T18:50:07.990473+00:00"
+		},
+		{
+			"created_on": "2015-03-18T19:56:51.269348+00:00",
+			"id": "kypj",
+			"is_private": false,
+			"links": {
+				"comments": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/comments"
+				},
+				"commits": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/commits"
+				},
+				"diff": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/503019269b337032912f7fea99ed6f9bf1b91c24/diff"
+				},
+				"html": {
+					"href": "https://bitbucket.org/snippets/teamsinspace/kypj"
+				},
+				"patch": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/503019269b337032912f7fea99ed6f9bf1b91c24/patch"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj"
+				},
+				"watchers": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/watchers"
+				}
+			},
+			"owner": {
+				"display_name": "Teams In Space",
+				"links": {
+					"avatar": {
+						"href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Sep/24/teamsinspace-avatar-3731530358-7_avatar.png"
+					},
+					"html": {
+						"href": "https://bitbucket.org/teamsinspace"
+					},
+					"self": {
+						"href": "https://api.bitbucket.org/2.0/teams/teamsinspace"
+					}
+				},
+				"username": "teamsinspace",
+				"uuid": "{61fc5cf6-d054-47d2-b4a9-061ccf858379}"
+			},
+			"title": "API docs snippet",
+			"updated_on": "2015-03-18T19:56:51.269378+00:00"
+		}
+	]
+}
