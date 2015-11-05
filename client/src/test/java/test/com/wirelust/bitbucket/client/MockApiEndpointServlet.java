@@ -22,7 +22,7 @@ public class MockApiEndpointServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String path = req.getRequestURI().substring(req.getContextPath().length() + "/api".length());
+		String path = req.getRequestURI().substring(req.getContextPath().length());
 
 		String outputMime = null;
 		OutputStream out = resp.getOutputStream();
