@@ -10,9 +10,12 @@ import java.util.TimeZone;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
+import com.wirelust.bitbucket.client.BitbucketAuthClient;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.Constants;
 import com.wirelust.bitbucket.client.representations.*;
+import com.wirelust.bitbucket.client.representations.auth.AccessToken;
+import org.apache.http.auth.AUTH;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -41,6 +44,8 @@ public class EndpointTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EndpointTest.class);
 
 	static final String ROOT_URL = "http://localhost:8080/client-test/api/";
+	static final String AUTH_ROOT_URL = "http://localhost:8080/client-test/site/";
+
 	static final String DATE_FORMAT = "yyyy-MM-dd";
 	static final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX";
 
@@ -49,6 +54,7 @@ public class EndpointTest {
 	ResteasyClient client;
 	ResteasyWebTarget target;
 	BitbucketV2Client bitbucketV2Client;
+	BitbucketAuthClient bitbucketAuthClient;
 	SimpleDateFormat simpleDateFormat;
 	SimpleDateFormat simpleDateTimeFormat;
 	SimpleDateFormat simpleDateTimeFormat2;
@@ -79,6 +85,11 @@ public class EndpointTest {
 		target = client.target(ROOT_URL);
 		bitbucketV2Client = target.proxy(BitbucketV2Client.class);
 
+		client = new ResteasyClientBuilder().build();
+		client.register(JacksonConfigurationProvider.class);
+		target = client.target(AUTH_ROOT_URL);
+		bitbucketAuthClient = target.proxy(BitbucketAuthClient.class);
+
 		TimeZone gmtZone = TimeZone.getTimeZone("GMT+0");
 
 		simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -93,6 +104,17 @@ public class EndpointTest {
 
 	@After
 	public void destroy() {
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeAuthToken() throws Exception {
+
+		Response response = bitbucketAuthClient.getTokenByUsernamePassword("password", "username", "password");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		AccessToken accessToken = response.readEntity(AccessToken.class);
+		Assert.assertEquals("gX0XmlxGGOmJXT3dBiurs8nkfgqNXlqni-nplZbOyEDwuvIWTpldCW-FRlFcP4YWtrQJSTtBcDdt324",
+			accessToken.getAccessToken());
 	}
 
 	@Test

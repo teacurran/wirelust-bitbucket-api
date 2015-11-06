@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Date: 07-Oct-2015
@@ -18,11 +20,14 @@ import org.apache.commons.io.IOUtils;
  * @author T. Curran
  */
 public class MockApiEndpointServlet extends HttpServlet {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MockApiEndpointServlet.class);
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String path = req.getRequestURI().substring(req.getContextPath().length());
+
+		LOGGER.info("requesting path:{}", path);
 
 		String outputMime = null;
 		OutputStream out = resp.getOutputStream();
@@ -49,6 +54,11 @@ public class MockApiEndpointServlet extends HttpServlet {
 		}
 
 		out.close();
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 
 }

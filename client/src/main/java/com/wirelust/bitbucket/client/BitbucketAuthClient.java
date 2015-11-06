@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 public interface BitbucketAuthClient {
 
 	/**
-	 * GET https://api.bitbucket.org/2.0/repositories/{owner}
+	 * POST https://bitbucket.org/site/oauth2/access_token
 	 */
 	@POST
 	@Path("/oauth2/access_token")
