@@ -200,7 +200,7 @@ public interface BitbucketV2Client {
 	@GET
 	@Path("/2.0/snippets/{username}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response getSnippitsByUsername(
+	public Response getSnippetsByUsername(
 		@PathParam("username") String username
 	);
 
@@ -208,10 +208,21 @@ public interface BitbucketV2Client {
 	 * GET https://api.bitbucket.org/2.0/snippets
 	 */
 	@GET
-	@Path("/2.0/snippets/{username}")
+	@Path("/2.0/snippets")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response getSnippits(
+	public Response getSnippets(
 		@QueryParam("role") String role
+	);
+
+	/**
+	 * GET https://api.bitbucket.org/2.0/snippets/{username}/{id}
+	 */
+	@GET
+	@Path("/2.0/snippets/{username}/{id}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getSnippetByUsernameId(
+		@PathParam("username") String username,
+		@PathParam("id") String id
 	);
 
 	/**

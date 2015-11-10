@@ -452,6 +452,16 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizeSnippitByUsernameId() throws Exception {
+		Response response = bitbucketV2Client.getSnippetByUsernameId("username", "kypj");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		Snippet snippet = response.readEntity(Snippet.class);
+
+		Assert.assertEquals("kypj", snippet.getId());
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizeTeam() throws Exception {
 		Response response = bitbucketV2Client.getTeamByName("teamname");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());

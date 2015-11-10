@@ -1,0 +1,85 @@
+{
+	"created_on": "2015-03-18T19:56:51.269348+00:00",
+	"creator": {
+		"display_name": "Daniel  Stevens",
+		"links": {
+			"avatar": {
+				"href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Jan/29/dans9190-avatar-2647033047-1_avatar.png"
+			},
+			"html": {
+				"href": "https://bitbucket.org/dans9190"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/users/dans9190"
+			}
+		},
+		"username": "dans9190",
+		"uuid": "{1cd06601-cd0e-4fce-be03-e9ac226978b7}"
+	},
+	"files": {
+		"README.md": {
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/snippets/teamsinspace/kypj/revisions/503019269b337032912f7fea99ed6f9bf1b91c24#README.md"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/503019269b337032912f7fea99ed6f9bf1b91c24/files/README.md"
+				}
+			}
+		},
+		"myquote2.html": {
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/snippets/teamsinspace/kypj/revisions/503019269b337032912f7fea99ed6f9bf1b91c24#myquote2.html"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/503019269b337032912f7fea99ed6f9bf1b91c24/files/myquote2.html"
+				}
+			}
+		}
+	},
+	"id": "kypj",
+	"is_private": false,
+	"links": {
+		"comments": {
+			"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/comments"
+		},
+		"commits": {
+			"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/commits"
+		},
+		"diff": {
+			"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/503019269b337032912f7fea99ed6f9bf1b91c24/diff"
+		},
+		"html": {
+			"href": "https://bitbucket.org/snippets/teamsinspace/kypj"
+		},
+		"patch": {
+			"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/503019269b337032912f7fea99ed6f9bf1b91c24/patch"
+		},
+		"self": {
+			"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj"
+		},
+		"watchers": {
+			"href": "https://api.bitbucket.org/2.0/snippets/teamsinspace/kypj/watchers"
+		}
+	},
+	"owner": {
+		"display_name": "Teams In Space",
+		"links": {
+			"avatar": {
+				"href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Sep/24/teamsinspace-avatar-3731530358-7_avatar.png"
+			},
+			"html": {
+				"href": "https://bitbucket.org/teamsinspace"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/teams/teamsinspace"
+			}
+		},
+		"username": "teamsinspace",
+		"uuid": "{61fc5cf6-d054-47d2-b4a9-061ccf858379}"
+	},
+	"scm": "git",
+	"title": "API docs snippet",
+	"updated_on": "2015-03-18T19:56:51.269378+00:00"
+}
