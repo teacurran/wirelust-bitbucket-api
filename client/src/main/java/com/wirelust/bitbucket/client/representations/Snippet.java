@@ -27,7 +27,7 @@ public class Snippet {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date updatedOn;
 
-	Map<String, File> files;
+	Map<String, BBFile> files;
 
 	Map<String, List<Link>> links;
 
@@ -39,11 +39,11 @@ public class Snippet {
 		this.id = id;
 	}
 
-	public Boolean getPrivate() {
+	public Boolean getIsPrivate() {
 		return isPrivate;
 	}
 
-	public void setPrivate(Boolean aPrivate) {
+	public void setIsPrivate(Boolean aPrivate) {
 		isPrivate = aPrivate;
 	}
 
@@ -95,11 +95,11 @@ public class Snippet {
 		this.updatedOn = updatedOn;
 	}
 
-	public Map<String, File> getFiles() {
+	public Map<String, BBFile> getFiles() {
 		return files;
 	}
 
-	public void setFiles(Map<String, File> files) {
+	public void setFiles(Map<String, BBFile> files) {
 		this.files = files;
 	}
 

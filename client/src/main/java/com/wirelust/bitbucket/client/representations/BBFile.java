@@ -8,7 +8,7 @@ import java.util.Map;
  *
  * @author T. Curran
  */
-public class File {
+public class BBFile {
 
 	Map<String, List<Link>> links;
 

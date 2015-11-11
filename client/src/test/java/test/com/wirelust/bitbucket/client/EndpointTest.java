@@ -459,6 +459,10 @@ public class EndpointTest {
 		Snippet snippet = response.readEntity(Snippet.class);
 
 		Assert.assertEquals("kypj", snippet.getId());
+
+		Map<String, BBFile> files = snippet.getFiles();
+		Assert.assertTrue(files.containsKey("README.md"));
+		Assert.assertTrue(files.containsKey("myquote2.html"));
 	}
 
 	@Test
