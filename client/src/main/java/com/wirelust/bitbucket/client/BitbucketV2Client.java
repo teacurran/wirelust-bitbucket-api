@@ -135,7 +135,7 @@ public interface BitbucketV2Client {
 			@PathParam("repo_slug") String repoSlug);
 
 	/**
-	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{1}
 	 * @return com.wirelust.bitbucket.client.representations.PullRequest
 	 */
 	@GET
@@ -144,10 +144,10 @@ public interface BitbucketV2Client {
 	public Response getPullRequestById(
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
-			@PathParam("id") String id);
+			@PathParam("id") Long id);
 
 	/**
-	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/activity
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{1}/activity
 	 * @return com.wirelust.bitbucket.client.representations.PullRequestActivity
 	 */
 	@GET
@@ -156,10 +156,10 @@ public interface BitbucketV2Client {
 	public Response getPullRequestActivityById(
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
-			@PathParam("id") String id);
+			@PathParam("id") Long id);
 
 	/**
-	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{1}/commits
 	 * @return com.wirelust.bitbucket.client.representations.CommitList
 	 */
 	@GET
@@ -168,10 +168,10 @@ public interface BitbucketV2Client {
 	public Response getPullRequestCommits(
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
-			@PathParam("id") String id);
+			@PathParam("id") Long id);
 
 	/**
-	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/commits
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{1}/commits
 	 * @return com.wirelust.bitbucket.client.representations.CommentList
 	 */
 	@GET
@@ -180,7 +180,7 @@ public interface BitbucketV2Client {
 	public Response getPullRequestComments(
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
-			@PathParam("id") String id);
+			@PathParam("id") Long id);
 
 	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/diff
@@ -192,7 +192,7 @@ public interface BitbucketV2Client {
 	public Response getPullRequestDiff(
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
-			@PathParam("id") String id);
+			@PathParam("id") Long id);
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/snippets/{username}
@@ -215,7 +215,7 @@ public interface BitbucketV2Client {
 	);
 
 	/**
-	 * GET https://api.bitbucket.org/2.0/snippets/{username or teamname}/{snippets id}/comments
+	 * GET https://api.bitbucket.org/2.0/snippets/{username or teamname}/{snippets 1}/comments
 	 */
 	@GET
 	@Path("/2.0/snippets/{username}/{snippit_id}/comments")
@@ -226,7 +226,7 @@ public interface BitbucketV2Client {
 	);
 
 	/**
-	 * GET https://api.bitbucket.org/2.0/snippets/{username or teamname}/{snippets id}/comments/{comment id}
+	 * GET https://api.bitbucket.org/2.0/snippets/{username or teamname}/{snippets 1}/comments/{comment 1}
 	 */
 	@GET
 	@Path("/2.0/snippets/{username}/{snippit_id}/comments/{comment_id}")

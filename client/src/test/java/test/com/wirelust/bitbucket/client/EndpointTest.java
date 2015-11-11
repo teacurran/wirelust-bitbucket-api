@@ -246,7 +246,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizePullRequest() throws Exception {
-		Response response = bitbucketV2Client.getPullRequestById("owner", "repo_slug", "id");
+		Response response = bitbucketV2Client.getPullRequestById("owner", "repo_slug", (long)1);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		PullRequest pullRequest = response.readEntity(PullRequest.class);
@@ -332,7 +332,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizePullRequestCommitList() throws Exception {
-		Response response = bitbucketV2Client.getPullRequestCommits("owner", "repo_slug", "id");
+		Response response = bitbucketV2Client.getPullRequestCommits("owner", "repo_slug", (long)1);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		CommitList commitList = response.readEntity(CommitList.class);
@@ -401,7 +401,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizePullRequestCommentList() throws Exception {
-		Response response = bitbucketV2Client.getPullRequestComments("owner", "repo_slug", "id");
+		Response response = bitbucketV2Client.getPullRequestComments("owner", "repo_slug", (long)1);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		CommentList commentList = response.readEntity(CommentList.class);
@@ -433,7 +433,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToDeseralizePullRequestActivityById() throws Exception {
-		Response response = bitbucketV2Client.getPullRequestActivityById("owner", "repo_slug", "id");
+		Response response = bitbucketV2Client.getPullRequestActivityById("owner", "repo_slug", (long)1);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		PullRequestActivityList activityList = response.readEntity(PullRequestActivityList.class);
@@ -443,7 +443,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToGetPullRequestDiff() throws Exception {
-		Response response = bitbucketV2Client.getPullRequestDiff("owner", "repo_slug", "id");
+		Response response = bitbucketV2Client.getPullRequestDiff("owner", "repo_slug", (long)1);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		String diff = response.readEntity(String.class);
