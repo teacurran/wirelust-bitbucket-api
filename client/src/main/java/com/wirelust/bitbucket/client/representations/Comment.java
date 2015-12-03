@@ -23,6 +23,7 @@ public class Comment {
 	Date updatedOn;
 	User user;
 	CommentLine inline;
+	String filename;
 
 	public Long getId() {
 		return id;
@@ -86,5 +87,13 @@ public class Comment {
 
 	public void setInline(CommentLine inline) {
 		this.inline = inline;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }
