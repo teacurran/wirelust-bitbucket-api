@@ -1,6 +1,11 @@
 package test.com.wirelust.bitbucket.client;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.io.StringBufferInputStream;
+import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +37,9 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.wickedsource.diffparser.api.DiffParser;
+import org.wickedsource.diffparser.api.UnifiedDiffParser;
+import org.wickedsource.diffparser.api.model.Diff;
 import test.com.wirelust.bitbucket.client.providers.JacksonConfigurationProvider;
 
 /**
@@ -446,9 +454,12 @@ public class EndpointTest {
 		Response response = bitbucketV2Client.getPullRequestDiff("owner", "repo_slug", (long)1);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
-		String diff = response.readEntity(String.class);
+		String diffString = response.readEntity(String.class);
+		InputStream diffStream = new ByteArrayInputStream(diffString.getBytes(StandardCharsets.UTF_8));
 
-		Assert.assertTrue(diff.contains("UsernameChangeForm"));
+		DiffParser parser = new UnifiedDiffParser();
+		List<Diff> diff = parser.parse(diffStream);
+		Assert.assertEquals(5, diff.size());
 	}
 
 	@Test
