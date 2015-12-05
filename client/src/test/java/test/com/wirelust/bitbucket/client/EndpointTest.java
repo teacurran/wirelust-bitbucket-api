@@ -620,7 +620,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToPostComment() throws Exception {
-		Response response = bitbucketV1Client.postPullRequestComment("owner", "repo_slug", 1, "comment");
+		Response response = bitbucketV1Client.postPullRequestComment("owner", "repo_slug", 1L, "comment");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		V1Comment v1Comment = response.readEntity(V1Comment.class);
