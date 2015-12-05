@@ -24,7 +24,7 @@ public interface BitbucketV1Client {
 	public Response postPullRequestComment(
 		@PathParam("owner") String owner,
 		@PathParam("repo_slug") String repoSlug,
-		@PathParam("pull_request_id") Integer pullRequestId,
+		@PathParam("pull_request_id") Long pullRequestId,
 		@FormParam("content") String content);
 
 

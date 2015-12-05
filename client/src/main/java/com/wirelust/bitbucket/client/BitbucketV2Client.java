@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
  *
  * @author T. Curran
  */
-public interface BitbucketV2Client {
+public interface BitbucketV2Client extends BitbucketV1Client {
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}
