@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketAuthClient;
+import com.wirelust.bitbucket.client.BitbucketV1Client;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.Constants;
 import com.wirelust.bitbucket.client.representations.*;
 import com.wirelust.bitbucket.client.representations.auth.AccessToken;
+import com.wirelust.bitbucket.client.representations.v1.V1Comment;
 import org.apache.http.auth.AUTH;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -61,6 +63,7 @@ public class EndpointTest {
 
 	ResteasyClient client;
 	ResteasyWebTarget target;
+	BitbucketV1Client bitbucketV1Client;
 	BitbucketV2Client bitbucketV2Client;
 	BitbucketAuthClient bitbucketAuthClient;
 	SimpleDateFormat simpleDateFormat;
@@ -90,11 +93,13 @@ public class EndpointTest {
 	public void init() {
 		client = new ResteasyClientBuilder().build();
 		client.register(JacksonConfigurationProvider.class);
+
+		target = client.target(ROOT_URL);
+		bitbucketV1Client = target.proxy(BitbucketV1Client.class);
+
 		target = client.target(ROOT_URL);
 		bitbucketV2Client = target.proxy(BitbucketV2Client.class);
 
-		client = new ResteasyClientBuilder().build();
-		client.register(JacksonConfigurationProvider.class);
 		target = client.target(AUTH_ROOT_URL);
 		bitbucketAuthClient = target.proxy(BitbucketAuthClient.class);
 
@@ -611,6 +616,15 @@ public class EndpointTest {
 
 		User firstFollower = followers.get(0);
 		Assert.assertEquals("tutorials", firstFollower.getUsername());
+	}
+
+	@Test
+	public void shouldBeAbleToPostComment() throws Exception {
+		Response response = bitbucketV1Client.postPullRequestComment("owner", "repo_slug", 1, "comment");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		V1Comment v1Comment = response.readEntity(V1Comment.class);
+		Assert.assertEquals(672, (int)v1Comment.getPullRequestId());
 	}
 
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
