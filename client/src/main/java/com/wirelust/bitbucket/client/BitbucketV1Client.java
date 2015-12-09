@@ -29,10 +29,12 @@ public interface BitbucketV1Client {
 		@FormParam("content") String content);
 
 	@DELETE
-	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/comments")
+	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}")
 	public Response deletePullRequestComment(
 		@PathParam("owner") String owner,
 		@PathParam("repo_slug") String repoSlug,
-		@PathParam("pull_request_id") Long pullRequestId);
+		@PathParam("pull_request_id") Long pullRequestId,
+		@PathParam("comment_id") Long commentId
+	);
 
 }
