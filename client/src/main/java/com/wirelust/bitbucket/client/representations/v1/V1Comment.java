@@ -13,10 +13,10 @@ import com.wirelust.bitbucket.client.Constants;
 public class V1Comment {
 
 	String username;
-	Integer pullRequestId;
-	Integer commentId;
+	Long pullRequestId;
+	Long commentId;
 	String displayName;
-	Integer parentId;
+	Long parentId;
 	Boolean deleted;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT_V1)
@@ -46,19 +46,19 @@ public class V1Comment {
 		this.username = username;
 	}
 
-	public Integer getPullRequestId() {
+	public Long getPullRequestId() {
 		return pullRequestId;
 	}
 
-	public void setPullRequestId(Integer pullRequestId) {
+	public void setPullRequestId(Long pullRequestId) {
 		this.pullRequestId = pullRequestId;
 	}
 
-	public Integer getCommentId() {
+	public Long getCommentId() {
 		return commentId;
 	}
 
-	public void setCommentId(Integer commentId) {
+	public void setCommentId(Long commentId) {
 		this.commentId = commentId;
 	}
 
@@ -70,11 +70,11 @@ public class V1Comment {
 		this.displayName = displayName;
 	}
 
-	public Integer getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(Integer parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 

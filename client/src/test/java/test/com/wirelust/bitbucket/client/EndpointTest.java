@@ -624,7 +624,7 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		V1Comment v1Comment = response.readEntity(V1Comment.class);
-		Assert.assertEquals(672, (int)v1Comment.getPullRequestId());
+		Assert.assertEquals(672, (long)v1Comment.getPullRequestId());
 	}
 
 	@Test
@@ -638,7 +638,7 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		V1Comment v1Comment = response.readEntity(V1Comment.class);
-		Assert.assertEquals(672, (int)v1Comment.getPullRequestId());
+		Assert.assertEquals(672, (long)v1Comment.getPullRequestId());
 	}
 
 	@Test
@@ -652,7 +652,7 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		V1Comment v1Comment = response.readEntity(V1Comment.class);
-		Assert.assertEquals(672, (int)v1Comment.getPullRequestId());
+		Assert.assertEquals(672L, (long)v1Comment.getPullRequestId());
 	}
 
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
