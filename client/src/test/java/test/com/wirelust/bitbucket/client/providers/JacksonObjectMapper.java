@@ -1,8 +1,10 @@
 package test.com.wirelust.bitbucket.client.providers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 /**
  * Date: 07-Oct-2015
@@ -20,6 +22,8 @@ public class JacksonObjectMapper extends ObjectMapper {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
 		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 		mapper.enable(DeserializationFeature. ACCEPT_SINGLE_VALUE_AS_ARRAY);
+
+		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
 		return mapper;
 	}

@@ -627,6 +627,34 @@ public class EndpointTest {
 		Assert.assertEquals(672, (int)v1Comment.getPullRequestId());
 	}
 
+	@Test
+	public void shouldBeAbleToPostCommentObject() throws Exception {
+		V1Comment comment = new V1Comment();
+		comment.setLineTo(59);
+		comment.setFilename("/test/file.xml");
+		comment.setContent("test comment");
+
+		Response response = bitbucketV1Client.postPullRequestComment("owner", "repo_slug", 1L, comment);
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		V1Comment v1Comment = response.readEntity(V1Comment.class);
+		Assert.assertEquals(672, (int)v1Comment.getPullRequestId());
+	}
+
+	@Test
+	public void shouldBeAbleToUpdateComment() throws Exception {
+		V1Comment comment = new V1Comment();
+		comment.setLineTo(59);
+		comment.setFilename("/test/file.xml");
+		comment.setContent("test comment");
+
+		Response response = bitbucketV1Client.putPullRequestComment("owner", "repo_slug", 1L, comment);
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		V1Comment v1Comment = response.readEntity(V1Comment.class);
+		Assert.assertEquals(672, (int)v1Comment.getPullRequestId());
+	}
+
 	private static void addFilesToWebArchive(WebArchive war, File dir) throws IllegalArgumentException {
 		if (dir == null || !dir.isDirectory()) {
 			throw new IllegalArgumentException("not a directory");

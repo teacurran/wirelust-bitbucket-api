@@ -1,9 +1,11 @@
 package test.com.wirelust.bitbucket.client;
 
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringBufferInputStream;
+import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,12 @@ public class MockApiEndpointServlet extends HttpServlet {
 		String path = req.getRequestURI().substring(req.getContextPath().length());
 
 		LOGGER.info("requesting path:{}", path);
+
+		InputStream reqInputStream = req.getInputStream();
+		String bodyContent = IOUtils.toString(reqInputStream, StandardCharsets.UTF_8.name());
+		if (bodyContent != null && !bodyContent.isEmpty()) {
+			LOGGER.info("request body content:{}", bodyContent);
+		}
 
 		String outputMime = null;
 		OutputStream out = resp.getOutputStream();
@@ -61,4 +69,8 @@ public class MockApiEndpointServlet extends HttpServlet {
 		doGet(req, resp);
 	}
 
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
 }
