@@ -1,7 +1,7 @@
 package com.wirelust.bitbucket.client;
 
-
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -190,6 +190,28 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/diff")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response getPullRequestDiff(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") Long id);
+
+	/**
+	 * POST https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/approve
+	 */
+	@POST
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/approve")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response postPullRequestApproval(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") Long id);
+
+	/**
+	 * DELETE https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/approve
+	 */
+	@POST
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/approve")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response deletePullRequestApproval(
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
 			@PathParam("id") Long id);

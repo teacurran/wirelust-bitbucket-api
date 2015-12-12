@@ -6,7 +6,7 @@ Please refer to the
 https://confluence.atlassian.com/bitbucket/bitbucket-cloud-documentation-home-221448814.html[API Documentation] from
 Bitbucket for how to use these calls.
 
-All code is licensed under the MIT license because that's the most yolo you can get. Refer to license.txt for more info b
+All code is licensed under the MIT license because that's the most yolo you can get. Refer to license.txt for more info.
 
 
 To build:
@@ -22,18 +22,21 @@ This module contains Value Objects and an Interface for the API.
 
 The goal for the project is to only contain as much information as needed in order to invoke a JAX-RS 2.0 client.
 
-There is no code related to networking or JSON serialization/de-serialization. It is assumed that these functions are handled by the client.
+There is no code related to networking or JSON serialization/de-serialization. It is assumed that these functions are
+handled by the client.
 
-All annotations are JAX-RS with the exception of some Jackson annotations for Date serialization.  If your client isn't using Jackson then you will have to use another approach for serializing dates.  I am looking into ways to make this module not rely on Jackson.
+All annotations are JAX-RS with the exception of some Jackson annotations for Date serialization.  If your client isn't
+using Jackson then you will have to use another approach for serializing dates.  I am looking into ways to make this
+module not rely on Jackson.
 
 Unit tests for this module use Arquillian running Wildfly 8.2.  It should be possible to run any embedded servlet
 container for unit tests but I happened to have Wildfly 8.2 config I could copy from another project.
 
-As of this writing, there are only client endpoints for GET methods.
+If there are any end points you would like added please open a defect/feature request and I'll get to it.
 
-If there are any end points you would like added please open a defect/feature request and I'll get to it. 
-
-All unit tests are based on the published responses in the documentation. I have found a few instances where these responses do not reflect the real world. I have updated the .json whenever this is the case. Please let me know if you find any additional. 
+All unit tests are based on the published responses in the documentation. I have found a few instances where these
+responses do not reflect the real world. I have updated the .json whenever this is the case. Please let me know if
+you find any additional.
 
 === Example
 
