@@ -1,5 +1,6 @@
 package com.wirelust.bitbucket.client;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -208,7 +209,7 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 	/**
 	 * DELETE https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/approve
 	 */
-	@POST
+	@DELETE
 	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/approve")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response deletePullRequestApproval(
