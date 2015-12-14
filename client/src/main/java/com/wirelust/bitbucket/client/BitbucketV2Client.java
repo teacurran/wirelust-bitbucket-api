@@ -184,6 +184,19 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 			@PathParam("id") Long id);
 
 	/**
+	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests/{1}/commits
+	 * @return com.wirelust.bitbucket.client.representations.CommentList
+	 */
+	@GET
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{id}/comments")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPullRequestCommentsWithPage(
+			@PathParam("owner") String owner,
+			@PathParam("repo_slug") String repoSlug,
+			@PathParam("id") Long id,
+			@QueryParam("page") Integer page);
+
+	/**
 	 * GET https://bitbucket.org/api/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/diff
 	 * @return com.wirelust.bitbucket.client.representations.String
 	 */
