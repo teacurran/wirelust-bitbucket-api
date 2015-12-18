@@ -32,6 +32,8 @@ module not rely on Jackson.
 Unit tests for this module use Arquillian running Wildfly 8.2.  It should be possible to run any embedded servlet
 container for unit tests but I happened to have Wildfly 8.2 config I could copy from another project.
 
+As far as endpoints included I have been adding them as needed. I think this project covers all GET requests available. For POST, PUT, and DELETE I've mostly only implemented endpoints related to commenting on pull requests for my sonarqube bitbucket plugin. 
+
 If there are any end points you would like added please open a defect/feature request and I'll get to it.
 
 All unit tests are based on the published responses in the documentation. I have found a few instances where these
