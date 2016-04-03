@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.wirelust.bitbucket.client</groupId>
-		<artifactId>bitbucket-bom</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<artifactId>bitbucket-parent</artifactId>
+		<version>1.0</version>
 	</parent>
 
-	<artifactId>wirelust-bitbucket-api-client</artifactId>
+	<artifactId>bitbucket-api-client</artifactId>
 	<packaging>jar</packaging>
 
 	<dependencies>
