@@ -11,6 +11,10 @@
 	<artifactId>bitbucket-api-client</artifactId>
 	<packaging>jar</packaging>
 
+	<name>Wirelust Bitbucket API Client</name>
+	<description>Wirelust Bitbucket API Client Library</description>
+	<url>https://github.com/teacurran/wirelust-bitbucket-api</url>
+
 	<dependencies>
 
 		<dependency>

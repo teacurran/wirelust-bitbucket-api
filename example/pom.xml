@@ -12,6 +12,10 @@
 	<artifactId>example</artifactId>
 	<packaging>war</packaging>
 
+	<name>Wirelust Bitbucket API Client - Example</name>
+	<description>Example project for the Wirelust Bitbucket API Client Library</description>
+	<url>https://github.com/teacurran/wirelust-bitbucket-api</url>
+
 	<properties>
 		<!-- Save the exploded directory with .war at the end so IntelliJ can deploy it -->
 		<webapp.dir>${project.build.directory}/${project.build.finalName}-exploded.war</webapp.dir>

@@ -4,11 +4,37 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	 	<modelVersion>4.0.0</modelVersion>
 
-		<artifactId>bitbucket-parent</artifactId>
-		<groupId>com.wirelust.bitbucket.client</groupId>
-		<version>1.0</version>
-
+	<artifactId>bitbucket-parent</artifactId>
+	<groupId>com.wirelust.bitbucket.client</groupId>
+	<version>1.0</version>
 	<packaging>pom</packaging>
+
+
+	<name>Wirelust Bitbucket API Client (Parent)</name>
+	<description>Parent project for the Wirelust Bitbucket API Client Library</description>
+	<url>https://github.com/teacurran/wirelust-bitbucket-api</url>
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/teacurran/wirelust-bitbucket-api/issues</url>
+	</issueManagement>
+	<inceptionYear>2015</inceptionYear>
+	<developers>
+		<developer>
+			<name>Terrence Curran</name>
+			<email>tea@approachingpi.com</email>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>The MIT License (MIT)</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<organization>
+		<name>Approaching Pi</name>
+	</organization>
+
 	<scm>
 		<connection>scm:git:https://github.com/teacurran/wirelust-bitbucket-api.git</connection>
 		<developerConnection>scm:git:https://github.com/teacurran/wirelust-bitbucket-api.git</developerConnection>
