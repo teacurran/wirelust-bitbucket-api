@@ -48,11 +48,15 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 
 		<version.arquillian>1.1.5.Final</version.arquillian>
+		<version.arquillian.jacoco>1.0.0.Alpha8</version.arquillian.jacoco>
 		<version.deltaspike>1.4.1</version.deltaspike>
 		<version.ee>1.0.2.Final</version.ee>
+		<version.jacoco>0.7.6.201602180812</version.jacoco>
 		<version.junit>4.12</version.junit>
 		<version.resteasy>3.0.13.Final</version.resteasy>
 		<version.slf4j>1.7.10</version.slf4j>
+		<version.sonar-jacoco-listener>3.11</version.sonar-jacoco-listener>
+		<version.surefire>2.19.1</version.surefire>
 		<version.wildfly>8.2.0.Final</version.wildfly>
 	</properties>
 
@@ -90,6 +94,38 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${version.jacoco}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version.surefire}</version>
+				<configuration>
+					<properties>
+						<property>
+							<name>listener</name>
+							<value>org.sonar.java.jacoco.JUnitListener</value>
+						</property>
+					</properties>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>

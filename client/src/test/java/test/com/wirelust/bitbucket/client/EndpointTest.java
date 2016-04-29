@@ -158,6 +158,35 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizeGetBuildStatus() throws Exception {
+		Response response = bitbucketV2Client.getBuildStatus("owner", "repo_slug", "revision", "key");
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		BuildStatus buildStatus = response.readEntity(BuildStatus.class);
+		Assert.assertEquals("SUCCESSFUL", buildStatus.getState());
+		Assert.assertEquals("build", buildStatus.getType());
+		Assert.assertEquals("BAMBOO-PROJECT-X", buildStatus.getKey());
+		Assert.assertEquals("Build #34", buildStatus.getName());
+		Assert.assertEquals("https://example.com/path/to/build", buildStatus.getUrl());
+		Assert.assertEquals("Changes by John Doe", buildStatus.getDescription());
+
+		Map<String, List<Link>> links = buildStatus.getLinks();
+		Assert.assertEquals(2, links.size());
+
+		List<Link> selfLinks = links.get("self");
+		Assert.assertEquals(1, selfLinks.size());
+
+		Link firstSelfLink = selfLinks.get(0);
+		Assert.assertEquals("http://www.google.com/self", firstSelfLink.getHref());
+
+		List<Link> commitLinks = links.get("commit");
+		Assert.assertEquals(1, commitLinks.size());
+
+		Link firstCommitLink = commitLinks.get(0);
+		Assert.assertEquals("http://www.google.com/commit", firstCommitLink.getHref());
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizeGetRepositoriesByOwner() throws Exception {
 
 		Response response = bitbucketV2Client.getRepositoriesByOwner("owner");
