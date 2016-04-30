@@ -47,7 +47,7 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 
-		<version.arquillian>1.1.5.Final</version.arquillian>
+		<version.arquillian>1.1.11.Final</version.arquillian>
 		<version.arquillian.jacoco>1.0.0.Alpha8</version.arquillian.jacoco>
 		<version.deltaspike>1.4.1</version.deltaspike>
 		<version.ee>1.0.2.Final</version.ee>
