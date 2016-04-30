@@ -141,8 +141,13 @@
 					<!-- plus argLine parameter configured by JaCoCo prepare-agent -->
 					<argLine>${argLine} -XX:-UseSplitVerifier</argLine>
 
-					<!-- Fork every test because it will launch a separate AS instance -->
-					<forkMode>always</forkMode>
+					<properties>
+						<property>
+							<name>listener</name>
+							<value>org.sonar.java.jacoco.JUnitListener</value>
+						</property>
+					</properties>
+
 					<systemPropertyVariables>
 						<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
 						<!-- the maven dependency plugin will have already downloaded the server on /target -->
@@ -151,12 +156,6 @@
 					</systemPropertyVariables>
 					<redirectTestOutputToFile>false</redirectTestOutputToFile>
 
-					<properties>
-						<property>
-							<name>listener</name>
-							<value>org.sonar.java.jacoco.JUnitListener</value>
-						</property>
-					</properties>
 				</configuration>
 			</plugin>
 		</plugins>
