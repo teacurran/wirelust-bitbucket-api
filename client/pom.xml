@@ -100,9 +100,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.wildfly</groupId>
-			<artifactId>wildfly-arquillian-container-embedded</artifactId>
+			<artifactId>wildfly-arquillian-container-managed</artifactId>
 			<version>${version.wildfly}</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>sun.jdk</groupId>
+					<artifactId>jconsole</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.shrinkwrap.resolver</groupId>
@@ -110,12 +116,6 @@
 			<version>2.1.0</version>
 			<scope>test</scope>
 			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.wildfly</groupId>
-			<artifactId>wildfly-embedded</artifactId>
-			<version>${version.wildfly}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
