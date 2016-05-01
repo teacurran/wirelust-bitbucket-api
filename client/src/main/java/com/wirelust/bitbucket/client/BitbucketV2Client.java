@@ -1,12 +1,8 @@
 package com.wirelust.bitbucket.client;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import com.wirelust.bitbucket.client.representations.BuildStatus;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -126,6 +122,20 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 		@PathParam("repo_slug") String repoSlug,
 		@PathParam("revision") String revision,
 		@PathParam("key") String key);
+
+	/**
+	 * POST https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/statuses/build
+	 * @return com.wirelust.bitbucket.client.representations.BuildStatus
+	 */
+	@POST
+	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/statuses/build}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response postBuildStatus(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug,
+		@PathParam("revision") String revision,
+		BuildStatus buildStatus);
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]

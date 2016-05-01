@@ -171,7 +171,7 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		BuildStatus buildStatus = response.readEntity(BuildStatus.class);
-		Assert.assertEquals("SUCCESSFUL", buildStatus.getState());
+		Assert.assertEquals(BuildStatus.STATE.SUCCESSFUL, buildStatus.getState());
 		Assert.assertEquals("build", buildStatus.getType());
 		Assert.assertEquals("BAMBOO-PROJECT-X", buildStatus.getKey());
 		Assert.assertEquals("Build #34", buildStatus.getName());

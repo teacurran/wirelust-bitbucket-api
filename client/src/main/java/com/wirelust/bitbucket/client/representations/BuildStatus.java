@@ -10,7 +10,13 @@ import java.util.Map;
  */
 public class BuildStatus {
 
-	String state;
+	public enum STATE {
+		INPROGRESS,
+		SUCCESSFUL,
+		FAILED
+	};
+
+	STATE state;
 	String type;
 	String key;
 	String name;
@@ -18,11 +24,11 @@ public class BuildStatus {
 	String description;
 	Map<String, List<Link>> links;
 
-	public String getState() {
+	public STATE getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(STATE state) {
 		this.state = state;
 	}
 
