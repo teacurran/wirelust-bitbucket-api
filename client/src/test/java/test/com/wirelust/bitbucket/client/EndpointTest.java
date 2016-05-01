@@ -29,7 +29,9 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.ConfigurableMavenResolverSystem;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
 import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
 import org.junit.After;
 import org.junit.Assert;
@@ -80,8 +82,14 @@ public class EndpointTest {
 		File dir = new File("src/test/resources");
 		addResourceFilesToArchive(testWar, dir);
 
-		testWar.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").importDependencies(ScopeType.TEST).resolve
-			().withTransitivity().asFile());
+		ConfigurableMavenResolverSystem mvnResolver = Maven.configureResolver();
+		PomEquippedResolveStage pers = mvnResolver.loadPomFromFile("pom.xml");
+		testWar.addAsLibraries(pers.resolve("org.apache.commons:commons-io").withTransitivity().asFile());
+		testWar.addAsLibraries(pers.resolve("org.wickedsource:diffparser").withTransitivity().asFile());
+
+		// I'm not including all of the TEST scoped dependencies any longer because jacoco will get an error on startup
+		//testWar.addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml").importDependencies(ScopeType.TEST).resolve
+		//	().withTransitivity().asFile());
 
 		System.out.println("test.war:" + testWar.toString(true));
 		LOGGER.debug("test deployment: {}", testWar.toString(true));
