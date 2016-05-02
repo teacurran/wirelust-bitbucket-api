@@ -138,6 +138,21 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 		BuildStatus buildStatus);
 
 	/**
+	 * PUT https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/statuses/build/{key}
+	 * @return com.wirelust.bitbucket.client.representations.BuildStatus
+	 */
+	@PUT
+	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/statuses/build/{key}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response putBuildStatus(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug,
+		@PathParam("revision") String revision,
+		@PathParam("key") String key,
+		BuildStatus buildStatus);
+
+	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
 	 */
 	@GET

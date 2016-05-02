@@ -206,6 +206,17 @@ public class EndpointTest {
 		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
 	}
 
+	@Test
+	public void shouldBeAbleToPutBuildStatus() throws Exception {
+		BuildStatus buildStatus = new BuildStatus();
+		buildStatus.setState(BuildStatus.STATE.FAILED);
+		buildStatus.setKey("key");
+		buildStatus.setType("build");
+
+		Response response = bitbucketV2Client.putBuildStatus("owner", "repo_slug", "revision", "key", buildStatus);
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
+	}
 
 	@Test
 	public void shouldBeAbleToDeseralizeGetRepositoriesByOwner() throws Exception {
