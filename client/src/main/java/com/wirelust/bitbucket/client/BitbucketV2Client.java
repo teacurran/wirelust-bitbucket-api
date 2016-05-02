@@ -128,7 +128,7 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 	 * @return com.wirelust.bitbucket.client.representations.BuildStatus
 	 */
 	@POST
-	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/statuses/build}")
+	@Path("/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/statuses/build")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response postBuildStatus(

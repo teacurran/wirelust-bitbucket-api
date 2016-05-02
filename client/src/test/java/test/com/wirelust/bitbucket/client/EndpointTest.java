@@ -195,8 +195,20 @@ public class EndpointTest {
 	}
 
 	@Test
-	public void shouldBeAbleToDeseralizeGetRepositoriesByOwner() throws Exception {
+	public void shouldBeAbleToPostBuildStatus() throws Exception {
+		BuildStatus buildStatus = new BuildStatus();
+		buildStatus.setState(BuildStatus.STATE.FAILED);
+		buildStatus.setKey("key");
+		buildStatus.setType("build");
 
+		Response response = bitbucketV2Client.postBuildStatus("owner", "repo_slug", "revision", buildStatus);
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
+	}
+
+
+	@Test
+	public void shouldBeAbleToDeseralizeGetRepositoriesByOwner() throws Exception {
 		Response response = bitbucketV2Client.getRepositoriesByOwner("owner");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
