@@ -17,7 +17,11 @@ public class User {
 	String uuid;
 	String kind;
 	String username;
+	String firstName;
+	String lastName;
 	String displayName;
+	String avatar;
+	Boolean isTeam;
 	String teamname;
 	String website;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
@@ -104,5 +108,37 @@ public class User {
 
 	public void setTeamname(String teamname) {
 		this.teamname = teamname;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public Boolean getIsTeam() {
+		return isTeam;
+	}
+
+	public void setIsTeam(Boolean team) {
+		isTeam = team;
 	}
 }

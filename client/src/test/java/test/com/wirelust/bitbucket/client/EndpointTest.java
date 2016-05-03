@@ -21,6 +21,7 @@ import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.Constants;
 import com.wirelust.bitbucket.client.representations.*;
 import com.wirelust.bitbucket.client.representations.auth.AccessToken;
+import com.wirelust.bitbucket.client.representations.v1.Privilege;
 import com.wirelust.bitbucket.client.representations.v1.V1Comment;
 import org.apache.http.auth.AUTH;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -171,7 +172,7 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		BuildStatus buildStatus = response.readEntity(BuildStatus.class);
-		Assert.assertEquals(BuildStatus.STATE.SUCCESSFUL, buildStatus.getState());
+		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
 		Assert.assertEquals("build", buildStatus.getType());
 		Assert.assertEquals("BAMBOO-PROJECT-X", buildStatus.getKey());
 		Assert.assertEquals("Build #34", buildStatus.getName());
@@ -216,6 +217,16 @@ public class EndpointTest {
 		Response response = bitbucketV2Client.putBuildStatus("owner", "repo_slug", "revision", "key", buildStatus);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeGetPerivileges() throws Exception {
+		Response response = bitbucketV2Client.getPrivileges("owner", Privilege.Type.ADMIN);
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		Privilege privilege = response.readEntity(Privilege.class);
+		Assert.assertEquals("tutorials/tutorials.bitbucket.org", privilege.getRepo());
+		Assert.assertEquals(Privilege.Type.WRITE, privilege.getPrivilege());
 	}
 
 	@Test

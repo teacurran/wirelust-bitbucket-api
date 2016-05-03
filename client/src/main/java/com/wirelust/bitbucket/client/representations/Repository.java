@@ -28,6 +28,7 @@ public class Repository {
 	Boolean isPrivate;
 	String language;
 	String name;
+	String slug;
 	String scm;
 	Long size;
 	String uuid;
@@ -152,5 +153,13 @@ public class Repository {
 
 	public void setLinks(Map<String, List<Link>> links) {
 		this.links = links;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 }
