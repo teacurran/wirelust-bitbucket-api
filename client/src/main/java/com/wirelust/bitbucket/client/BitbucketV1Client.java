@@ -35,6 +35,17 @@ public interface BitbucketV1Client {
 		@QueryParam("filter") Privilege.Type filter);
 
 	/**
+	 * /1.0/privileges/{accountname}/?filter=admin
+	 */
+	@GET
+	@Path("/1.0/privileges/{owner}/{repo_slug}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPrivileges(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String reopSlug,
+		@QueryParam("filter") Privilege.Type filter);
+
+	/**
 	 * /1.0/repositories/{accountname}/{repo_slug}/pullrequests/{pull_request_id}/comments
 	 */
 	@POST

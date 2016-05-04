@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketAuthClient;
@@ -224,9 +225,31 @@ public class EndpointTest {
 		Response response = bitbucketV2Client.getPrivileges("owner", Privilege.Type.ADMIN);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
-		Privilege privilege = response.readEntity(Privilege.class);
+		List<Privilege> privileges = response.readEntity(new GenericType<List<Privilege>>() {});
+
+		Assert.assertEquals(1, privileges.size());
+
+		Privilege privilege = privileges.get(0);
 		Assert.assertEquals("tutorials/tutorials.bitbucket.org", privilege.getRepo());
 		Assert.assertEquals(Privilege.Type.WRITE, privilege.getPrivilege());
+	}
+
+	@Test
+	public void shouldBeAbleToDeseralizeGetPerivilegesForRepo() throws Exception {
+		Response response = bitbucketV2Client.getPrivileges("owner", "repo_slug", Privilege.Type.ADMIN);
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		List<Privilege> privileges = response.readEntity(new GenericType<List<Privilege>>() {});
+
+		Assert.assertEquals(2, privileges.size());
+
+		Privilege privilege = privileges.get(1);
+		Assert.assertEquals("tutorials/tutorials.bitbucket.org", privilege.getRepo());
+		Assert.assertEquals(Privilege.Type.READ, privilege.getPrivilege());
+
+		Repository repository = privilege.getRepository();
+		Assert.assertEquals("tutorials.bitbucket.org", repository.getName());
+		Assert.assertEquals("tutorials.bitbucket.org", repository.getSlug());
 	}
 
 	@Test
@@ -240,6 +263,15 @@ public class EndpointTest {
 
 		Repository repository = repositoryList.getValues().get(0);
 		Assert.assertEquals("git", repository.getScm());
+		Assert.assertEquals("allow_forks", repository.getForkPolicy());
+		Assert.assertEquals("dans9190/new-repository", repository.getFullName());
+		Assert.assertEquals("This repo ", repository.getDescription());
+		Assert.assertEquals(true, repository.getHasIssues());
+		Assert.assertEquals(true, repository.getHasWiki());
+		Assert.assertEquals(true, repository.getIsPrivate());
+		Assert.assertEquals("en_US", repository.getLanguage());
+		Assert.assertEquals(33348, (long)repository.getSize());
+		Assert.assertEquals("{9bdd6b69-3dc4-406b-a8dd-ff5119aefc61}", repository.getUuid());
 
 		Date createdDate = simpleDateTimeFormat.parse("2014-08-13T19:05:22.148829+00:00");
 		Assert.assertEquals(createdDate, repository.getCreatedOn());

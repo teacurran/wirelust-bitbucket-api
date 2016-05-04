@@ -8,10 +8,10 @@
             "description": "This repo ",
             "fork_policy": "allow_forks",
             "full_name": "dans9190/new-repository",
-            "has_issues": false,
-            "has_wiki": false,
-            "is_private": false,
-            "language": "",
+            "has_issues": true,
+            "has_wiki": true,
+            "is_private": true,
+            "language": "en_US",
             "links": {
                 "avatar": {
                     "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/57a3af3749c5/img/language-avatars/default_16.png"
