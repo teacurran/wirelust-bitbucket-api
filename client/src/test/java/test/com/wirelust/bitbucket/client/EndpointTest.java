@@ -1,21 +1,5 @@
 package test.com.wirelust.bitbucket.client;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.io.StringBufferInputStream;
-import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.Response;
-
 import com.wirelust.bitbucket.client.BitbucketAuthClient;
 import com.wirelust.bitbucket.client.BitbucketV1Client;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
@@ -24,9 +8,9 @@ import com.wirelust.bitbucket.client.representations.*;
 import com.wirelust.bitbucket.client.representations.auth.AccessToken;
 import com.wirelust.bitbucket.client.representations.v1.Privilege;
 import com.wirelust.bitbucket.client.representations.v1.V1Comment;
-import org.apache.http.auth.AUTH;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -34,7 +18,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.ConfigurableMavenResolverSystem;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
-import org.jboss.shrinkwrap.resolver.api.maven.ScopeType;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,11 +25,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.wickedsource.diffparser.api.DiffParser;
 import org.wickedsource.diffparser.api.UnifiedDiffParser;
 import org.wickedsource.diffparser.api.model.Diff;
 import test.com.wirelust.bitbucket.client.providers.JacksonConfigurationProvider;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Date: 07-Oct-2015
@@ -198,7 +193,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToPostBuildStatus() throws Exception {
-		BuildStatus buildStatus = new BuildStatus();
+		BuildStatusPost buildStatus = new BuildStatusPost();
 		buildStatus.setState(BuildStatus.STATE.FAILED);
 		buildStatus.setKey("key");
 		buildStatus.setType("build");
@@ -210,7 +205,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToPutBuildStatus() throws Exception {
-		BuildStatus buildStatus = new BuildStatus();
+		BuildStatusPost buildStatus = new BuildStatusPost();
 		buildStatus.setState(BuildStatus.STATE.FAILED);
 		buildStatus.setKey("key");
 		buildStatus.setType("build");

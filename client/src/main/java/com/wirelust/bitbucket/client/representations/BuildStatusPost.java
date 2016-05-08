@@ -1,34 +1,26 @@
 package com.wirelust.bitbucket.client.representations;
 
-import java.util.List;
-import java.util.Map;
-
 /**
- * Date: 29-Apr-2016
+ * Date: 08-May-2016
  *
  * @author T. Curran
+ *
+ * This class exists because posting build status with links will not work
  */
-public class BuildStatus {
+public class BuildStatusPost {
 
-	public enum STATE {
-		INPROGRESS,
-		SUCCESSFUL,
-		FAILED
-	};
-
-	STATE state;
+	BuildStatus.STATE state;
 	String type;
 	String key;
 	String name;
 	String url;
 	String description;
-	Map<String, List<Link>> links;
 
-	public STATE getState() {
+	public BuildStatus.STATE getState() {
 		return state;
 	}
 
-	public void setState(STATE state) {
+	public void setState(BuildStatus.STATE state) {
 		this.state = state;
 	}
 
@@ -72,11 +64,4 @@ public class BuildStatus {
 		this.key = key;
 	}
 
-	public Map<String, List<Link>> getLinks() {
-	return links;
-}
-
-	public void setLinks(Map<String, List<Link>> links) {
-		this.links = links;
-	}
 }

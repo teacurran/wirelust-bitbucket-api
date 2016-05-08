@@ -1,6 +1,6 @@
 package com.wirelust.bitbucket.client;
 
-import com.wirelust.bitbucket.client.representations.BuildStatus;
+import com.wirelust.bitbucket.client.representations.BuildStatusPost;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -135,7 +135,7 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 		@PathParam("owner") String owner,
 		@PathParam("repo_slug") String repoSlug,
 		@PathParam("revision") String revision,
-		BuildStatus buildStatus);
+		BuildStatusPost buildStatus);
 
 	/**
 	 * PUT https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/commit/{revision}/statuses/build/{key}
@@ -150,7 +150,7 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 		@PathParam("repo_slug") String repoSlug,
 		@PathParam("revision") String revision,
 		@PathParam("key") String key,
-		BuildStatus buildStatus);
+		BuildStatusPost buildStatus);
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/repositories/{owner}/{repo_slug}/pullrequests?state=[OPEN, MERGED, DECLINED]
