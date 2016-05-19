@@ -1,11 +1,15 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.io.Serializable;
+
 /**
  * Date: 08-Oct-2015
  *
  * @author T. Curran
  */
-public class CommitSource {
+public class CommitSource implements Serializable {
+
+	private static final long serialVersionUID = 6410285719035915746L;
 
 	Commit commit;
 	Repository repository;

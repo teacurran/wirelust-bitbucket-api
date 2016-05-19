@@ -1,5 +1,6 @@
 package com.wirelust.bitbucket.client.representations.v1;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -10,7 +11,9 @@ import com.wirelust.bitbucket.client.Constants;
  *
  * @author T. Curran
  */
-public class V1Comment {
+public class V1Comment implements Serializable {
+
+	private static final long serialVersionUID = 7387646855881904997L;
 
 	String username;
 	Long pullRequestId;

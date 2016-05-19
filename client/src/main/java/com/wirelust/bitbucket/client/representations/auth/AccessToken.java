@@ -1,11 +1,15 @@
 package com.wirelust.bitbucket.client.representations.auth;
 
+import java.io.Serializable;
+
 /**
  * Date: 05-Nov-2015
  *
  * @author T. Curran
  */
-public class AccessToken {
+public class AccessToken implements Serializable {
+
+	private static final long serialVersionUID = 7387646855881904997L;
 
 	String accessToken;
 	String scopes;

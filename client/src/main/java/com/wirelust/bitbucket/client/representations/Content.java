@@ -1,11 +1,16 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.io.Serializable;
+
 /**
  * Date: 12-Oct-2015
  *
  * @author T. Curran
  */
-public class Content {
+public class Content implements Serializable {
+
+	private static final long serialVersionUID = 6410285719035915746L;
+
 	String raw;
 	String markup;
 	String html;

@@ -1,5 +1,6 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -10,7 +11,10 @@ import com.wirelust.bitbucket.client.Constants;
  *
  * @author T. Curran
  */
-public class Update {
+public class Update implements Serializable {
+
+	private static final long serialVersionUID = 6410285719035915746L;
+
 	String status;
 	String description;
 	String title;

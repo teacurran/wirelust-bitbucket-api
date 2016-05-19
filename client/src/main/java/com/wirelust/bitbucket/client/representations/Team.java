@@ -6,4 +6,5 @@ package com.wirelust.bitbucket.client.representations;
  * @author T. Curran
  */
 public class Team extends User {
+
 }

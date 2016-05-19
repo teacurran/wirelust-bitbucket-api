@@ -1,5 +1,6 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,9 @@ import com.wirelust.bitbucket.client.Constants;
  *
  * @author T. Curran
  */
-public class Repository {
+public class Repository implements Serializable {
+
+	private static final long serialVersionUID = 6410285719035915746L;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date createdOn;

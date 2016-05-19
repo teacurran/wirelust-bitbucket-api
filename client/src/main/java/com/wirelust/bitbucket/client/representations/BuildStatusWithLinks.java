@@ -1,17 +1,17 @@
 package com.wirelust.bitbucket.client.representations;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Date: 08-Nov-2015
+ * Date: 19-May-2016
  *
  * @author T. Curran
+ *
+ * This class exists because posting build status with links will not work
+ *
  */
-public class BBFile implements Serializable {
-
-	private static final long serialVersionUID = 7387646855881904997L;
+public class BuildStatusWithLinks extends BuildStatus {
 
 	Map<String, List<Link>> links;
 

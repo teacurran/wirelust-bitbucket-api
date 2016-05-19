@@ -1,5 +1,6 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,10 @@ import java.util.Map;
  *
  * @author T. Curran
  */
-public class Link {
+public class Link implements Serializable {
+
+	private static final long serialVersionUID = 6410285719035915746L;
+
 	String href;
 	String name;
 

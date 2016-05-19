@@ -1,11 +1,16 @@
 package com.wirelust.bitbucket.client.representations.v1;
 
+import java.io.Serializable;
+
 /**
  * Date: 04-Dec-2015
  *
  * @author T. Curran
  */
-public class V1Repo {
+public class V1Repo implements Serializable {
+
+	private static final long serialVersionUID = 7387646855881904997L;
+
 	String owner;
 	String slug;
 
