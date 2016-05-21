@@ -22,7 +22,7 @@ public class BuildStatus {
 	String name;
 	String url;
 	String description;
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 
 	public STATE getState() {
 		return state;

@@ -28,7 +28,7 @@ public class User {
 	Date createdOn;
 	String location;
 	String type;
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 
 	public String getUuid() {
 		return uuid;

@@ -13,7 +13,7 @@ public class CommentList {
 	Integer size;
 	String next;
 
-	List<Comment> values;
+	private List<Comment> values;
 
 	public Integer getPage() {
 		return page;

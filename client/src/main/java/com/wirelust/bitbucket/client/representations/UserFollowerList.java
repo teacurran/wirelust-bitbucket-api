@@ -13,7 +13,7 @@ public class UserFollowerList {
 	Integer pagelen;
 	Integer size;
 
-	List<User> values;
+	private List<User> values;
 
 	public Integer getPage() {
 		return page;

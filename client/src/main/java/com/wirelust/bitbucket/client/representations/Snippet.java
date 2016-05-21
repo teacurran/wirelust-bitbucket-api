@@ -27,9 +27,9 @@ public class Snippet {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date updatedOn;
 
-	Map<String, BBFile> files;
+	private Map<String, BBFile> files;
 
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 
 	public String getId() {
 		return id;

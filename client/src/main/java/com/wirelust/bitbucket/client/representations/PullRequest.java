@@ -21,7 +21,7 @@ public class PullRequest {
 	User author;
 	User closedBy;
 	String state;
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 	Boolean closeSourceBranch;
 	CommitSource source;
 	CommitSource destination;
@@ -30,8 +30,8 @@ public class PullRequest {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date updatedOn;
 	Commit mergeCommit;
-	List<User> reviewers;
-	List<Participant> participants;
+	private List<User> reviewers;
+	private List<Participant> participants;
 
 	public Long getId() {
 		return id;

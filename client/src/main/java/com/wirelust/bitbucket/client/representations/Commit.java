@@ -15,14 +15,14 @@ import com.wirelust.bitbucket.client.Constants;
 public class Commit {
 
 	String hash;
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 	List<Commit> parents;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT_2)
 	Date date;
 	String message;
 	CommitAuthor author;
 	Repository repository;
-	List<Participant> participants;
+	private List<Participant> participants;
 
 	public String getHash() {
 		return hash;

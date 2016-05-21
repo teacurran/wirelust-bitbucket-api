@@ -15,7 +15,7 @@ import com.wirelust.bitbucket.client.Constants;
 public class Comment {
 	Long id;
 	Comment parent;
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 	Content content;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date createdOn;

@@ -13,7 +13,7 @@ public class CommitList {
 	Integer size;
 	String next;
 
-	List<Commit> values;
+	private List<Commit> values;
 
 	public Integer getPage() {
 		return page;

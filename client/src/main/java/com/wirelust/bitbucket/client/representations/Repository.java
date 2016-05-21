@@ -33,7 +33,7 @@ public class Repository {
 	Long size;
 	String uuid;
 	User owner;
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 
 	public Date getCreatedOn() {
 		return createdOn;

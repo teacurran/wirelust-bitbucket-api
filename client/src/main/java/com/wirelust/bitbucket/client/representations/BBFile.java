@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class BBFile {
 
-	Map<String, List<Link>> links;
+	private Map<String, List<Link>> links;
 
 	public Map<String, List<Link>> getLinks() {
 		return links;

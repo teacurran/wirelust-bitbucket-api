@@ -13,7 +13,7 @@ public class RepositoryList {
 	Integer pagelen;
 	Integer size;
 
-	List<Repository> values;
+	private List<Repository> values;
 
 	public Integer getPage() {
 		return page;
