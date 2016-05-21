@@ -1,5 +1,6 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,9 @@ import java.util.List;
  *
  * @author T. Curran
  */
-public class PullRequestActivityList {
+public class PullRequestActivityList implements Serializable {
+
+	private static final long serialVersionUID = 6410285719035915746L;
 
 	Integer page;
 	Integer pagelen;

@@ -1,5 +1,7 @@
 package com.wirelust.bitbucket.client.representations.v1;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.wirelust.bitbucket.client.representations.Repository;
@@ -10,7 +12,9 @@ import com.wirelust.bitbucket.client.representations.User;
  *
  * @author T. Curran
  */
-public class Privilege {
+public class Privilege implements Serializable {
+
+	private static final long serialVersionUID = 7387646855881904997L;
 
 	public enum Type {
 		ADMIN("admin"), READ("read"), WRITE("write");

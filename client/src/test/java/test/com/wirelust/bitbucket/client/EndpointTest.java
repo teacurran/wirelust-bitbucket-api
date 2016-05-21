@@ -167,7 +167,7 @@ public class EndpointTest {
 		Response response = bitbucketV2Client.getBuildStatus("owner", "repo_slug", "revision", "key");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
-		BuildStatus buildStatus = response.readEntity(BuildStatus.class);
+		BuildStatusWithLinks buildStatus = response.readEntity(BuildStatusWithLinks.class);
 		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
 		Assert.assertEquals("build", buildStatus.getType());
 		Assert.assertEquals("BAMBOO-PROJECT-X", buildStatus.getKey());
@@ -193,7 +193,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToPostBuildStatus() throws Exception {
-		BuildStatusPost buildStatus = new BuildStatusPost();
+		BuildStatus buildStatus = new BuildStatus();
 		buildStatus.setState(BuildStatus.STATE.FAILED);
 		buildStatus.setKey("key");
 		buildStatus.setType("build");
@@ -205,7 +205,7 @@ public class EndpointTest {
 
 	@Test
 	public void shouldBeAbleToPutBuildStatus() throws Exception {
-		BuildStatusPost buildStatus = new BuildStatusPost();
+		BuildStatus buildStatus = new BuildStatus();
 		buildStatus.setState(BuildStatus.STATE.FAILED);
 		buildStatus.setKey("key");
 		buildStatus.setType("build");

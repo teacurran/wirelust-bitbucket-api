@@ -2,13 +2,16 @@ package com.wirelust.bitbucket.client.representations;
 
 import java.util.List;
 import java.util.Map;
+import java.io.Serializable;
 
 /**
  * Date: 29-Apr-2016
  *
  * @author T. Curran
  */
-public class BuildStatus {
+public class BuildStatus implements Serializable {
+
+	private static final long serialVersionUID = 7387646855881904997L;
 
 	public enum STATE {
 		INPROGRESS,
@@ -73,8 +76,8 @@ public class BuildStatus {
 	}
 
 	public Map<String, List<Link>> getLinks() {
-	return links;
-}
+		return links;
+	}
 
 	public void setLinks(Map<String, List<Link>> links) {
 		this.links = links;
