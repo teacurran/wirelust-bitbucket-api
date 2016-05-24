@@ -1,8 +1,6 @@
 package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Date: 07-Oct-2015
