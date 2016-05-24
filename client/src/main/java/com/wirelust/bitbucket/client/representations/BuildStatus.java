@@ -25,7 +25,6 @@ public class BuildStatus implements Serializable {
 	String name;
 	String url;
 	String description;
-	private Map<String, List<Link>> links;
 
 	public STATE getState() {
 		return state;
@@ -75,11 +74,4 @@ public class BuildStatus implements Serializable {
 		this.key = key;
 	}
 
-	public Map<String, List<Link>> getLinks() {
-		return links;
-	}
-
-	public void setLinks(Map<String, List<Link>> links) {
-		this.links = links;
-	}
 }

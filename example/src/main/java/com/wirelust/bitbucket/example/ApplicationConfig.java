@@ -1,8 +1,5 @@
 package com.wirelust.bitbucket.example;
 
-import java.io.Serializable;
-import javax.enterprise.context.ApplicationScoped;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,10 +8,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.enterprise.context.ApplicationScoped;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;

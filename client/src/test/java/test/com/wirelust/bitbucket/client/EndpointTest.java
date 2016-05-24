@@ -5,7 +5,7 @@ import com.wirelust.bitbucket.client.BitbucketV1Client;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.Constants;
 import com.wirelust.bitbucket.client.representations.*;
-import com.wirelust.bitbucket.client.representations.auth.AccessToken;
+import com.wirelust.bitbucket.client.representations.auth.OauthAccessToken;
 import com.wirelust.bitbucket.client.representations.v1.Privilege;
 import com.wirelust.bitbucket.client.representations.v1.V1Comment;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -130,7 +130,7 @@ public class EndpointTest {
 		Response response = bitbucketAuthClient.getTokenByUsernamePassword("password", "username", "password");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
-		AccessToken accessToken = response.readEntity(AccessToken.class);
+		OauthAccessToken accessToken = response.readEntity(OauthAccessToken.class);
 		Assert.assertEquals("gX0XmlxGGOmJXT3dBiurs8nkfgqNXlqni-nplZbOyEDwuvIWTpldCW-FRlFcP4YWtrQJSTtBcDdt324",
 			accessToken.getAccessToken());
 	}
@@ -227,6 +227,9 @@ public class EndpointTest {
 		Privilege privilege = privileges.get(0);
 		Assert.assertEquals("tutorials/tutorials.bitbucket.org", privilege.getRepo());
 		Assert.assertEquals(Privilege.Type.WRITE, privilege.getPrivilege());
+
+		User user = privilege.getUser();
+		Assert.assertEquals("cburwinkle", user.getUsername());
 	}
 
 	@Test

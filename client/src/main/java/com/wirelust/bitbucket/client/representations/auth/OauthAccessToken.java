@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author T. Curran
  */
-public class AccessToken implements Serializable {
+public class OauthAccessToken implements Serializable {
 
 	private static final long serialVersionUID = 7387646855881904997L;
 

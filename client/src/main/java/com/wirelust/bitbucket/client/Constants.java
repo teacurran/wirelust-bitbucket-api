@@ -18,4 +18,7 @@ public class Constants {
 	 */
 	public static final String DATE_TIME_FORMAT_V1 = "yyyy-MM-dd HH:mm:ssXXX";
 
+	private Constants() {
+		// class is used for static properties only
+	}
 }
