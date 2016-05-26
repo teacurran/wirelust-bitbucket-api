@@ -1,6 +1,7 @@
 package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class PullRequestActivityList extends PageableList implements Serializabl
 
 	String next;
 
-	List<PullRequestActivity> values;
+	ArrayList<PullRequestActivity> values;
 
 	public String getNext() {
 		return next;
@@ -29,6 +30,6 @@ public class PullRequestActivityList extends PageableList implements Serializabl
 	}
 
 	public void setValues(List<PullRequestActivity> values) {
-		this.values = values;
+		this.values = new ArrayList<>(values);
 	}
 }

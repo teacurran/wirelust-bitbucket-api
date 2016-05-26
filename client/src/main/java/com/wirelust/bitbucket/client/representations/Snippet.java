@@ -2,6 +2,7 @@ package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +31,9 @@ public class Snippet implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date updatedOn;
 
-	private Map<String, BBFile> files;
+	private HashMap<String, BBFile> files;
 
-	private Map<String, List<Link>> links;
+	private HashMap<String, List<Link>> links;
 
 	public String getId() {
 		return id;
@@ -103,7 +104,7 @@ public class Snippet implements Serializable {
 	}
 
 	public void setFiles(Map<String, BBFile> files) {
-		this.files = files;
+		this.files = new HashMap<>(files);
 	}
 
 	public Map<String, List<Link>> getLinks() {
@@ -111,6 +112,6 @@ public class Snippet implements Serializable {
 	}
 
 	public void setLinks(Map<String, List<Link>> links) {
-		this.links = links;
+		this.links = new HashMap<>(links);
 	}
 }

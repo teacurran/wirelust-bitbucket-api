@@ -1,9 +1,9 @@
 package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public class Commit implements Serializable {
 	private static final long serialVersionUID = 6410285719035915746L;
 
 	String hash;
-	private Map<String, List<Link>> links;
+	private HashMap<String, List<Link>> links;
 	ArrayList<Commit> parents;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT_2)
 	Date date;
@@ -42,7 +42,7 @@ public class Commit implements Serializable {
 	}
 
 	public void setLinks(Map<String, List<Link>> links) {
-		this.links = links;
+		this.links = new HashMap<>(links);
 	}
 
 	public List<Commit> getParents() {

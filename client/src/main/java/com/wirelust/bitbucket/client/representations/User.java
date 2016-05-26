@@ -2,6 +2,7 @@ package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class User implements Serializable {
 	Date createdOn;
 	String location;
 	String type;
-	private Map<String, List<Link>> links;
+	private HashMap<String, List<Link>> links;
 
 	public String getUuid() {
 		return uuid;
@@ -62,7 +63,7 @@ public class User implements Serializable {
 	}
 
 	public void setLinks(Map<String, List<Link>> links) {
-		this.links = links;
+		this.links = new HashMap<>(links);
 	}
 
 	public String getWebsite() {
