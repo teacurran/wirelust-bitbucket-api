@@ -1,5 +1,6 @@
 package com.wirelust.bitbucket.client.representations;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,13 +14,13 @@ import java.util.Map;
  */
 public class BuildStatusWithLinks extends BuildStatus {
 
-	Map<String, List<Link>> links;
+	HashMap<String, List<Link>> links;
 
 	public Map<String, List<Link>> getLinks() {
 		return links;
 	}
 
-	public void setLinks(Map<String, List<Link>> links) {
+	public void setLinks(HashMap<String, List<Link>> links) {
 		this.links = links;
 	}
 }
