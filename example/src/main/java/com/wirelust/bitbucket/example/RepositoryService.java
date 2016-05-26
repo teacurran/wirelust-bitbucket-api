@@ -1,6 +1,7 @@
 package com.wirelust.bitbucket.example;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -51,7 +52,7 @@ public class RepositoryService implements Serializable {
 		if (repositoryList != null) {
 			return repositoryList.getValues();
 		}
-		return null;
+		return new ArrayList<>();
 	}
 
 	public String getUser() {

@@ -233,6 +233,17 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToGetPrivilegeTypes() {
+		Assert.assertEquals(Privilege.Type.ADMIN, Privilege.Type.fromString("admin"));
+		Assert.assertEquals(Privilege.Type.READ, Privilege.Type.fromString("read"));
+		Assert.assertEquals(Privilege.Type.WRITE, Privilege.Type.fromString("write"));
+
+		Assert.assertEquals(Privilege.Type.ADMIN.getValue(), "admin");
+		Assert.assertEquals(Privilege.Type.READ.getValue(), "read");
+		Assert.assertEquals(Privilege.Type.WRITE.getValue(), "write");
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizeGetPerivilegesForRepo() throws Exception {
 		Response response = bitbucketV2Client.getPrivileges("owner", "repo_slug", Privilege.Type.ADMIN);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());

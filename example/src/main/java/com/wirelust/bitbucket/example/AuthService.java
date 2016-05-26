@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
+import com.wirelust.bitbucket.example.exceptions.AuthException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
@@ -41,19 +42,27 @@ public class AuthService implements Serializable {
 	String accessToken;
 	Long expiresIn;
 
-	public void login() throws OAuthSystemException, IOException {
-		OAuthClientRequest oAuthClientRequest = OAuthClientRequest
-			.authorizationLocation(ApplicationConfig.BITBUCKET_AUTH_URL)
-			.setClientId(applicationConfig.getBitbucketOauthKey())
-			.setRedirectURI(applicationConfig.getBitbucketOauthRedirectUrl())
-			.setResponseType(ResponseType.CODE.toString())
-			.buildQueryMessage();
+	public void login() throws AuthException {
+		OAuthClientRequest oAuthClientRequest;
+		try {
+			oAuthClientRequest = OAuthClientRequest
+				.authorizationLocation(ApplicationConfig.BITBUCKET_AUTH_URL)
+				.setClientId(applicationConfig.getBitbucketOauthKey())
+				.setRedirectURI(applicationConfig.getBitbucketOauthRedirectUrl())
+				.setResponseType(ResponseType.CODE.toString())
+				.buildQueryMessage();
+		} catch (OAuthSystemException e) {
+			throw new AuthException("Unable to make oAuthClientRequest", e);
+		}
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
-		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 
-		externalContext.redirect(oAuthClientRequest.getLocationUri());
+		try {
+			externalContext.redirect(oAuthClientRequest.getLocationUri());
+		} catch (IOException e) {
+			throw new AuthException("unable to redirect", e);
+		}
 	}
 
 	public void checkOauthCode() throws OAuthSystemException, OAuthProblemException, IOException {
@@ -76,11 +85,12 @@ public class AuthService implements Serializable {
 		final String authStringEnc = new String(authEncBytes);
 
 		OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient()) {
+			@Override
 			public <T extends OAuthAccessTokenResponse> T accessToken(
 				OAuthClientRequest request, String requestMethod, Class<T> responseClass)
 				throws OAuthSystemException, OAuthProblemException {
 
-				Map<String, String> headers = new HashMap<String, String>();
+				Map<String, String> headers = new HashMap<>();
 				headers.put(OAuth.HeaderType.CONTENT_TYPE, OAuth.ContentType.URL_ENCODED);
 				headers.put("Authorization", "Basic " + authStringEnc);
 

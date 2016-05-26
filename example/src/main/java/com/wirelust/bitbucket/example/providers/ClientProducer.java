@@ -1,18 +1,14 @@
 package com.wirelust.bitbucket.example.providers;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.example.ApplicationConfig;
 import com.wirelust.bitbucket.example.AuthService;
-import org.apache.commons.codec.binary.Base64;
-import org.jboss.resteasy.auth.oauth.OAuthFilter;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -45,8 +41,7 @@ public class ClientProducer {
 		}
 
 		ResteasyWebTarget target = client.target(ApplicationConfig.BITBUCKET_ENDPOINT_URL);
-		BitbucketV2Client bitbucketV2Client = target.proxy(BitbucketV2Client.class);
 
-		return bitbucketV2Client;
+		return target.proxy(BitbucketV2Client.class);
 	}
 }
