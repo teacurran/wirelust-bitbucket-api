@@ -242,7 +242,7 @@ public class EndpointTest {
 		Assert.assertEquals(Privilege.Type.READ.getValue(), "read");
 		Assert.assertEquals(Privilege.Type.WRITE.getValue(), "write");
 
-		Assert.assertNull(Privilege.Type.fromString("invalid"));
+		Assert.assertNull(Privilege.Type.fromString(null));
 	}
 
 	@Test
