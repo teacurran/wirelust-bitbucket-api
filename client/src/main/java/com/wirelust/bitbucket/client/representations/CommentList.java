@@ -29,7 +29,7 @@ public class CommentList extends PageableList implements Serializable {
 		return values;
 	}
 
-	public void setValues(ArrayList<Comment> values) {
-		this.values = values;
+	public void setValues(List<Comment> values) {
+		this.values = new ArrayList<>(values);
 	}
 }

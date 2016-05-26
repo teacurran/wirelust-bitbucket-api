@@ -20,7 +20,7 @@ public class BBFile implements Serializable {
 		return links;
 	}
 
-	public void setLinks(HashMap<String, List<Link>> links) {
-		this.links = links;
+	public void setLinks(Map<String, List<Link>> links) {
+		this.links = new HashMap<>(links);
 	}
 }

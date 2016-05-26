@@ -1,6 +1,8 @@
 package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +21,13 @@ public class Commit implements Serializable {
 
 	String hash;
 	private Map<String, List<Link>> links;
-	List<Commit> parents;
+	ArrayList<Commit> parents;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT_2)
 	Date date;
 	String message;
 	CommitAuthor author;
 	Repository repository;
-	private List<Participant> participants;
+	private ArrayList<Participant> participants;
 
 	public String getHash() {
 		return hash;
@@ -48,7 +50,7 @@ public class Commit implements Serializable {
 	}
 
 	public void setParents(List<Commit> parents) {
-		this.parents = parents;
+		this.parents = new ArrayList<>(parents);
 	}
 
 	public Date getDate() {
@@ -88,6 +90,6 @@ public class Commit implements Serializable {
 	}
 
 	public void setParticipants(List<Participant> participants) {
-		this.participants = participants;
+		this.participants = new ArrayList<>(participants);
 	}
 }

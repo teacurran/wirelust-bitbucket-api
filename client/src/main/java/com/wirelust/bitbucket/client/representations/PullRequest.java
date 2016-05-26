@@ -1,7 +1,9 @@
 package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ public class PullRequest implements Serializable {
 	User author;
 	User closedBy;
 	String state;
-	private Map<String, List<Link>> links;
+	private HashMap<String, List<Link>> links;
 	Boolean closeSourceBranch;
 	CommitSource source;
 	CommitSource destination;
@@ -33,8 +35,8 @@ public class PullRequest implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date updatedOn;
 	Commit mergeCommit;
-	private List<User> reviewers;
-	private List<Participant> participants;
+	private ArrayList<User> reviewers;
+	private ArrayList<Participant> participants;
 
 	public Long getId() {
 		return id;
@@ -97,7 +99,7 @@ public class PullRequest implements Serializable {
 	}
 
 	public void setLinks(Map<String, List<Link>> links) {
-		this.links = links;
+		this.links = new HashMap<>(links);
 	}
 
 	public Boolean getCloseSourceBranch() {
@@ -153,7 +155,7 @@ public class PullRequest implements Serializable {
 	}
 
 	public void setReviewers(List<User> reviewers) {
-		this.reviewers = reviewers;
+		this.reviewers = new ArrayList<>(reviewers);
 	}
 
 	public List<Participant> getParticipants() {
@@ -161,6 +163,6 @@ public class PullRequest implements Serializable {
 	}
 
 	public void setParticipants(List<Participant> participants) {
-		this.participants = participants;
+		this.participants = new ArrayList<>(participants);
 	}
 }

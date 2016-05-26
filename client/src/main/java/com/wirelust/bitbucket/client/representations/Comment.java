@@ -2,6 +2,7 @@ package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class Comment implements Serializable {
 
 	Long id;
 	Comment parent;
-	private Map<String, List<Link>> links;
+	private HashMap<String, List<Link>> links;
 	Content content;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date createdOn;
@@ -50,7 +51,7 @@ public class Comment implements Serializable {
 	}
 
 	public void setLinks(Map<String, List<Link>> links) {
-		this.links = links;
+		this.links = new HashMap<>(links);
 	}
 
 	public Content getContent() {
