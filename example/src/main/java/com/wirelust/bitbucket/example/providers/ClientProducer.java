@@ -34,7 +34,6 @@ public class ClientProducer {
 				public void filter(ClientRequestContext requestContext) throws IOException {
 					String token = authService.getAccessToken();
 
-					//String base64Token = Base64.encodeBase64String(token.getBytes(StandardCharsets.UTF_8));
 					requestContext.getHeaders().add("Authorization", "Bearer " + token);
 				}
 			});

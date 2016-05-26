@@ -71,13 +71,6 @@ public class ApplicationConfig implements Serializable {
 		Properties props = new Properties();
 		try {
 			props.load(configInputStream);
-			try {
-				for (Map.Entry<Object, Object> e : props.entrySet()) {
-					BeanUtils.setProperty(this, (String) e.getKey(), e.getValue());
-				}
-			} catch (Exception e) {
-				throw new RuntimeException("Error initializing from properties: " + props);
-			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -88,6 +81,15 @@ public class ApplicationConfig implements Serializable {
 				LOGGER.error("error closing input stream", ioe);
 			}
 		}
+
+		try {
+			for (Map.Entry<Object, Object> e : props.entrySet()) {
+				BeanUtils.setProperty(this, (String) e.getKey(), e.getValue());
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("Error initializing from properties: " + props, e);
+		}
+
 		LOGGER.info("env properties loaded:{}", props.toString());
 	}
 

@@ -9,7 +9,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 
 import com.wirelust.bitbucket.example.exceptions.AuthException;
 import org.apache.commons.codec.binary.Base64;
@@ -65,17 +64,22 @@ public class AuthService implements Serializable {
 		}
 	}
 
-	public void checkOauthCode() throws OAuthSystemException, OAuthProblemException, IOException {
+	public void checkOauthCode() throws AuthException {
 		if (isLoggedIn() || authCode == null) {
 			return;
 		}
 
-		OAuthClientRequest oAuthClientRequest = OAuthClientRequest
+		OAuthClientRequest oAuthClientRequest;
+		try {
+			oAuthClientRequest = OAuthClientRequest
 			.tokenLocation(ApplicationConfig.BITBUCKET_TOKEN_URL)
 			.setGrantType(GrantType.AUTHORIZATION_CODE)
 			.setRedirectURI(applicationConfig.getBitbucketOauthRedirectUrl())
 			.setCode(authCode)
 			.buildBodyMessage();
+		} catch (OAuthSystemException e) {
+			throw new AuthException("Unable to check oAuth code", e);
+		}
 
 		// Bitbucket requires the client_id and secret to be sent with Basic Auth
 		// OLTU doesn't appear to support this, so we are going to extend the client
@@ -98,8 +102,12 @@ public class AuthService implements Serializable {
 			}
 		};
 
-
-		OAuthJSONAccessTokenResponse oAuthResponse = oAuthClient.accessToken(oAuthClientRequest, OAuth.HttpMethod.POST);
+		OAuthJSONAccessTokenResponse oAuthResponse;
+		try {
+			oAuthResponse = oAuthClient.accessToken(oAuthClientRequest, OAuth.HttpMethod.POST);
+		} catch (OAuthSystemException | OAuthProblemException e) {
+			throw new AuthException("Unable to get oAuth token", e);
+		}
 
 		accessToken = oAuthResponse.getAccessToken();
 		expiresIn = oAuthResponse.getExpiresIn();
