@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Properties;
 import javax.annotation.PostConstruct;
@@ -35,6 +36,8 @@ public class ApplicationConfig implements Serializable {
 
 	private static final String ENV_FILE_NAME = "app.bitbucket.env";
 
+	Properties configuredProperties = new Properties();
+
 	private String bitbucketOauthKey;
 	private String bitbucketSecret;
 	private String bitbucketOauthRedirectUrl;
@@ -49,48 +52,11 @@ public class ApplicationConfig implements Serializable {
 			configFileName = "dev.properties";
 		}
 
-		InputStream configInputStream = null;
-		File propertyFile = new File(configFileName);
-
-		// Attempt to load the config from a file
-		if (propertyFile.exists() && propertyFile.canRead()) {
-			try {
-				configInputStream = new FileInputStream(propertyFile);
-			} catch (FileNotFoundException e) {
-				// impossible to get here
-				LOGGER.error("config file not found", e);
-			}
-		} else {
-			configInputStream = this.getClass().getResourceAsStream("/environments/" + configFileName);
+		if (!loadConfigFromFileSystem(configFileName)) {
+			loadConfigFromResources(configFileName);
 		}
 
-		if (configInputStream == null) {
-			throw new RuntimeException("Error initializing config, unable to load property file:" + configFileName);
-		}
-
-		Properties props = new Properties();
-		try {
-			props.load(configInputStream);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				configInputStream.close();
-			} catch (IOException ioe) {
-				// nothing we can really do here
-				LOGGER.error("error closing input stream", ioe);
-			}
-		}
-
-		try {
-			for (Map.Entry<Object, Object> e : props.entrySet()) {
-				BeanUtils.setProperty(this, (String) e.getKey(), e.getValue());
-			}
-		} catch (Exception e) {
-			throw new RuntimeException("Error initializing from properties: " + props, e);
-		}
-
-		LOGGER.info("env properties loaded:{}", props.toString());
+		LOGGER.info("env properties loaded:{}", configuredProperties.toString());
 	}
 
 	public String getBitbucketOauthKey() {
@@ -115,5 +81,36 @@ public class ApplicationConfig implements Serializable {
 
 	public void setBitbucketOauthRedirectUrl(String bitbucketOauthRedirectUrl) {
 		this.bitbucketOauthRedirectUrl = bitbucketOauthRedirectUrl;
+	}
+
+	private void loadConfigFromResources(final String fileName) {
+		try (InputStream configInputStream = this.getClass().getResourceAsStream("/environments/" + fileName)) {
+			loadConfiguration(configInputStream);
+		} catch (IOException e) {
+			LOGGER.error("config resource file not found", e);
+		}
+	}
+
+	private boolean loadConfigFromFileSystem(final String fileName) {
+		File propertyFile = new File(fileName);
+
+		try (InputStream configInputStream = new FileInputStream(propertyFile)) {
+			loadConfiguration(configInputStream);
+		} catch (IOException e) {
+			LOGGER.error("config file not found", e);
+		}
+		return true;
+	}
+
+	private void loadConfiguration(final InputStream inputStream) throws IOException {
+		configuredProperties.load(inputStream);
+
+		try {
+			for (Map.Entry<Object, Object> e : configuredProperties.entrySet()) {
+				BeanUtils.setProperty(this, (String) e.getKey(), e.getValue());
+			}
+		} catch (InvocationTargetException | IllegalAccessException e) {
+			LOGGER.error("error setting property value", e);
+		}
 	}
 }
