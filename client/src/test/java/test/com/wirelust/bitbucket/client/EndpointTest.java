@@ -8,6 +8,7 @@ import com.wirelust.bitbucket.client.representations.*;
 import com.wirelust.bitbucket.client.representations.auth.OauthAccessToken;
 import com.wirelust.bitbucket.client.representations.v1.Privilege;
 import com.wirelust.bitbucket.client.representations.v1.V1Comment;
+import com.wirelust.bitbucket.client.representations.v1.V1Repo;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -133,6 +134,10 @@ public class EndpointTest {
 		OauthAccessToken accessToken = response.readEntity(OauthAccessToken.class);
 		Assert.assertEquals("gX0XmlxGGOmJXT3dBiurs8nkfgqNXlqni-nplZbOyEDwuvIWTpldCW-FRlFcP4YWtrQJSTtBcDdt324",
 			accessToken.getAccessToken());
+		Assert.assertEquals("repository:admin team:write account:write", accessToken.getScopes());
+		Assert.assertEquals(3600, (long)accessToken.getExpiresIn());
+		Assert.assertEquals("E7fNADEJvW834Es8nz", accessToken.getRefreshToken());
+		Assert.assertEquals("bearer", accessToken.getTokenType());
 	}
 
 	@Test
@@ -739,6 +744,10 @@ public class EndpointTest {
 
 		V1Comment v1Comment = response.readEntity(V1Comment.class);
 		Assert.assertEquals(672, (long)v1Comment.getPullRequestId());
+
+		V1Repo repo = v1Comment.getPrRepo();
+		Assert.assertEquals("tutorials", repo.getOwner());
+		Assert.assertEquals("tutorials-repo", repo.getSlug());
 	}
 
 	@Test

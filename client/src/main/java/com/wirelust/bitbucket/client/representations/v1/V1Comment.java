@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wirelust.bitbucket.client.Constants;
 
 /**
@@ -38,7 +39,9 @@ public class V1Comment implements Serializable {
 	Integer lineTo;
 	String destRev;
 	String anchor;
-	Boolean isSpam;
+
+	@JsonProperty("is_spam")
+	Boolean spam;
 	V1Repo prRepo;
 
 	public String getUsername() {
@@ -185,20 +188,12 @@ public class V1Comment implements Serializable {
 		this.anchor = anchor;
 	}
 
-	public Boolean getIsSpam() {
-		return isSpam;
-	}
-
-	public void setIsSpam(Boolean spam) {
-		isSpam = spam;
-	}
-
-	public Boolean getSpam() {
-		return isSpam;
+	public Boolean isSpam() {
+		return spam;
 	}
 
 	public void setSpam(Boolean spam) {
-		isSpam = spam;
+		this.spam = spam;
 	}
 
 	public V1Repo getPrRepo() {
