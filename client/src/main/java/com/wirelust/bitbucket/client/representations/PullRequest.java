@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.wirelust.bitbucket.client.Constants;
 
 /**
@@ -19,13 +21,23 @@ public class PullRequest implements Serializable {
 
 	private static final long serialVersionUID = 6410285719035915746L;
 
+	public enum State {
+		OPEN, DECLINED, MERGED;
+
+		@JsonCreator
+		public static State fromString(String key) {
+			return key == null ? null : State.valueOf(key.toUpperCase());
+		}
+	}
+
+
 	Long id;
 	String title;
 	String description;
 	String reason;
 	User author;
 	User closedBy;
-	String state;
+	State state;
 	private HashMap<String, List<Link>> links;
 	Boolean closeSourceBranch;
 	CommitSource source;
@@ -86,11 +98,11 @@ public class PullRequest implements Serializable {
 		this.closedBy = closedBy;
 	}
 
-	public String getState() {
+	public State getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 

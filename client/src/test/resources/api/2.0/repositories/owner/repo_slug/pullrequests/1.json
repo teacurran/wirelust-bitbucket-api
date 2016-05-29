@@ -1,5 +1,5 @@
 {
-	"description": "![img](https://cloudup.com/c7ZJtChLw9J+) ## Removing: * Notifications * Email * Change password * Sessions ## Renaming: * Change username * Delete account (rename to delete team) ",
+	"description": "Change username * Delete account (rename to delete team)",
 	"links": {
 		"decline": {
 			"href": "https://staging.bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/3767/decline"
@@ -73,7 +73,7 @@
 			"name": "staging"
 		}
 	},
-	"reason": "",
+	"reason": "What does this field do?",
 	"closed_by": null,
 	"source": {
 		"commit": {

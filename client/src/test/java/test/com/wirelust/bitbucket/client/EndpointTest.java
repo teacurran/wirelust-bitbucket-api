@@ -382,11 +382,26 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		PullRequest pullRequest = response.readEntity(PullRequest.class);
-
+		Assert.assertEquals(3767, (long)pullRequest.getId());
+		Assert.assertEquals("BB-9500: Remove certain admin links for Team accounts", pullRequest.getTitle());
+		Assert.assertEquals("Change username * Delete account (rename to delete team)", pullRequest.getDescription());
+		Assert.assertEquals("What does this field do?", pullRequest.getReason());
 		Assert.assertEquals(true, pullRequest.getCloseSourceBranch());
+		Assert.assertNull(pullRequest.getClosedBy());
+		Assert.assertEquals(PullRequest.State.OPEN, pullRequest.getState());
+		Assert.assertNull(pullRequest.getMergeCommit());
+
+		Date dateCreated = simpleDateTimeFormat.parse("2013-11-05T23:59:26.480984+00:00");
+		Assert.assertEquals(dateCreated, pullRequest.getCreatedOn());
+
+		Date dateUpdated = simpleDateTimeFormat.parse("2013-11-07T00:17:41.061613+00:00");
+		Assert.assertEquals(dateUpdated, pullRequest.getUpdatedOn());
 
 		Map<String, List<Link>> links = pullRequest.getLinks();
 		Assert.assertEquals(10, links.size());
+
+		User author = pullRequest.getAuthor();
+		Assert.assertEquals("mfrauenholtz", author.getUsername());
 
 		CommitSource commitSource = pullRequest.getSource();
 		Assert.assertEquals("mfrauenholtz/team-removal/admin-links", commitSource.getBranch().getName());
