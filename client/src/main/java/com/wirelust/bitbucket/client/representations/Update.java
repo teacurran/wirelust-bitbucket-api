@@ -3,6 +3,7 @@ package com.wirelust.bitbucket.client.representations;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wirelust.bitbucket.client.Constants;
 
@@ -15,25 +16,24 @@ public class Update implements Serializable {
 
 	private static final long serialVersionUID = 6410285719035915746L;
 
-	String status;
+	public enum State {
+		OPEN, DECLINED, MERGED;
+
+		@JsonCreator
+		public static State fromString(String key) {
+			return key == null ? null : State.valueOf(key.toUpperCase());
+		}
+	}
+
 	String description;
 	String title;
 	CommitSource destination;
 	CommitSource source;
 	String reason;
-	User user;
-	String state;
+	State state;
 	User author;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date date;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public String getDescription() {
 		return description;
@@ -75,19 +75,11 @@ public class Update implements Serializable {
 		this.reason = reason;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getState() {
+	public State getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 

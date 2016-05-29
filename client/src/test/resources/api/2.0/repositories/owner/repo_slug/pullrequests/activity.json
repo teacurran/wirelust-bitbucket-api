@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"update": {
-				"description": "editme.html edited online with Bitbucket",
+				"description": "editme.html edited online",
 				"title": "editme.html edited online with Bitbucket",
 				"destination": {
 					"commit": {
@@ -31,7 +31,7 @@
 						"name": "default"
 					}
 				},
-				"reason": "",
+				"reason": "valid reason",
 				"source": {
 					"commit": {
 						"hash": "e38157163256",

@@ -576,6 +576,28 @@ public class EndpointTest {
 		PullRequestActivityList activityList = response.readEntity(PullRequestActivityList.class);
 
 		Assert.assertEquals(10965, (long)activityList.getSize());
+
+		List<PullRequestActivity> activities = activityList.getValues();
+		Assert.assertEquals(2, activities.size());
+
+		PullRequestActivity firstActivity = activities.get(0);
+		Assert.assertEquals(3662, (long)firstActivity.getPullRequest().getId());
+
+		Update update = firstActivity.getUpdate();
+		Assert.assertEquals("editme.html edited online", update.getDescription());
+		Assert.assertEquals(Update.State.OPEN, update.getState());
+		Assert.assertEquals("editme.html edited online with Bitbucket", update.getTitle());
+		Assert.assertEquals("160c67046cbd", update.getDestination().getCommit().getHash());
+		Assert.assertEquals("e38157163256", update.getSource().getCommit().getHash());
+		Assert.assertEquals("valid reason", update.getReason());
+		Assert.assertEquals("yogaswara", update.getAuthor().getUsername());
+		Date updateDate = simpleDateTimeFormat.parse("2014-04-17T11:43:06.043720+00:00");
+		Assert.assertEquals(updateDate, update.getDate());
+
+		PullRequestActivity secondActivity = activities.get(1);
+		Comment comment = secondActivity.getComment();
+		Assert.assertEquals("dans9190", comment.getUser().getUsername());
+
 	}
 
 	@Test

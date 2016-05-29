@@ -50,7 +50,7 @@
 		},
 		{
 			"update": {
-				"status": "open",
+				"state": "open",
 				"description": "![img](https://cloudup.com/ccaeaiiEz1S+) ## Removing: * Notifications * Email * Change password * Sessions ## Renaming: * Change username * Delete account (rename to delete team) ",
 				"title": "BB-9500: Remove certain admin links for Team accounts",
 				"destination": {
@@ -104,7 +104,7 @@
 					}
 				},
 				"reason": "",
-				"user": {
+				"author": {
 					"username": "mfrauenholtz",
 					"display_name": "Michael Frauenholtz",
 					"links": {
