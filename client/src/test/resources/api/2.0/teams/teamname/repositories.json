@@ -44,7 +44,6 @@
 			"full_name": "tutorials/hgsplitpractice",
 			"has_issues": false,
 			"owner": {
-				"teamname": "tutorials",
 				"display_name": "first name last",
 				"links": {
 					"self": {
@@ -103,7 +102,6 @@
 			"full_name": "tutorials/oauth-examples",
 			"has_issues": false,
 			"owner": {
-				"teamname": "tutorials",
 				"display_name": "first name last",
 				"links": {
 					"self": {

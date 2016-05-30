@@ -26,7 +26,6 @@ public class User implements Serializable {
 	String displayName;
 	String avatar;
 	Boolean isTeam;
-	String teamname;
 	String website;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
 	Date createdOn;
@@ -104,14 +103,6 @@ public class User implements Serializable {
 
 	public void setKind(String kind) {
 		this.kind = kind;
-	}
-
-	public String getTeamname() {
-		return teamname;
-	}
-
-	public void setTeamname(String teamname) {
-		this.teamname = teamname;
 	}
 
 	public String getFirstName() {

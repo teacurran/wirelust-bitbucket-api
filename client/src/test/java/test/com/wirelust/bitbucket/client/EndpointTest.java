@@ -235,19 +235,10 @@ public class EndpointTest {
 
 		User user = privilege.getUser();
 		Assert.assertEquals("cburwinkle", user.getUsername());
-	}
-
-	@Test
-	public void shouldBeAbleToGetPrivilegeTypes() {
-		Assert.assertEquals(Privilege.Type.ADMIN, Privilege.Type.fromString("admin"));
-		Assert.assertEquals(Privilege.Type.READ, Privilege.Type.fromString("read"));
-		Assert.assertEquals(Privilege.Type.WRITE, Privilege.Type.fromString("write"));
-
-		Assert.assertEquals(Privilege.Type.ADMIN.getValue(), "admin");
-		Assert.assertEquals(Privilege.Type.READ.getValue(), "read");
-		Assert.assertEquals(Privilege.Type.WRITE.getValue(), "write");
-
-		Assert.assertNull(Privilege.Type.fromString(null));
+		Assert.assertEquals("Christine", user.getFirstName());
+		Assert.assertEquals("Burwinkle", user.getLastName());
+		Assert.assertEquals("https://secure.gravatar.com/avatar/test.png", user.getAvatar());
+		Assert.assertEquals(false, user.getIsTeam());
 	}
 
 	@Test
@@ -631,6 +622,11 @@ public class EndpointTest {
 		Snippet snippet = response.readEntity(Snippet.class);
 
 		Assert.assertEquals("kypj", snippet.getId());
+		Assert.assertEquals(false, snippet.getIsPrivate());
+		Assert.assertEquals("Daniel  Stevens", snippet.getCreator().getDisplayName());
+		Assert.assertEquals("Teams In Space", snippet.getOwner().getDisplayName());
+		Assert.assertEquals("git", snippet.getScm());
+		Assert.assertEquals("API docs snippet", snippet.getTitle());
 
 		Map<String, BBFile> files = snippet.getFiles();
 		Assert.assertTrue(files.containsKey("README.md"));
@@ -662,6 +658,7 @@ public class EndpointTest {
 
 		User user = userList.getValues().get(0);
 		Assert.assertEquals("tutorials", user.getUsername());
+		Assert.assertEquals("team", user.getKind());
 	}
 
 	@Test
