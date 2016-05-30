@@ -1,7 +1,7 @@
 {
 	"links": {
 		"self": {
-			"href": "https://api.bitbucket.org/2.0/repositories/atlassian/atlassian-rest/commit/61d9e64348f9da407e62f64726337fd3bb24b466/comments/530189"
+			"href": "http://www.google.com"
 		},
 		"code": {
 			"href": "https://api.bitbucket.org/2.0/repositories/atlassian/atlassian-rest/diff/61d9e64348f9da407e62f64726337fd3bb24b466?path=pom.xml"

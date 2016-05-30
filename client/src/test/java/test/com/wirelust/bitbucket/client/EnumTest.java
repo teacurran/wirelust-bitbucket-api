@@ -1,5 +1,6 @@
 package test.com.wirelust.bitbucket.client;
 
+import com.wirelust.bitbucket.client.representations.BuildStatus;
 import com.wirelust.bitbucket.client.representations.PullRequest;
 import com.wirelust.bitbucket.client.representations.Update;
 import com.wirelust.bitbucket.client.representations.v1.Privilege;
@@ -42,4 +43,10 @@ public class EnumTest {
 		Assert.assertNull(Update.State.fromString(null));
 	}
 
+	@Test
+	public void shouldBeAbleToBuildStatusState() {
+		Assert.assertEquals(BuildStatus.State.INPROGRESS, BuildStatus.State.valueOf("INPROGRESS"));
+		Assert.assertEquals(BuildStatus.State.SUCCESSFUL, BuildStatus.State.valueOf("SUCCESSFUL"));
+		Assert.assertEquals(BuildStatus.State.FAILED, BuildStatus.State.valueOf("FAILED"));
+	}
 }

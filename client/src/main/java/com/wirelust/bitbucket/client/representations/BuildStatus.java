@@ -11,24 +11,24 @@ public class BuildStatus implements Serializable {
 
 	private static final long serialVersionUID = 7387646855881904997L;
 
-	public enum STATE {
+	public enum State {
 		INPROGRESS,
 		SUCCESSFUL,
 		FAILED
 	};
 
-	STATE state;
+	State state;
 	String type;
 	String key;
 	String name;
 	String url;
 	String description;
 
-	public STATE getState() {
+	public State getState() {
 		return state;
 	}
 
-	public void setState(STATE state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 

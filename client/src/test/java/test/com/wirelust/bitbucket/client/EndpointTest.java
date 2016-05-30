@@ -173,7 +173,7 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		BuildStatusWithLinks buildStatus = response.readEntity(BuildStatusWithLinks.class);
-		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
+		Assert.assertEquals(BuildStatus.State.FAILED, buildStatus.getState());
 		Assert.assertEquals("build", buildStatus.getType());
 		Assert.assertEquals("BAMBOO-PROJECT-X", buildStatus.getKey());
 		Assert.assertEquals("Build #34", buildStatus.getName());
@@ -199,25 +199,25 @@ public class EndpointTest {
 	@Test
 	public void shouldBeAbleToPostBuildStatus() throws Exception {
 		BuildStatus buildStatus = new BuildStatus();
-		buildStatus.setState(BuildStatus.STATE.FAILED);
+		buildStatus.setState(BuildStatus.State.FAILED);
 		buildStatus.setKey("key");
 		buildStatus.setType("build");
 
 		Response response = bitbucketV2Client.postBuildStatus("owner", "repo_slug", "revision", buildStatus);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
+		Assert.assertEquals(BuildStatus.State.FAILED, buildStatus.getState());
 	}
 
 	@Test
 	public void shouldBeAbleToPutBuildStatus() throws Exception {
 		BuildStatus buildStatus = new BuildStatus();
-		buildStatus.setState(BuildStatus.STATE.FAILED);
+		buildStatus.setState(BuildStatus.State.FAILED);
 		buildStatus.setKey("key");
 		buildStatus.setType("build");
 
 		Response response = bitbucketV2Client.putBuildStatus("owner", "repo_slug", "revision", "key", buildStatus);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-		Assert.assertEquals(BuildStatus.STATE.FAILED, buildStatus.getState());
+		Assert.assertEquals(BuildStatus.State.FAILED, buildStatus.getState());
 	}
 
 	@Test
@@ -535,6 +535,14 @@ public class EndpointTest {
 
 		Date dateModified = simpleDateTimeFormat.parse("2013-11-07T23:55:24.502477+00:00");
 		Assert.assertEquals(dateModified, comment.getUpdatedOn());
+
+		Map<String, List<Link>> links = comment.getLinks();
+		Assert.assertEquals("http://www.google.com", links.get("self").get(0).getHref());
+
+		CommentLine commentLine = comment.getInline();
+		Assert.assertEquals(381, (int)commentLine.getFrom());
+		Assert.assertNull(commentLine.getTo());
+		Assert.assertEquals("pom.xml", commentLine.getPath());
 	}
 
 	@Test
