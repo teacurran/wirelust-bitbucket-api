@@ -586,7 +586,7 @@ public class EndpointTest {
 		PullRequestActivityList activityList = response.readEntity(PullRequestActivityList.class);
 
 		Assert.assertEquals(10965, (long)activityList.getSize());
-		Assert.assertEquals("http://www.google.com/fakeurl3", activityList.getNext());
+		Assert.assertEquals("http://www.google.com/fakeurl5", activityList.getNext());
 
 		List<PullRequestActivity> activities = activityList.getValues();
 		Assert.assertEquals(2, activities.size());
