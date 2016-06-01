@@ -1,5 +1,9 @@
 package test.com.wirelust.bitbucket.client;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
+import com.wirelust.bitbucket.client.Constants;
 import com.wirelust.bitbucket.client.representations.BuildStatus;
 import com.wirelust.bitbucket.client.representations.PullRequest;
 import com.wirelust.bitbucket.client.representations.Update;
@@ -49,4 +53,17 @@ public class EnumTest {
 		Assert.assertEquals(BuildStatus.State.SUCCESSFUL, BuildStatus.State.valueOf("SUCCESSFUL"));
 		Assert.assertEquals(BuildStatus.State.FAILED, BuildStatus.State.valueOf("FAILED"));
 	}
+
+	@Test
+	/**
+	 * This method simply instantiates a private constructor to ensure code coverage for it so the
+	 * coverage reports aren't diminished
+	 */
+	public void testConstructorIsPrivate() throws Exception {
+		Constructor<Constants> constructor = Constants.class.getDeclaredConstructor();
+		Assert.assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		constructor.setAccessible(true);
+		constructor.newInstance();
+	}
+
 }
