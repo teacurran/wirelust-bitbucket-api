@@ -346,6 +346,7 @@ public class EndpointTest {
 		Assert.assertEquals(1, (long)pullRequestList.getPage());
 		Assert.assertEquals(12, (long)pullRequestList.getSize());
 		Assert.assertEquals(1, (long)pullRequestList.getPagelen());
+		Assert.assertEquals("http://www.google.com/fakeurl2", pullRequestList.getNext());
 
 		List<PullRequest> pullRequests = pullRequestList.getValues();
 		Assert.assertEquals(1, pullRequests.size());
@@ -484,6 +485,7 @@ public class EndpointTest {
 		Assert.assertEquals(1, (long) commitList.getPage());
 		Assert.assertEquals(11, (long) commitList.getSize());
 		Assert.assertEquals(1, (long) commitList.getPagelen());
+		Assert.assertEquals("http://www.google.com/fakeurl", commitList.getNext());
 
 		List<Commit> commits = commitList.getValues();
 		Assert.assertEquals(1, commits.size());
@@ -511,6 +513,7 @@ public class EndpointTest {
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		CommentList commentList = response.readEntity(CommentList.class);
+		Assert.assertEquals("http://www.google.com/fakeurl4", commentList.getNext());
 
 		List<Comment> comments = commentList.getValues();
 		Assert.assertEquals(1, comments.size());
@@ -583,6 +586,7 @@ public class EndpointTest {
 		PullRequestActivityList activityList = response.readEntity(PullRequestActivityList.class);
 
 		Assert.assertEquals(10965, (long)activityList.getSize());
+		Assert.assertEquals("http://www.google.com/fakeurl3", activityList.getNext());
 
 		List<PullRequestActivity> activities = activityList.getValues();
 		Assert.assertEquals(2, activities.size());
