@@ -31,7 +31,7 @@ public class Participant implements Serializable {
 		this.user = user;
 	}
 
-	public Boolean getApproved() {
+	public Boolean isApproved() {
 		return approved;
 	}
 

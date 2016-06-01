@@ -398,6 +398,7 @@ public class EndpointTest {
 		Assert.assertEquals("mfrauenholtz/team-removal/admin-links", commitSource.getBranch().getName());
 		Assert.assertEquals("2a81a1edc0c2", commitSource.getCommit().getHash());
 		Assert.assertEquals(1, commitSource.getCommit().getLinks().size());
+		Assert.assertEquals("bitbucket", commitSource.getRepository().getName());
 
 		CommitSource commitDestination = pullRequest.getDestination();
 		Assert.assertEquals("staging", commitDestination.getBranch().getName());
@@ -430,6 +431,7 @@ public class EndpointTest {
 
 		Commit firstCommit = commits.get(0);
 		Assert.assertEquals("61d9e64348f9da407e62f64726337fd3bb24b466", firstCommit.getHash());
+		Assert.assertEquals("atlassian-rest", firstCommit.getRepository().getName());
 
 		Map<String, List<Link>> links = firstCommit.getLinks();
 		Assert.assertEquals(6, links.size());
@@ -456,6 +458,10 @@ public class EndpointTest {
 
 		Map<String, List<Link>> links = commit.getLinks();
 		Assert.assertEquals(6, links.size());
+
+		List<Participant> participants = commit.getParticipants();
+		Assert.assertEquals(1, participants.size());
+		Assert.assertFalse(participants.get(0).isApproved());
 
 		Assert.assertEquals("59721f593b020123a75424285845325126f56e2e", commit.getParents().get(0).getHash());
 
@@ -529,6 +535,8 @@ public class EndpointTest {
 		Comment comment = response.readEntity(Comment.class);
 
 		Assert.assertEquals(530189, (long)comment.getId());
+		Assert.assertEquals("Inline test comment.", comment.getContent().getRaw());
+		Assert.assertEquals("<p>Inline test comment.</p>", comment.getContent().getHtml());
 
 		Date dateCreated = simpleDateTimeFormat.parse("2013-11-07T23:55:24.486865+00:00");
 		Assert.assertEquals(dateCreated, comment.getCreatedOn());
@@ -639,6 +647,16 @@ public class EndpointTest {
 		Map<String, BBFile> files = snippet.getFiles();
 		Assert.assertTrue(files.containsKey("README.md"));
 		Assert.assertTrue(files.containsKey("myquote2.html"));
+
+		BBFile readmeFile = files.get("README.md");
+		Assert.assertEquals(2, readmeFile.getLinks().size());
+
+		Assert.assertEquals(7, snippet.getLinks().size());
+		Date createdOn = simpleDateTimeFormat.parse("2015-03-18T19:56:51.269348+00:00");
+		Assert.assertEquals(createdOn, snippet.getCreatedOn());
+
+		Date updatedOn = simpleDateTimeFormat.parse("2015-03-18T19:56:51.269378+00:00");
+		Assert.assertEquals(updatedOn, snippet.getUpdatedOn());
 	}
 
 	@Test
@@ -786,6 +804,7 @@ public class EndpointTest {
 
 		V1Comment v1Comment = response.readEntity(V1Comment.class);
 		Assert.assertEquals(672, (long)v1Comment.getPullRequestId());
+		Assert.assertEquals("pom.xml", v1Comment.getFilename());
 
 		V1Repo repo = v1Comment.getPrRepo();
 		Assert.assertEquals("tutorials", repo.getOwner());
