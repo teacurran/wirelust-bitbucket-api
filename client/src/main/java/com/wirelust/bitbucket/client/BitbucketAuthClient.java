@@ -14,6 +14,10 @@ import javax.ws.rs.core.Response;
  */
 public interface BitbucketAuthClient {
 
+	public static final String GRANT_TYPE_AUTH_CODE = "authorization_code";
+	public static final String GRANT_TYPE_PASSWORD = "password";
+	public static final String GRANT_TYPE_REFRESH = "refresh_token";
+
 	/**
 	 * POST https://bitbucket.org/site/oauth2/access_token
 	 */
