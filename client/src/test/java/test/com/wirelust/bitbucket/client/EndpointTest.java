@@ -836,7 +836,7 @@ public class EndpointTest {
 		comment.setFilename("/test/file.xml");
 		comment.setContent("test comment");
 
-		Response response = bitbucketV1Client.putPullRequestComment("owner", "repo_slug", 1L, comment);
+		Response response = bitbucketV1Client.putPullRequestComment("owner", "repo_slug", 1L, 1L, comment);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		V1Comment v1Comment = response.readEntity(V1Comment.class);

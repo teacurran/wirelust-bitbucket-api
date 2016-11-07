@@ -68,13 +68,14 @@ public interface BitbucketV1Client {
 		V1Comment comment);
 
 	@PUT
-	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/comments")
+	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response putPullRequestComment(
 		@PathParam("owner") String owner,
 		@PathParam("repo_slug") String repoSlug,
 		@PathParam("pull_request_id") Long pullRequestId,
+		@PathParam("comment_id") Long commentId,
 		V1Comment comment);
 
 	@DELETE
