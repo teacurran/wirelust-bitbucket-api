@@ -1,6 +1,8 @@
 package com.wirelust.bitbucket.client;
 
 import com.wirelust.bitbucket.client.representations.BuildStatus;
+import com.wirelust.bitbucket.client.representations.Task;
+import com.wirelust.bitbucket.client.representations.v1.V1Comment;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -267,6 +269,27 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 			@PathParam("owner") String owner,
 			@PathParam("repo_slug") String repoSlug,
 			@PathParam("id") Long id);
+
+	@POST
+	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response postPullRequestTask(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug,
+		@PathParam("pull_request_id") Long pullRequestId,
+		Task task);
+
+	@PUT
+	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response putPullRequestTask(
+		@PathParam("owner") String owner,
+		@PathParam("repo_slug") String repoSlug,
+		@PathParam("pull_request_id") Long pullRequestId,
+		@PathParam("task_id") Long taskId,
+		Task task);
 
 	/**
 	 * GET https://api.bitbucket.org/2.0/snippets/{username}
