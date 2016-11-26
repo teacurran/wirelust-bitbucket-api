@@ -11,6 +11,8 @@ import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.representations.CommitList;
+import com.wirelust.bitbucket.client.representations.PullRequest;
+import com.wirelust.bitbucket.client.representations.PullRequestList;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
 
@@ -34,6 +36,7 @@ public class RepositoryService implements Serializable {
 	String repositoryOwner;
 	String repositoryName;
 	CommitList commitList;
+	PullRequestList pullRequestList;
 
 	public List<Repository> getList() {
 		Response response;
@@ -83,6 +86,24 @@ public class RepositoryService implements Serializable {
 			response.close();
 		}
 		return commitList;
+	}
+
+	public PullRequestList getRepositoryPullRequests() {
+		if (pullRequestList == null && getRepository() != null) {
+			Response response = null;
+			try {
+				response = bitbucketV2Client.getPullRequests(repositoryOwner, repositoryName, PullRequest.State.OPEN
+					.name());
+				if (response.getStatus() == HttpServletResponse.SC_OK) {
+					pullRequestList = response.readEntity(PullRequestList.class);
+				}
+			} finally {
+				if (response != null) {
+					response.close();
+				}
+			}
+		}
+		return pullRequestList;
 	}
 
 	public void setRepository(Repository repository) {

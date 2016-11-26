@@ -37,7 +37,7 @@
 
 			</h:panelGrid>
 
-			<p:tabMenu activeIndex="0">
+			<p:tabMenu activeIndex="1">
 				<p:menuitem value="Commits" outcome="repository-view.xhtml">
 					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
 					<f:param name="name" value="#{repositoryService.repository.name}"/>
@@ -48,22 +48,30 @@
 				</p:menuitem>
 			</p:tabMenu>
 
-			<h2>Commits (page: #{repositoryService.repositoryCommits.page}):</h2>
-			<p:dataTable value="#{repositoryService.repositoryCommits.values}" var="_commit">
+			<h2>Pull Requests (page: #{repositoryService.repositoryPullRequests.page}):</h2>
+			<p:dataTable value="#{repositoryService.repositoryPullRequests.values}" var="_pullrequest">
 
 				<p:column headerText="Author">
-					<h:outputText value="#{_commit.author.raw}"/>
+					<h:outputText value="#{_pullrequest.author.username}"/>
 				</p:column>
 
 				<p:column headerText="Date">
-					<h:outputText value="#{_commit.date}"/>
+					<h:outputText value="#{_pullrequest.createdOn}"/>
 				</p:column>
 
-				<p:column headerText="Hash">
-					<p:link outcome="commit.xhtml" value="#{_commit.hash}">
+				<p:column headerText="Id">
+					<p:link outcome="commit.xhtml" value="#{_pullrequest.id}">
 						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
 						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
-						<f:param name="revision" value="#{_commit.hash}"/>
+						<f:param name="id" value="#{_pullrequest.id}"/>
+					</p:link>
+				</p:column>
+
+				<p:column headerText="Title">
+					<p:link outcome="commit.xhtml" value="#{_pullrequest.title}">
+						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
+						<f:param name="id" value="#{_pullrequest.id}"/>
 					</p:link>
 				</p:column>
 			</p:dataTable>
