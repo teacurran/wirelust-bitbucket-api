@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+<ui:define name="metadata">
+	<f:metadata>
+		<f:viewParam name="owner" value="#{repositoryService.repositoryOwner}"/>
+		<f:viewParam name="name" value="#{repositoryService.repositoryName}"/>
+
+		<f:viewParam name="owner" value="#{pullRequestService.repositoryOwner}"/>
+		<f:viewParam name="name" value="#{pullRequestService.repositoryName}"/>
+		<f:viewParam name="status" value="#{pullRequestService.status}" />
+	</f:metadata>
+</ui:define>
+
+<ui:composition template="/WEB-INF/view/templates/main.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+			<h1>Repository:
+				<p:link outcome="repository-list.xhtml"
+					value="#{repositoryService.repository.owner.username}">
+					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+				</p:link>/#{repositoryService.repository.name}
+			</h1>
+
+			<h:panelGrid columns="2" columnClasses="label, value" styleClass="detail-grid">
+
+				<h:outputLabel for="fieldDisplayName" value="Full Name"/>
+				<h:outputText id="fieldDisplayName" value="#{repositoryService.repository.fullName}"/>
+
+				<h:outputLabel for="fieldUuid" value="UUID"/>
+				<h:outputText id="fieldUuid" value="#{repositoryService.repository.uuid}"/>
+
+				<h:outputLabel for="fieldScm" value="SCM"/>
+				<h:outputText id="fieldScm" value="#{repositoryService.repository.scm}"/>
+
+			</h:panelGrid>
+
+			<p:tabMenu activeIndex="1">
+				<p:menuitem value="Commits" outcome="repository-view.xhtml">
+					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+					<f:param name="name" value="#{repositoryService.repository.name}"/>
+				</p:menuitem>
+				<p:menuitem value="Pull Requests" outcome="repository-pullrequests.xhtml">
+					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+					<f:param name="name" value="#{repositoryService.repository.name}"/>
+				</p:menuitem>
+			</p:tabMenu>
+
+			<h2>Pull Requests (page: #{pullRequestService.repositoryPullRequests.page}):</h2>
+			<p:dataTable value="#{pullRequestService.repositoryPullRequests.values}" var="_pullrequest">
+
+				<p:column headerText="Author">
+					<h:outputText value="#{_pullrequest.author.username}"/>
+				</p:column>
+
+				<p:column headerText="Date">
+					<h:outputText value="#{_pullrequest.createdOn}"/>
+				</p:column>
+
+				<p:column headerText="Id">
+					<p:link outcome="commit.xhtml" value="#{_pullrequest.id}">
+						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
+						<f:param name="id" value="#{_pullrequest.id}"/>
+					</p:link>
+				</p:column>
+
+				<p:column headerText="Title">
+					<p:link outcome="repository-pullrequest-view.xhtml" value="#{_pullrequest.title}">
+						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
+						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
+						<f:param name="id" value="#{_pullrequest.id}"/>
+					</p:link>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

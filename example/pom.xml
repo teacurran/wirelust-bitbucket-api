@@ -18,6 +18,8 @@
 	<properties>
 		<!-- Save the exploded directory with .war at the end so IntelliJ can deploy it -->
 		<webapp.dir>${project.build.directory}/${project.build.finalName}-exploded.war</webapp.dir>
+
+		<version.prettyfaces>3.4.1.Final</version.prettyfaces>
 	</properties>
 
 	<dependencies>
@@ -75,6 +77,27 @@
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${version.slf4j}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>${version.prettyfaces}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-config-prettyfaces</artifactId>
+			<version>${version.prettyfaces}</version>
 			<scope>compile</scope>
 		</dependency>
 

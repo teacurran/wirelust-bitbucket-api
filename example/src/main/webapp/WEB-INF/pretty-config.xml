@@ -1,0 +1,26 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="repository-list">
+		<pattern value="/repositories" />
+		<view-id value="/repository-list.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="repository-list-owner">
+		<pattern value="/repositories/#{owner}" />
+		<view-id value="/repository-list.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="repository-view">
+		<pattern value="/repositories/#{owner}/#{name}"/>
+		<view-id value="/repository-view.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="repository-pullrequest-list">
+		<pattern value="/repositories/#{owner}/#{name}"/>
+		<view-id value="/repository-pullrequest-list.xhtml" />
+	</url-mapping>
+
+</pretty-config>
