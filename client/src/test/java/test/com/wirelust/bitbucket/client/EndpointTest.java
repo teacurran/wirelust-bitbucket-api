@@ -635,6 +635,39 @@ public class EndpointTest {
 	}
 
 	@Test
+	public void shouldBeAbleToDeseralizePullRequestTaskPost() throws Exception {
+		/*
+		{
+			"content": {
+				"raw": "bookType.isDeleted()"
+			},
+			"comment": {
+				"id": 27219095
+			},
+			"completed": false,
+			"state": "UNRESOLVED"
+		}
+		*/
+		Content content = new Content();
+		content.setRaw("remove casting here");
+
+		Comment comment = new Comment();
+		comment.setId(1L);
+
+		Task task = new Task();
+		task.setState(Task.State.UNRESOLVED);
+		task.setContent(content);
+		task.setComment(comment);
+
+		Response response = bitbucketV2Client.postPullRequestTask("owner", "repo_slug", (long)1, task);
+		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+
+		Task taskResponse = response.readEntity(Task.class);
+
+		Assert.assertEquals("markdown", taskResponse.getContent().getMarkup());
+	}
+
+	@Test
 	public void shouldBeAbleToDeseralizeSnippitByUsernameId() throws Exception {
 		Response response = bitbucketV2Client.getSnippetByUsernameId("username", "kypj");
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());

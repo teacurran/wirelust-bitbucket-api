@@ -1,0 +1,47 @@
+{
+	"comment": {
+		"id": 27219095,
+		"links": {
+			"self": {
+				"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/154/comments/27219095"
+			},
+			"html": {
+				"href": "https://bitbucket.org/bitbucket/bitbucket/pull-requests/154/_/diff#comment-27219095"
+			}
+		}
+	},
+	"links": {
+		"self": {
+			"href": "https://bitbucket.org/api/2.0/repositories/bitbucket/bitbucket/pullrequests/154/tasks/890443"
+		},
+		"html": {
+			"href": "https://bitbucket.org/bitbucket/bitbucket/pull-requests/154/_/diff#task-890443"
+		}
+	},
+	"creator": {
+		"username": "teacurran",
+		"display_name": "Terrence Curran",
+		"type": "user",
+		"uuid": "{fb9edf63-a1c4-4be5-9e90-d537353f965d}",
+		"links": {
+			"self": {
+				"href": "https://bitbucket.org/api/2.0/users/teacurran"
+			},
+			"html": {
+				"href": "https://bitbucket.org/teacurran/"
+			},
+			"avatar": {
+				"href": "https://bitbucket.org/account/teacurran/avatar/32/"
+			}
+		}
+	},
+	"created_on": "2016-11-26T20:29:12.188913+00:00",
+	"content": {
+		"raw": "bookType.isDeleted()",
+		"markup": "markdown",
+		"html": "<p>bookType.isDeleted()</p>"
+	},
+	"state": "UNRESOLVED",
+	"updated_on": "2016-11-26T20:29:12.188934+00:00",
+	"id": 890443
+}

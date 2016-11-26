@@ -20,14 +20,16 @@ public class Comment implements Serializable {
 
 	Long id;
 	Comment parent;
-	private HashMap<String, List<Link>> links;
+	HashMap<String, List<Link>> links;
 	Content content;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
-	Date createdOn;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
-	Date updatedOn;
 	User user;
 	CommentLine inline;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
+	Date createdOn;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
+	Date updatedOn;
 
 	public Long getId() {
 		return id;
