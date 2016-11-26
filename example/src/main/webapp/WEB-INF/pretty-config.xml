@@ -19,8 +19,13 @@
 	</url-mapping>
 
 	<url-mapping id="repository-pullrequest-list">
-		<pattern value="/repositories/#{owner}/#{name}"/>
+		<pattern value="/repositories/#{owner}/#{name}/pull-requests"/>
 		<view-id value="/repository-pullrequest-list.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="repository-pullrequest-view">
+		<pattern value="/repositories/#{owner}/#{name}/pull-requests/#{/\\d+/ id}"/>
+		<view-id value="/repository-pullrequest-view.xhtml" />
 	</url-mapping>
 
 </pretty-config>
