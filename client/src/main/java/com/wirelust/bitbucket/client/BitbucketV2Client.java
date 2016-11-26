@@ -271,7 +271,7 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 			@PathParam("id") Long id);
 
 	@POST
-	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks")
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response postPullRequestTask(
@@ -281,7 +281,7 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 		Task task);
 
 	@PUT
-	@Path("/1.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}")
+	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response putPullRequestTask(

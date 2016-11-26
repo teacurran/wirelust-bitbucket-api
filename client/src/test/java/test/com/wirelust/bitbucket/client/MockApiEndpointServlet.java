@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.IOUtils;
@@ -29,8 +30,6 @@ public class MockApiEndpointServlet extends HttpServlet {
 
 		String path = req.getRequestURI().substring(req.getContextPath().length());
 
-		LOGGER.info("requesting path:{}", path);
-
 		InputStream reqInputStream = req.getInputStream();
 		String bodyContent = IOUtils.toString(reqInputStream, StandardCharsets.UTF_8.name());
 		if (bodyContent != null && !bodyContent.isEmpty()) {
@@ -40,10 +39,22 @@ public class MockApiEndpointServlet extends HttpServlet {
 		String outputMime = null;
 		OutputStream out = resp.getOutputStream();
 
-		InputStream is = this.getClass().getResourceAsStream(path + ".json");
+		InputStream is = null;
+
+		if (!req.getMethod().equalsIgnoreCase(HttpMethod.GET)) {
+			LOGGER.info("checking for path:/{}{}.json", req.getMethod(), path);
+			is = this.getClass().getResourceAsStream("/" + req.getMethod() + path + ".json");
+		}
+
+		if (is == null) {
+			LOGGER.info("checking for path:{}.json", path);
+			is = this.getClass().getResourceAsStream(path + ".json");
+		}
+
 		if (is != null) {
 			outputMime = MediaType.APPLICATION_JSON;
 		} else {
+			LOGGER.info("checking for path:{}.txt", path);
 			 is = this.getClass().getResourceAsStream(path + ".txt");
 			if (is != null) {
 				outputMime = MediaType.APPLICATION_OCTET_STREAM;
