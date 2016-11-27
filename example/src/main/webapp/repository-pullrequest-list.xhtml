@@ -64,7 +64,7 @@
 				</p:column>
 
 				<p:column headerText="Id">
-					<p:link outcome="commit.xhtml" value="#{_pullrequest.id}">
+					<p:link outcome="repository-pullrequest-view.xhtml" value="#{_pullrequest.id}">
 						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
 						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
 						<f:param name="id" value="#{_pullrequest.id}"/>

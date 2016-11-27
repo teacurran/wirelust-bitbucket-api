@@ -15,6 +15,9 @@ import com.wirelust.bitbucket.client.representations.PullRequest;
 import com.wirelust.bitbucket.client.representations.PullRequestList;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
+import com.wirelust.bitbucket.client.representations.TaskList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Date: 15-Oct-2015
@@ -27,6 +30,8 @@ public class PullRequestService implements Serializable {
 
 	private static final long serialVersionUID = 5934821136854974901L;
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(PullRequestService.class);
+
 	@Inject
 	BitbucketV2Client bitbucketV2Client;
 
@@ -37,6 +42,45 @@ public class PullRequestService implements Serializable {
 	String repositoryName;
 	PullRequestList pullRequestList;
 	String status;
+	Long id;
+	PullRequest pullRequest;
+	TaskList taskList;
+
+	public TaskList getTaskList() {
+		if (taskList == null && repositoryService.getRepository() != null) {
+			Response response = null;
+			try {
+				response = bitbucketV2Client.getPullRequestTasks(repositoryOwner, repositoryName, id);
+				if (response.getStatus() == HttpServletResponse.SC_OK) {
+					taskList = response.readEntity(TaskList.class);
+				} else {
+					LOGGER.error("error getting task list. response:{}", response.getStatus());
+				}
+			} finally {
+				if (response != null) {
+					response.close();
+				}
+			}
+		}
+		return taskList;
+	}
+
+	public PullRequest getPullRequest() {
+		if (pullRequest == null && repositoryService.getRepository() != null) {
+			Response response = null;
+			try {
+				response = bitbucketV2Client.getPullRequestById(repositoryOwner, repositoryName, id);
+				if (response.getStatus() == HttpServletResponse.SC_OK) {
+					pullRequestList = response.readEntity(PullRequestList.class);
+				}
+			} finally {
+				if (response != null) {
+					response.close();
+				}
+			}
+		}
+		return pullRequest;
+	}
 
 	public PullRequestList getRepositoryPullRequests() {
 		if (pullRequestList == null && repositoryService.getRepository() != null) {
@@ -87,5 +131,13 @@ public class PullRequestService implements Serializable {
 	public void setStatus(String status) {
 		pullRequestList = null;
 		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

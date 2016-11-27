@@ -10,6 +10,9 @@
 	<f:metadata>
 		<f:viewParam name="owner" value="#{repositoryService.repositoryOwner}"/>
 		<f:viewParam name="name" value="#{repositoryService.repositoryName}"/>
+
+		<f:viewParam name="owner" value="#{pullRequestService.repositoryOwner}"/>
+		<f:viewParam name="name" value="#{pullRequestService.repositoryName}"/>
 	</f:metadata>
 </ui:define>
 
@@ -37,42 +40,19 @@
 
 			</h:panelGrid>
 
-			<p:tabMenu activeIndex="1">
-				<p:menuitem value="Commits" outcome="repository-view.xhtml">
-					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
-					<f:param name="name" value="#{repositoryService.repository.name}"/>
-				</p:menuitem>
-				<p:menuitem value="Pull Requests" outcome="repository-pullrequests.xhtml">
-					<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
-					<f:param name="name" value="#{repositoryService.repository.name}"/>
-				</p:menuitem>
-			</p:tabMenu>
-
-			<h2>Pull Requests (page: #{repositoryService.repositoryPullRequests.page}):</h2>
-			<p:dataTable value="#{repositoryService.repositoryPullRequests.values}" var="_pullrequest">
+			<h2>Tasks:</h2>
+			<p:dataTable value="#{pullRequestService.taskList.values}" var="_task">
 
 				<p:column headerText="Author">
-					<h:outputText value="#{_pullrequest.author.username}"/>
+					<h:outputText value="#{_task.creator.author.username}"/>
 				</p:column>
 
 				<p:column headerText="Date">
-					<h:outputText value="#{_pullrequest.createdOn}"/>
+					<h:outputText value="#{_task.createdOn}"/>
 				</p:column>
 
-				<p:column headerText="Id">
-					<p:link outcome="commit.xhtml" value="#{_pullrequest.id}">
-						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
-						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
-						<f:param name="id" value="#{_pullrequest.id}"/>
-					</p:link>
-				</p:column>
-
-				<p:column headerText="Title">
-					<p:link outcome="commit.xhtml" value="#{_pullrequest.title}">
-						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
-						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
-						<f:param name="id" value="#{_pullrequest.id}"/>
-					</p:link>
+				<p:column headerText="Value">
+					<h:outputText value="#{_task.content.html}" escape="false"/>
 				</p:column>
 			</p:dataTable>
 
