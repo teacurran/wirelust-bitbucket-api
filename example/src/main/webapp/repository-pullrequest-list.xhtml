@@ -13,6 +13,7 @@
 
 		<f:viewParam name="owner" value="#{pullRequestService.repositoryOwner}"/>
 		<f:viewParam name="name" value="#{pullRequestService.repositoryName}"/>
+		<f:viewParam name="id" value="#{pullRequestService.id}"/>
 		<f:viewParam name="status" value="#{pullRequestService.status}" />
 	</f:metadata>
 </ui:define>
@@ -74,7 +75,7 @@
 				<p:column headerText="Title">
 					<p:link outcome="repository-pullrequest-view.xhtml" value="#{_pullrequest.title}">
 						<f:param name="owner" value="#{repositoryService.repository.owner.username}"/>
-						<f:param name="repo_slug" value="#{repositoryService.repository.name}"/>
+						<f:param name="name" value="#{repositoryService.repository.name}"/>
 						<f:param name="id" value="#{_pullrequest.id}"/>
 					</p:link>
 				</p:column>

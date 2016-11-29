@@ -1,6 +1,7 @@
 package com.wirelust.bitbucket.example.providers;
 
 import java.io.IOException;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.ws.rs.client.ClientRequestContext;
@@ -18,6 +19,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
  *
  * @author T. Curran
  */
+@ApplicationScoped
 public class ClientProducer {
 
 	@Inject

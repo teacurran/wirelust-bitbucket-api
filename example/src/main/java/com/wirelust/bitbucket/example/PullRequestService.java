@@ -47,7 +47,7 @@ public class PullRequestService implements Serializable {
 	TaskList taskList;
 
 	public TaskList getTaskList() {
-		if (taskList == null && repositoryService.getRepository() != null) {
+		if (taskList == null && repositoryService.getRepository() != null && id != null) {
 			Response response = null;
 			try {
 				response = bitbucketV2Client.getPullRequestTasks(repositoryOwner, repositoryName, id);
