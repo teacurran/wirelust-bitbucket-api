@@ -93,6 +93,7 @@ public class RepositoryService implements Serializable {
 
 	public void setRepositoryOwner(String repositoryOwner) {
 		this.repositoryOwner = repositoryOwner;
+		resetEntities();
 	}
 
 	public String getRepositoryName() {
@@ -101,5 +102,11 @@ public class RepositoryService implements Serializable {
 
 	public void setRepositoryName(String repositoryName) {
 		this.repositoryName = repositoryName;
+		resetEntities();
+	}
+
+	private void resetEntities() {
+		this.repository = null;
+		this.commitList = null;
 	}
 }

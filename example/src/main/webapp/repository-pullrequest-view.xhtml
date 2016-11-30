@@ -13,6 +13,7 @@
 
 		<f:viewParam name="owner" value="#{pullRequestService.repositoryOwner}"/>
 		<f:viewParam name="name" value="#{pullRequestService.repositoryName}"/>
+		<f:viewParam name="id" value="#{pullRequestService.id}" />
 	</f:metadata>
 </ui:define>
 
@@ -44,7 +45,7 @@
 			<p:dataTable value="#{pullRequestService.taskList.values}" var="_task">
 
 				<p:column headerText="Author">
-					<h:outputText value="#{_task.creator.author.username}"/>
+					<h:outputText value="#{_task.creator.username}"/>
 				</p:column>
 
 				<p:column headerText="Date">

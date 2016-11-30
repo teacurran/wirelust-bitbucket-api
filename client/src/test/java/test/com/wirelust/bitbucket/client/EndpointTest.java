@@ -1,5 +1,6 @@
 package test.com.wirelust.bitbucket.client;
 
+import com.wirelust.bitbucket.client.BitBucketUndocumentedClient;
 import com.wirelust.bitbucket.client.BitbucketAuthClient;
 import com.wirelust.bitbucket.client.BitbucketV1Client;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
@@ -65,6 +66,7 @@ public class EndpointTest {
 	ResteasyWebTarget target;
 	BitbucketV1Client bitbucketV1Client;
 	BitbucketV2Client bitbucketV2Client;
+	BitBucketUndocumentedClient bitBucketUndocumentedClient;
 	BitbucketAuthClient bitbucketAuthClient;
 	SimpleDateFormat simpleDateFormat;
 	SimpleDateFormat simpleDateTimeFormat;
@@ -105,6 +107,7 @@ public class EndpointTest {
 
 		target = client.target(ROOT_URL);
 		bitbucketV2Client = target.proxy(BitbucketV2Client.class);
+		bitBucketUndocumentedClient = target.proxy(BitBucketUndocumentedClient.class);
 
 		target = client.target(AUTH_ROOT_URL);
 		bitbucketAuthClient = target.proxy(BitbucketAuthClient.class);
@@ -659,7 +662,7 @@ public class EndpointTest {
 		task.setContent(content);
 		task.setComment(comment);
 
-		Response response = bitbucketV2Client.postPullRequestTask("owner", "repo_slug", (long)1, task);
+		Response response = bitBucketUndocumentedClient.postPullRequestTask("owner", "repo_slug", (long)1, task);
 		Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
 
 		Task taskResponse = response.readEntity(Task.class);

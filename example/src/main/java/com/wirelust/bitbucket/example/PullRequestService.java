@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
+import com.wirelust.bitbucket.client.BitBucketUndocumentedClient;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.representations.CommitList;
 import com.wirelust.bitbucket.client.representations.PullRequest;
@@ -36,6 +37,9 @@ public class PullRequestService implements Serializable {
 	BitbucketV2Client bitbucketV2Client;
 
 	@Inject
+	BitBucketUndocumentedClient bitBucketUndocumentedClient;
+
+	@Inject
 	RepositoryService repositoryService;
 
 	String repositoryOwner;
@@ -50,7 +54,7 @@ public class PullRequestService implements Serializable {
 		if (taskList == null && repositoryService.getRepository() != null && id != null) {
 			Response response = null;
 			try {
-				response = bitbucketV2Client.getPullRequestTasks(repositoryOwner, repositoryName, id);
+				response = bitBucketUndocumentedClient.getPullRequestTasks(repositoryOwner, repositoryName, id);
 				if (response.getStatus() == HttpServletResponse.SC_OK) {
 					taskList = response.readEntity(TaskList.class);
 				} else {
@@ -139,5 +143,7 @@ public class PullRequestService implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+		this.pullRequest = null;
+		this.taskList = null;
 	}
 }

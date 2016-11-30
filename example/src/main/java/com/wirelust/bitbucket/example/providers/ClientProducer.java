@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 
+import com.wirelust.bitbucket.client.BitBucketUndocumentedClient;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.example.ApplicationConfig;
 import com.wirelust.bitbucket.example.AuthService;
@@ -45,4 +46,26 @@ public class ClientProducer {
 
 		return target.proxy(BitbucketV2Client.class);
 	}
+
+	@Produces
+	public BitBucketUndocumentedClient getUndocumentedClient() {
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(JacksonConfigurationProvider.class);
+
+		if (authService.isLoggedIn()) {
+			client.register(new ClientRequestFilter() {
+				@Override
+				public void filter(ClientRequestContext requestContext) throws IOException {
+					String token = authService.getAccessToken();
+
+					requestContext.getHeaders().add("Authorization", "Bearer " + token);
+				}
+			});
+		}
+
+		ResteasyWebTarget target = client.target(ApplicationConfig.BITBUCKET_INTERNAL_ENDPOINT_URL);
+
+		return target.proxy(BitBucketUndocumentedClient.class);
+	}
+
 }

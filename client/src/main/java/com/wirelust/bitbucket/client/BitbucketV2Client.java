@@ -270,36 +270,6 @@ public interface BitbucketV2Client extends BitbucketV1Client {
 			@PathParam("repo_slug") String repoSlug,
 			@PathParam("id") Long id);
 
-	@GET
-	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getPullRequestTasks(
-		@PathParam("owner") String owner,
-		@PathParam("repo_slug") String repoSlug,
-		@PathParam("pull_request_id") Long pullRequestId);
-
-	@POST
-	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response postPullRequestTask(
-		@PathParam("owner") String owner,
-		@PathParam("repo_slug") String repoSlug,
-		@PathParam("pull_request_id") Long pullRequestId,
-		Task task);
-
-	@PUT
-	@Path("/2.0/repositories/{owner}/{repo_slug}/pullrequests/{pull_request_id}/tasks/{task_id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response putPullRequestTask(
-		@PathParam("owner") String owner,
-		@PathParam("repo_slug") String repoSlug,
-		@PathParam("pull_request_id") Long pullRequestId,
-		@PathParam("task_id") Long taskId,
-		Task task);
-
 	/**
 	 * GET https://api.bitbucket.org/2.0/snippets/{username}
 	*/
