@@ -11,8 +11,6 @@ import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.client.representations.CommitList;
-import com.wirelust.bitbucket.client.representations.PullRequest;
-import com.wirelust.bitbucket.client.representations.PullRequestList;
 import com.wirelust.bitbucket.client.representations.Repository;
 import com.wirelust.bitbucket.client.representations.RepositoryList;
 

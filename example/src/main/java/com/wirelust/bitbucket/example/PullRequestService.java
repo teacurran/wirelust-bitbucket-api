@@ -1,8 +1,6 @@
 package com.wirelust.bitbucket.example;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,11 +9,8 @@ import javax.ws.rs.core.Response;
 
 import com.wirelust.bitbucket.client.BitBucketUndocumentedClient;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
-import com.wirelust.bitbucket.client.representations.CommitList;
 import com.wirelust.bitbucket.client.representations.PullRequest;
 import com.wirelust.bitbucket.client.representations.PullRequestList;
-import com.wirelust.bitbucket.client.representations.Repository;
-import com.wirelust.bitbucket.client.representations.RepositoryList;
 import com.wirelust.bitbucket.client.representations.TaskList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,8 +2,8 @@ package com.wirelust.bitbucket.client.representations;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -31,7 +31,7 @@ public class Task implements Serializable {
 	User creator;
 	State state;
 	Comment comment;
-	HashMap<String, List<Link>> links;
+	Map<String, List<Link>> links;
 	Content content;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_FORMAT)
@@ -72,11 +72,11 @@ public class Task implements Serializable {
 		this.comment = comment;
 	}
 
-	public HashMap<String, List<Link>> getLinks() {
+	public Map<String, List<Link>> getLinks() {
 		return links;
 	}
 
-	public void setLinks(HashMap<String, List<Link>> links) {
+	public void setLinks(Map<String, List<Link>> links) {
 		this.links = links;
 	}
 
