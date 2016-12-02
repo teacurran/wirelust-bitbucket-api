@@ -44,6 +44,7 @@ public class PullRequestService implements Serializable {
 	Long id;
 	PullRequest pullRequest;
 	TaskList taskList;
+	String diff;
 
 	public TaskList getTaskList() {
 		if (taskList == null && repositoryService.getRepository() != null && id != null) {
@@ -70,7 +71,7 @@ public class PullRequestService implements Serializable {
 			try {
 				response = bitbucketV2Client.getPullRequestById(repositoryOwner, repositoryName, id);
 				if (response.getStatus() == HttpServletResponse.SC_OK) {
-					pullRequestList = response.readEntity(PullRequestList.class);
+					pullRequest = response.readEntity(PullRequest.class);
 				}
 			} finally {
 				if (response != null) {
@@ -79,6 +80,23 @@ public class PullRequestService implements Serializable {
 			}
 		}
 		return pullRequest;
+	}
+
+	public String getDiff() {
+		if (diff == null && repositoryService.getRepository() != null) {
+			Response response = null;
+			try {
+				response = bitbucketV2Client.getPullRequestDiff(repositoryOwner, repositoryName, id);
+				if (response.getStatus() == HttpServletResponse.SC_OK) {
+					diff = response.readEntity(String.class);
+				}
+			} finally {
+				if (response != null) {
+					response.close();
+				}
+			}
+		}
+		return diff;
 	}
 
 	public PullRequestList getRepositoryPullRequests() {
@@ -140,5 +158,6 @@ public class PullRequestService implements Serializable {
 		this.id = id;
 		this.pullRequest = null;
 		this.taskList = null;
+		this.diff = null;
 	}
 }

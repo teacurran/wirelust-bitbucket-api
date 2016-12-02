@@ -18,6 +18,12 @@
 </ui:define>
 
 <ui:composition template="/WEB-INF/view/templates/main.xhtml">
+	<ui:define name="head">
+		<link rel="stylesheet" type="text/css" href="${request.contextPath}/assets/components/dif2html/styles/diff2html.min.css"/>
+		<script type="text/javascript" src="${request.contextPath}/assets/components/dif2html/scripts/diff2html.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/assets/components/dif2html/scripts/diff2html-ui.min.js"></script>
+	</ui:define>
+
 	<ui:define name="content">
 
 		<h:form>
@@ -41,7 +47,7 @@
 
 			</h:panelGrid>
 
-			<h2>Tasks:</h2>
+			<h2>Tasks</h2>
 			<p:dataTable value="#{pullRequestService.taskList.values}" var="_task">
 
 				<p:column headerText="Author">
@@ -56,6 +62,17 @@
 					<h:outputText value="#{_task.content.html}" escape="false"/>
 				</p:column>
 			</p:dataTable>
+
+			<h2>Diff</h2>
+			<script type="javascript">
+				var diffString = jQuery("#diffOutput")[0];
+				var diff2htmlUi = new Diff2HtmlUI({diff: diffString});
+
+				diff2htmlUi.draw('diffOutput', {inputFormat: 'diff', showFiles: true, matching: 'lines'});
+			</script>
+			<pre id="diffOutput">
+				<h:outputText value="#{pullRequestService.diff}"/>
+			</pre>
 
 		</h:form>
 	</ui:define>
