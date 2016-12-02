@@ -64,15 +64,17 @@
 			</p:dataTable>
 
 			<h2>Diff</h2>
-			<script type="javascript">
-				var diffString = jQuery("#diffOutput")[0];
-				var diff2htmlUi = new Diff2HtmlUI({diff: diffString});
-
-				diff2htmlUi.draw('diffOutput', {inputFormat: 'diff', showFiles: true, matching: 'lines'});
-			</script>
-			<pre id="diffOutput">
+			<pre id="diffSource" style="display:none;">
 				<h:outputText value="#{pullRequestService.diff}"/>
 			</pre>
+			<div id="diffOutput"></div>
+
+			<script type="text/javascript">
+				var diffString = jQuery("#diffSource").text();
+				var diff2htmlUi = new Diff2HtmlUI({diff: diffString});
+
+				diff2htmlUi.draw('#diffOutput', {inputFormat: 'diff', showFiles: true, matching: 'lines'});
+			</script>
 
 		</h:form>
 	</ui:define>

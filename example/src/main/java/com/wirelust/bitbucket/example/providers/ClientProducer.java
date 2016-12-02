@@ -11,6 +11,7 @@ import com.wirelust.bitbucket.client.BitBucketUndocumentedClient;
 import com.wirelust.bitbucket.client.BitbucketV2Client;
 import com.wirelust.bitbucket.example.ApplicationConfig;
 import com.wirelust.bitbucket.example.AuthService;
+import com.wirelust.bitbucket.example.jaxrs.JaxRsClientFactory;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -28,7 +29,7 @@ public class ClientProducer {
 
 	@Produces
 	public BitbucketV2Client getClient() {
-		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyClient client = JaxRsClientFactory.newClientBuilder().build();
 		client.register(JacksonConfigurationProvider.class);
 
 		if (authService.isLoggedIn()) {
@@ -49,7 +50,7 @@ public class ClientProducer {
 
 	@Produces
 	public BitBucketUndocumentedClient getUndocumentedClient() {
-		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyClient client = JaxRsClientFactory.newClientBuilder().build();
 		client.register(JacksonConfigurationProvider.class);
 
 		if (authService.isLoggedIn()) {

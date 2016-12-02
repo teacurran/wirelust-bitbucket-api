@@ -53,7 +53,7 @@
 		<version.ee>1.0.2.Final</version.ee>
 		<version.jacoco>0.7.6.201602180812</version.jacoco>
 		<version.junit>4.12</version.junit>
-		<version.resteasy>3.0.13.Final</version.resteasy>
+		<version.resteasy>3.0.19.Final</version.resteasy>
 		<version.slf4j>1.7.10</version.slf4j>
 		<version.sonar-jacoco-listener>3.11</version.sonar-jacoco-listener>
 		<version.surefire>2.19.1</version.surefire>
